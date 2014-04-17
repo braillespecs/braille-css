@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="box-model">
+  <h2> Box Model </h2>
+  <p class="issue">
+    See <a href="https://github.com/snaekobbi/braille-css-spec/issues/29"
+    class="ticket">braille-css-spec#29</a>.
+  </p>
+  <p>
+    The CSS <a href="CSS3BOX#css-basic">box model</a> [[CSS3BOX]] describes how each element and
+    each string of text is laid out by transforming the <a href="CSS2CONFORM#doctree"
+    class="externalDFN">document tree</a> into a tree of rectangular boxes, each consisting of a
+    <a href="CSS3BOX#content" class="externalDFN">content area</a> and optional surrounding <a
+    href="CSS3BOX#padding" class="externalDFN">padding</a>, <a href="CSS3BOX#border"
+    class="externalDFN">border</a> and <a href="CSS3BOX#margin" class="externalDFN">margin</a>
+    areas. Braille CSS has a slightly simplified model.
+  </p>
+  <p>
+    Each element in the <a href="CSS2CONFORM#doctree" class="externalDFN">document tree</a>
+    generates zero or more boxes. The position and size of an element's box(es) are often
+    calculated with respect to the edges of a certain rectangle, called the <dfn>containing
+    block</dfn>. In general, generated boxes act as containing blocks for descendant boxes. The
+    containing block in which the <a href="CSS2CONFORM#root" class="externalDFN">root
+    element</a> lives is called the <dfn>initial containing block</dfn>, and is equal to the <a
+    href="CSS3PAGE#page-area" class="externalDFN">page area</a>. For other elements, the
+    containing block is formed by the <a href="CSS3BOX#content0" class="externalDFN">content
+    edge</a> of the nearest <a title="block-level box">block-level</a> ancestor box.
+  </p>
+  <p class="note">
+    These simplified definitions are equivalent to the original definitions of <a
+    href="CSS3BOX#containing" class="externalDFN">containing block</a> and <a
+    href="CSS3BOX#initial" class="externalDFN">initial containing block</a> [[CSS3BOX]]
+    [[CSS3POS]], considering that braille CSS does not support <a
+    href="CSS2MEDIA#continuous-media-group" class="externalDFN">continuous media</a> or anything
+    other than <a href="CSS3POS#static" class="externalDFN">static positioning</a>.
+  </p>
+  <p>
+    There are <a title="block-level box">block-level boxes</a>, <a title="line box">line
+    boxes</a> and <a title="inline-level box">inline-level boxes</a>. A block-level box is like
+    a paragraph, a line box like a line of text, and inline-level boxes like words inside a
+    line. Boxes are laid out according to the <a href="CSS2VISUREN#normal-flow">normal flow</a>
+    positioning scheme, which consists of <a title="block formatting context">block
+    formatting</a> of <a title="block-level box">block-level boxes</a> and <a
+    title="inline-level formatting context">inline formatting</a> of <a title="inline-level
+    box">inline-level boxes</a>.
+  </p>
+  <p class="note">
+    As opposed to [[CSS2]] where boxes can be <a href="CSS2VISUREN#floats">floated</a> or <a
+    href="CSS2VISUREN#absolute-positioning">positioned absolutely</a> as well, braille CSS only
+    supports the normal flow positioning scheme. Another difference is that normal flow in
+    braille CSS doesn't include <a href="CSS2VISUREN#relative-positioning">relative
+    positioning</a>.
+  </p>
+  <section id="block-level-formatting">
+    <h3> Block-level Formatting </h3>
+    <p>
+      Elements with a value of ‘<a>block</a>’ or ‘<a>list-item</a>’ for the ‘<a>display</a>’
+      property are called <dfn title="block-level element">block-level
+      elements</dfn>. Block-level elements generate <dfn title="block-level box">block-level
+      boxes</dfn>, which are boxes that participate in a block formatting context. In a
+      <dfn>block formatting context</dfn>, boxes are laid out one after the other, vertically,
+      beginning at the top of a <a>containing block</a>. The vertical distance between two
+      sibling boxes is determined by the <a href="#the-margin-properties">‘margin’
+      properties</a>. Vertical margins between adjacent block-level boxes <a
+      title="collapsing margin">collapse</a>.
+    </p>
+    <p>
+      In general, each box's left and right <a href="CSS3BOX#margin0" class="externalDFN">outer
+      edges</a> touch the left and right edges of the containing block. The following constraint
+      must hold:
+    </p>
+    <p>
+      <pre style="white-space: normal">
+        ‘<a><var>margin-left</var></a>’ + <var>border-left-width</var> +
+        ‘<a><var>padding-left</var></a>’ + <var>width</var> + ‘<a><var>padding-right</var></a>’
+        + <var>border-right-width</var> + ‘<a><var>margin-right</var></a>’ = <var>width of
+        <a>containing block</a></var>
+      </pre>
+    </p>
+    <p>
+      In the equation above, <var>border-left-width</var> is equal to 1 if the value of
+      ‘<a>border-left</a>’ is not ‘none’, or 0 otherwise. Similarly,
+      <var>border-right-width</var> is equal to 1 if the value of ‘<a>border-right</a>’ is not
+      ‘none’, or 0 otherwise.
+    </p>
+    <p>
+      However, if an element is <a>positioned</a>, the box's edges don't need to touch the edges
+      of the containing block. In this case the equation becomes:
+    </p>
+    <p>
+      <pre style="white-space: normal">
+        <var>left offset</var> + ‘<a><var>margin-left</var></a>’ + <var>border-left-width</var>
+        + ‘<a><var>padding-left</var></a>’ + <var>width</var> +
+        ‘<a><var>padding-right</var></a>’ + <var>border-right-width</var> +
+        ‘<a><var>margin-right</var></a>’ + <var>right offset</var> = <var>width of <a>initial
+        containing block</a></var>
+      </pre>
+    </p>
+    <p>
+      Here, <var>left offset</var> is equal to the value of ‘<a>left</a>’ if it is not ‘auto’,
+      or otherwise the distance from the left edge of the <a>containing block</a> to the left
+      edge of the <a>initial containing block</a>. Likewise, <var>right offset</var> is equal to
+      the value of ‘<a>right</a>’ if it is not ‘auto’, or otherwise the distance from the right
+      edge of the <a>containing block</a> to the right edge of the <a>initial containing
+      block</a>.
+    </p>
+    <p>
+      If a box has only <a title="inline-level box">inline-level</a> children, the height is the
+      number of <a title="line box">line boxes</a>. If the box has <a title="block-level
+      box">block-level</a> children, the height is the distance between the top <a
+      href="CSS3BOX#border0" class="externalDFN">border-edge</a> of the topmost block-level
+      child box that doesn't have margins <a href="CSS3BOX#collapsed"
+      class="externalDFN">collapsed through</a> it and the bottom <a href="CSS3BOX#border0"
+      class="externalDFN">border-edge</a> of the bottommost block-level child box that doesn't
+      have margins <a href="CSS3BOX#collapsed" class="externalDFN">collapsed through</a>
+      it. However, if the element has a nonzero top padding and/or top border, then the content
+      starts at the top <a href="CSS3BOX#margin0" class="externalDFN">margin edge</a> of the
+      topmost child. Similarly, if the element has a nonzero bottom padding and/or bottom
+      border, then the content ends at the bottom <a href="CSS3BOX#margin0"
+      class="externalDFN">margin edge</a> of the bottommost child.
+    </p>
+    <p class="note">
+      Block formatting in braille CSS is considerably simplified with respect to [[CSS2]] and
+      [[CSS3BOX]]. Since there is no <a href="CSS2VISUREN#floats">floating</a>, no <a
+      href="CSS2VISUREN#absolute-positioning">absolute positioning</a> and no ‘<a
+      href="CSS3BOX#inline-block" class="externalDFN">display: inline-block</a>’, each page has
+      only a single block formatting context. Furthermore, the text orientation is always
+      left-to-right and top-to-bottom (it is as if the ‘<a href="CSS3WRITINGMODES#direction"
+      class="externalDFN">direction</a>’ and ‘<a href="CSS3WRITINGMODES#writing-mode"
+      class="externalDFN">writing-mode</a>’ properties would have their values set to ‘<a
+      href="CSS3WRITINGMODES#ltr" class="externalDFN">ltr</a>’ and ‘<a
+      href="CSS3WRITINGMODES#horizontal-tb" class="externalDFN">horizontal-tb</a>’). Finally,
+      because there can be no <a href="CSS2CONFORM#replaced-element"
+      class="externalDFN">replaced elements</a> and there are no ‘<a href="CSS3BOX#width"
+      class="externalDFN">width</a>’, ‘<a href="CSS3BOX#height" class="externalDFN">height</a>’,
+      ‘<a href="CSS3BOX#min-width" class="externalDFN">min-width</a>’, ‘<a
+      href="CSS3BOX#min-height" class="externalDFN">min-height</a>’, ‘<a
+      href="CSS3BOX#max-width" class="externalDFN">max-width</a>’ and ‘<a
+      href="CSS3BOX#max-height" class="externalDFN">max-height</a>’ properties (it is as if
+      their values would be set to ‘auto’, ‘auto’, ‘0’, ‘0’, ‘none’ and ‘none’), calculating
+      widths, heights and margins becomes rather trivial.
+    </p>
+  </section>
+  <section id="inline-level-formatting">
+    <h3> Inline-level Formatting </h3>
+    <p>
+      Elements with a value of ‘<a>inline</a>’ for the ‘<a>display</a>’ property are called <dfn
+      title="inline-level element">inline-level elements</dfn>. Inline-level elements generate
+      <dfn title="inline-level box">inline-level boxes</dfn>, which are boxes that participate
+      in an inline-level formatting context. In an <dfn>inline-level formatting context</dfn>,
+      boxes are laid out horizontally, one after the other, beginning at the top of a
+      <a>containing block</a>. The rectangular area that contains the boxes that form a line is
+      called a <dfn>line box</dfn>. Line boxes are created as needed to hold inline-level
+      content.
+    </p>
+    <p>
+      The height of a line box is 1. The width is determined by a containing block. The left
+      edge of a line box touches the left edge of its <a>containing block</a> and the right edge
+      touches the right edge of its <a>containing block</a>.
+    </p>
+    <p>
+      When the total width of the inline-level boxes on a line is less than the width of the
+      line box containing them, their horizontal distribution within the line box is determined
+      by the ‘<a>text-align</a>’ property. When an inline box exceeds the width of a line box,
+      it is split into several boxes and these boxes are distributed across several line boxes.
+    </p>
+    <p class="note">
+      Inline formatting in braille CSS is simplified with respect to [[CSS2]] and
+      [[CSS3TEXT]]. The <a href="CSS2VISUDET#propdef-line-height" class="externalDFN">height</a>
+      of a line box is always equal to 1, and there is no <a
+      href="CSS3WRITINGMODES#inline-alignment">inline-level alignment</a>.
+    </p>
+  </section>
+  <section id="anonymous-boxes">
+    <h3> Anonymous Boxes </h3>
+    <p>
+      <dfn title="anonymous box">Anonymous boxes</dfn> are created when the box model requires a
+      child box with a certain value for ‘<a>display</a>’, but the child actually has a
+      different value.
+    </p>
+    <ul>
+      <li>
+        A <a>block-level box</a> may contain either <a title="line box">line boxes</a> or <a
+        title="block-level box">block-level boxes</a>, but not both. If necessary, line boxes
+        are wrapped in one or more anonymous block-level boxes.
+      </li>
+      <li>
+        When an <a>inline-level box</a> contains a <a>block-level box</a>, it is broken around
+        the block-level box (and any block-level siblings that are consecutive or separated only
+        by <a href="CSS3TEXT#collapsible" class="externalDFN">collapsible whitespace</a>). The
+        line boxes before the break and after the break are enclosed in anonymous block-level
+        boxes.
+      </li>
+      <li>
+        Any text that is directly contained inside a block container element is enclosed in an
+        anonymous inline-level box. White space content that would subsequently be <a
+        href="CSS3TEXT#collapsible" class="externalDFN">collapsed</a> away does not generate any
+        anonymous boxes.
+      </li>
+    </ul>
+    <p>
+      The properties of anonymous boxes are <a href="CSS3CASCADE#inherited-property"
+      class="externalDFN">inherited</a> from the enclosing non-anonymous box. Non-inherited
+      properties have their <a href="CSS3CASCADE#initial-value" class="externalDFN">initial
+      value</a>.
+    </p>
+  </section>
+  <section id="collapsing-margins">
+    <h3> Collapsing Margins </h3>
+    <p>
+      The adjoining margins of two or more boxes (which might or might not be siblings) may
+      combine to form a single margin. Margins that combine this way are said to “<dfn
+      title="collapsing margin">collapse</dfn>”. Margins are adjoining if there are no <a
+      title="line box">line boxes</a>, <a href="CSS3BOX#padding" class="externalDFN">padding</a>
+      or <a href="CSS3BOX#border" class="externalDFN">border</a> areas to separate
+      them. Adjoining vertical margins collapse, horizontal margins don't. A collapsed margin is
+      considered adjoining to another margin if any of its component margins is adjoining to
+      that margin (collapsing is “transitive”). When two or more margins collapse, the the width
+      of the resulting margin is the maximum of the collapsing margins' widths.
+    </p>
+    <p class="note">
+      This simplified definition is almost equivalent to the original definition of <a
+      href="CSS3BOX#collapsing-margins">collapsing margins</a> [[CSS2]] [[CSS3BOX]], considering
+      that in braille CSS each page has only a single block formatting context, that the height
+      of block-level boxes are auto-computed, that boxes can have no negative top or bottom
+      margins, that the <a href="#the-margin-properties">margin properties</a> do not apply on
+      inline-level boxes and that there is no <a href="CSS2VISUREN#floats">floating</a>, no <a
+      href="CSS2VISUREN#propdef-clear">clearance</a>, no <a href="CSS2VISUFX#propdef-overflow"
+      class="externalDFN">overflow</a>, no <a href="CSS2VISUREN#absolute-positioning">absolute
+      positioning</a>, no <a href="CSS3BOX#vertical" class="externalDFN">vertical boxes</a> and
+      no ‘<a href="CSS3BOX#inline-block" class="externalDFN">display: inline-block</a>’. The
+      only deviation from the original definition is that in braille CSS the margins of the <a
+      href="CSS2CONFORM#root" class="externalDFN">root element</a>'s box also collapse.
+    </p>
+    <p class="issue">
+      In the Liblouis implementation, paddings currently collapse. See <a
+      href="https://github.com/daisy/pipeline-mod-braille/issues/12"
+      class="ticket">pipeline-mod-braille#12</a>.
+    </p>
+    <p class="issue">
+      In the Dotify implementation, margins currently don't collapse. See <a
+      href="http://code.google.com/p/obfl/issues/detail?id=27" class="ticket">obfl#27</a> and <a
+      href="http://code.google.com/p/obfl/issues/detail?id=29" class="ticket">obfl#29</a>.
+    </p>
+  </section>
+  <section id="the-display-property">
+    <h3> The ‘<a>display</a>’ property </h3>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>display</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td>
+            block | inline | list-item | none
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>inline</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td> all elements and pseudo-elements </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      This property determines the type of box(es) that are generated for an element. The values
+      are as follows:
+    </p>
+    <dl>
+      <dt>
+        <dfn>inline</dfn>
+      </dt>
+      <dd>
+        This value causes an element to generate an inline box.
+      </dd>
+      <dt>
+        <dfn>block</dfn>
+      </dt>
+      <dd>
+        This value causes an element to generate a block box.
+      </dd>
+      <dt>
+        <dfn>list-item</dfn>
+      </dt>
+      <dd>
+        This value causes an element to generate a principal block box and a <a
+        title="::marker">marker</a> box.
+      </dd>
+      <dt> none </dt>
+      <dd>
+        This value causes an element to generate no boxes (i.e., the element has no effect on
+        layout). Descendant elements do not generate any boxes either; this behavior cannot be
+        overridden by setting the ‘<a>display</a>’ property on the descendants.
+      </dd>
+    </dl>
+  </section>
+  <section id="box-offsets">
+    <h4> Box Offsets: the ‘<a>left</a>’ and ‘<a>right</a>’ properties </h4>
+    <p>
+      An element is said to be <dfn>positioned</dfn> if its ‘<a>left</a>’ or ‘<a>right</a>’
+      properties have a value other than ‘auto’.
+    </p>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>left</dfn>, <dfn>right</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td><a><var>&lt;length&gt;</var></a> | auto</td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>auto</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      The ‘<a>left</a>’ and ‘<a>right</a>’ properties... Values have the following meanings:
+    </p>
+    <dl>
+      <dt> auto </dt>
+      <dd>
+        ...
+      </dd>
+      <dt>
+        <a>&lt;length&gt;</a>
+      </dt>
+      <dd>
+        ... specifies how far a box's left or right margin edge is offset to the edge of the
+        page area
+      </dd>
+    </dl>
+    <p class="note">
+      Note that these properties have a different meaning than the ‘<a
+      href="CSS2VISUREN#propdef-left" class="externalDFN">left</a>’ and ‘<a
+      href="CSS2VISUREN#propdef-right" class="externalDFN">right</a>’ properties defined in
+      [[CSS2]] and [[CSS3POS]].
+    </p>
+  </section>
+  <section id="the-margin-properties">
+    <h4>
+      Margins: the ‘<a>margin-top</a>’, ‘<a>margin-right</a>’, ‘<a>margin-bottom</a>’,
+      ‘<a>margin-left</a>’, and ‘<a>margin</a>’ properties
+    </h4>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>margin-top</dfn>, <dfn>margin-right</dfn>, <dfn>margin-bottom</dfn>, <dfn>margin-left</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td><a><var>&lt;length&gt;</var></a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Margin properties set the thickness of the <a href="CSS3BOX#margin"
+      class="externalDFN">margin area</a>. The value may be a negative length for
+      ‘<a>margin-left</a>’ and ‘<a>margin-right</a>’.
+    </p>
+    <div class="note">
+      <p>
+        These properties have a number differences with the original <a
+        href="CSS3BOX#the-margin">margin properties</a> defined in [[CSS3BOX]]:
+      </p>
+      <ul>
+        <li>
+          Margins can only be expressed in terms of cells and lines. Other units or
+          percentages are not allowed.
+        </li>
+        <li>
+          ‘<a>margin-top</a>’ and ‘<a>margin-bottom</a>’ may not be negative.
+        </li>
+        <li>
+          The properties don't apply on inline-level boxes.
+        </li>
+      </ul>
+    </div>
+    <div class="example">
+      <div class="code xml">
+        <pre class="highlight"><![CDATA[<body>
+  <p> ⠤⠤⠤ </p>
+</body>]]></pre>
+      </div>
+      <div class="code css">
+        <pre class="highlight">@page { size: 10 3; }
+
+p {
+  display: block;
+  margin-left: 1; }</pre>
+      </div>
+      <div class="code pef">
+        <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="3" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row>⠀⠤⠤⠤</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+      </div>
+      <p>
+        The value of ‘margin-left’ may be negative:
+      </p>
+      <div class="code css">
+        <pre class="highlight">@page { size: 10 3; }
+
+body {
+  display: block;
+  margin-left: 3; }
+
+p {
+  display: block;
+  margin-left: -1; }</pre>
+      </div>
+      <div class="code pef">
+        <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="3" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row>⠀⠀⠤⠤⠤</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+      </div>
+    </div>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>margin</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td><a><var>&lt;length&gt;</var></a>{1,4}</td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>(see individual properties)</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>(see individual properties)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      ‘<a>margin</a>’ is a <a
+      href="http://www.w3.org/TR/css3-cascade/#shorthand-property--shorthand"
+      class="externalDFN">shorthand</a> for the other four properties. If ‘<a>margin</a>’ has
+      four values, they set top, right, bottom and left in that order. If left is omitted, it
+      is the same as right. If bottom is omitted, it is the same as top. If right is omitted
+      it is the same as top.
+    </p>
+    <div class="example">
+      <div class="code css">
+        <pre class="highlight">@page { size: 10 3; }
+
+p {
+  display: block;
+  margin: 1; }</pre>
+      </div>
+      <div class="code pef">
+        <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="3" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row>⠀⠤⠤⠤</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+      </div>
+    </div>
+  </section>
+  <section id="the-padding-properties">
+    <h3>
+      Padding: the ‘<a>padding-top</a>’, ‘<a>padding-right</a>’, ‘<a>padding-bottom</a>’,
+      ‘<a>padding-left</a>’, and ‘<a>padding</a>’ properties
+    </h3>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>padding-top</dfn>, <dfn>padding-right</dfn>, <dfn>padding-bottom</dfn>, <dfn>padding-left</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td><a><var>&lt;length&gt;</var></a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Padding properties set the thickness of the <a href="CSS3BOX#padding"
+      class="externalDFN">padding area</a>. The value may not be negative.
+    </p>
+    <div class="note">
+      <p>
+        These properties have a number differences with the original <a
+        href="CSS3BOX#the-padding">padding properties</a> defined in [[CSS3BOX]]:
+      </p>
+      <ul>
+        <li>
+          Paddings can only be expressed in terms of cells and lines. Other units or
+          percentages are not allowed.
+        </li>
+        <li>
+          The properties don't apply on inline-level boxes.
+        </li>
+      </ul>
+    </div>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>padding</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td><a><var>&lt;length&gt;</var></a>{1,4}</td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>(see individual properties)</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>(see individual properties)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      ‘<a>padding</a>’ is a <a
+      href="http://www.w3.org/TR/css3-cascade/#shorthand-property--shorthand"
+      class="externalDFN">shorthand</a> for the other four properties. If ‘<a>padding</a>’ has
+      four values, they set top, right, bottom and left in that order. If left is omitted, it is
+      the same as right. If bottom is omitted, it is the same as top. If right is omitted it is
+      the same as top.
+    </p>
+  </section>
+  <section id="the-border-properties">
+    <h3>
+      Borders: the ‘<a>border-top</a>’, ‘<a>border-right</a>’, ‘<a>border-bottom</a>’,
+      ‘<a>border-left</a>’, and ‘<a>border</a>’ properties
+    </h3>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>border-top</dfn>, <dfn>border-right</dfn>, <dfn>border-bottom</dfn>, <dfn>border-left</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td><a><var>&lt;braille-character&gt;</var></a> | none</td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>none</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      These properties set the style of the top, right, bottom, and left border of a box. Values
+      have the following meanings:
+    </p>
+    <dl>
+      <dt>
+        <a>&lt;braille-character&gt;</a>
+      </dt>
+      <dd>
+        A border is constructed by repeating the specified <a
+        title="&lt;braille-character&gt;">braille character</a> along the side of the box. The
+        border width is ‘1’.
+      </dd>
+      <dt>
+        none
+      </dt>
+      <dd>
+        No border is constructed (and the width is therefore ‘0’).
+      </dd>
+    </dl>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>border</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td>[ <a><var>&lt;braille-character&gt;</var></a> | none ]{1,4}</td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>(see individual properties)</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>(see individual properties)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      ‘<a>border</a>’ is a <a
+      href="http://www.w3.org/TR/css3-cascade/#shorthand-property--shorthand"
+      class="externalDFN">shorthand</a> for the other four. Its four values set the top, right,
+      bottom and left border respectively. A missing left is the same as right, a missing bottom
+      is the same as top, and a missing right is also the same as top.
+    </p>
+  </section>
+</section>

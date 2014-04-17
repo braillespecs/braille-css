@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:xi="http://www.w3.org/2001/XInclude">
+  <head>
+    <title> Braille CSS </title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+      @font-face {
+        font-family: odt2braille;
+        src: url(odt2braille8.ttf);
+      }
+      body {
+        line-height: 1.3;
+        padding-right: 30px !important;
+      }
+      dl dd {
+        margin-bottom: 0.5em;
+      }
+      .head dd {
+        margin-bottom: 0;
+      }
+      .email::before {
+        content: "&lt;"
+      }
+      .email::after {
+        content: "&gt;"
+      }
+      em.rfc2119 {
+        font-size: 120%;
+      }
+      [role='heading'], dfn {
+        position: relative;
+      }
+      a.self-link {
+        position: absolute;
+        opacity: 0;
+        text-decoration: none;
+        transition: opacity .2s;
+      }
+      table.propdef a.self-link {
+        background-color: #def;
+      }
+      table.propdef a.self-link:hover {
+        background-color: #ffa;
+      }
+      .issue a.self-link {
+        background-color: #fbe9e9;
+      }
+      [role='heading'] > a.self-link {
+        top: -1px;
+        left: -1.2em;
+        width: 1.2em;
+      }
+      [role='heading'].issue-title > a.self-link {
+        left: -.8em;
+        width: .8em;
+      }
+      dfn > a.self-link {
+        font-size: 90%;
+        left: -0.8em;
+        width: 0.7em;
+        top: 2px;
+        padding-left: 0.1em;
+      }
+      [role='heading']:hover > a.self-link,
+      dfn:hover > a.self-link {
+        opacity: 1;
+      }
+      [role='heading'] > a.self-link::before {
+        content: "§";
+      }
+      dfn > a.self-link::before {
+        content: "#";
+      }
+      .example {
+        margin: 1em 0;
+        padding: .5em 1.2em;
+        border-left-width: .5em;
+        border-left-style: solid;
+        border-color: #e0cb52;
+        background-color: #fcfaee;
+      }
+      .example::before {
+        content: "example";
+        display: block;
+        text-transform: uppercase;
+        color: #b9ab2d;
+      }
+      .code {
+        display: block;
+        font-family: sans-serif;
+        margin: 1em .5em;
+        padding-bottom: 1px;
+        border-left: 1px solid #e0cb52;
+      }
+      .code::before {
+        display: inline-block;
+        padding: .5em;
+        border-top: 1px solid #e0cb52;
+        text-transform: uppercase;
+        font-size: 80%;
+        color: #b9ab2d;
+      }
+      .code.css::before {
+        content: "css";
+      }
+      .code.css.with-label[id] {
+        position: relative;
+      }
+      .code.css.with-label[id]::after {
+        content: attr(id);
+        display: block;
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        font-family: monospace;
+        color: #b9ab2d;
+      }
+      .code.css pre a {
+        border-bottom: 1px dotted #0088cc;
+        text-decoration: none;
+      }
+      .code.xml {
+        max-height: 500px;
+        overflow: auto;
+      }
+      .code.xml::before {
+        content: "xml";
+      }
+      .code.pef {
+        position: relative;
+        line-height: normal;
+      }
+      .code.pef::before {
+        content: "braille";
+      }
+      .code.pef pre {
+        display: none;
+      }
+      .code.pef .test {
+        position: absolute;
+        top: 5px;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        padding: 7px;
+        color: white;
+        font-family: "Arial";
+        font-size: 160%;
+        font-weight: bold;
+        text-align: center;
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 8px;
+        box-shadow: 0 1px rgba(255,255,255,.2) inset;
+      }
+      .code.pef .test-liblouis {
+        right: 91px;
+      }
+      .code.pef .test-dotify {
+        right: 48px;
+      }
+      .code.pef .test-fop {
+        right: 5px;
+      }
+      .code.pef .test-liblouis::before {
+        content: "L";
+      }
+      .code.pef .test-dotify::before {
+        content: "D";
+      }
+      .code.pef .test-fop::before {
+        content: "F";
+      }
+      .code.pef .test-passed {
+        background-color: #449900;
+      }
+      .code.pef .test-failed {
+        background-color: #ee2200;
+      }
+      pef {
+        display: block;
+        margin: 0;
+        padding: .2em .5em .5em 1em;
+        line-height: 1;
+        background-color: transparent;
+        background-image: none;
+      }
+      pef page {
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-shadow: 3px 3px 3px #eee;
+        padding: 0.5em;
+        margin: .5em 0 0 .5em;
+        background-color: rgba(255, 255, 255, 0.7);
+      }
+      pef row {
+        display: block;
+        font-family: odt2braille;
+        letter-spacing: 0px;
+        font-size: 125%;
+      }
+      table.propdef {
+        page-break-inside: avoid;
+        width: 100%;
+        margin: 1.2em 0;
+        border-left: 0.5em solid #8ccbf2;
+        padding: 0.5em 1em;
+        background: #def;
+        border-spacing: 0;
+      }
+      table.propdef th, table.propdef td {
+        vertical-align: baseline;
+        padding: 0.5em;
+        border-bottom: 1px solid #bbd7e9;
+      }
+      table.propdef th {
+        font-style: italic;
+        font-weight: normal;
+        width: 8.3em;
+        padding-left: 1em;
+        text-align: left;
+      }
+      table.propdef > tbody > tr:last-child th,
+      table.propdef > tbody > tr:last-child td {
+        border-bottom: 0;
+      }
+      div.note p {
+        margin: 0 0 0.5em;
+      }
+      .note-title {
+        display: none;
+      }
+      .todo {
+        margin: 1em 0;
+        padding: 1em 1.2em;
+        border-left: .5em solid #ffa500;
+        background-color: #ffeecc;
+      }
+      .todo::before {
+        display: inline;
+        text-transform: uppercase;
+        margin-right: 5px;
+        content: "todo";
+        color: #ff8800;
+      }
+      .braille {
+        font-family: odt2braille;
+        font-size: 125%;
+      }
+    </style>
+    <script type="text/javascript" class="remove">
+      var respecConfig = {
+          specStatus: "unofficial",
+          shortName: "braille-css",
+          editors: [{
+            name:   "Bert Frees",
+            mailto: "bertfrees@gmail.com",
+            url:    "http://github.com/bertfrees" }],
+          additionalCopyrightHolders: "Copyright © 2014 Bert Frees",
+          edDraftURI: "http://github.com/snaekobbi/braille-css-spec",
+          testSuiteURI: "http://github.com/snaekobbi/braille-css-spec",
+          otherLinks: [{
+            key: "Feedback",
+            data: [{
+              value: "https://github.com/snaekobbi/braille-css-spec/issues",
+              href: "https://github.com/snaekobbi/braille-css-spec/issues" }]}],
+          /*
+           * see https://raw.githubusercontent.com/tobie/specref/88e937f32f9597d9cf85d354978fa8db25369ac9/biblio.json
+           */
+          /* FIXME:
+           * - remove dependency on drafts
+           * - use a fixed version of biblio.json
+           *   => e.g. CSS21 became an alias of CSS2 instead of the other way around, which led to a circular reference error because CSS2 was still defined as the alias locally
+           */
+          localBiblio: {
+            "CSS2BOX": {
+              href: "http://www.w3.org/TR/CSS21/box.html" },
+            "CSS2CONFORM": {
+              href: "http://www.w3.org/TR/CSS21/conform.html" },
+            "CSS2MEDIA": {
+              href: "http://www.w3.org/TR/CSS21/media.html" },
+            "CSS2SYN": {
+              href: "http://www.w3.org/TR/CSS21/syndata.html" },
+            "CSS2VISUFX": {
+              href: "http://www.w3.org/TR/CSS21/visufx.html" },
+            "CSS2VISUREN": {
+              href: "http://www.w3.org/TR/CSS21/visuren.html" },
+            "CSS2VISUDET": {
+              href: "http://www.w3.org/TR/CSS21/visudet.html" },
+            "CSS3BG": {
+              aliasOf: "css3-background" },
+            "CSS3BOX": {
+              aliasOf: "css3-box-20070809",
+              edDraft: "http://dev.w3.org/csswg/css-box" },
+            "CSS3BREAK": {
+              aliasOf: "css3-break-20120823" },
+            "CSS3CASCADE": {
+              aliasOf: "css-cascade-3-20131003" },
+            "CSS3COUNTERSTYLES": {
+              aliasOf: "css-counter-styles-3" },
+            "CSS3GCPM": {
+              aliasOf: "css-gcpm-3-20140513" },
+            "CSS3GENCON": {
+              aliasOf: "css3-content-20030514" },
+            "CSS3LIST": {
+              aliasOf: "css-lists-3-20140320" },
+            "CSS3PAGE": {
+              aliasOf: "css3-page-20130314" },
+            "CSS3POS": {
+              href: "http://dev.w3.org/csswg/css-position/",
+              title: "CSS Positioned Layout Module Level 3",
+              authors: [ "Bert Bos" ],
+              status: "WD",
+              publisher: "W3C",
+              edDraft: "http://dev.w3.org/csswg/css-position/" },
+            "CSS3REGIONS": {
+              aliasOf: "css3-regions-20140218" },
+            "CSS3SELECT": {
+              aliasOf: "css3-selectors-20110929" },
+            "CSS3SYN": {
+              href: "http://www.w3.org/TR/2014/CR-css-syntax-3-20140220/",
+              title: "CSS Syntax Module Level 3",
+              authors: [ "David Baron" ],
+              status: "CR",
+              publisher: "W3C",
+              rawDate: "2014-02-20" },
+            "CSS3TEXT": {
+              aliasOf: "css3-text-20121113" },
+            "CSS3VAL": {
+              aliasOf: "css3-values-20130730",
+              edDraft: "http://dev.w3.org/csswg/css3-values/" },
+            "CSS3WRITINGMODES": {
+              aliasOf: "css-writing-modes-3-20140320" },
+            "CSSSTYLEATTR": {
+              href: "http://www.w3.org/TR/2002/WD-css-style-attr-20020515",
+              title: "Syntax of CSS rules in HTML's \"style\" attribute",
+              authors: ["Tantek Çelik", "Bert Bos", "Marc Attinasi"],
+              status: "WD",
+              publisher: "W3C" },
+            "PRINCE": {
+              href: "http://www.princexml.com/doc/9.0/properties/" }
+              }
+      };
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+            class="remove"/>
+    <script type="text/javascript" class="remove"><![CDATA[
+      /*
+       * create PEF previews from PEF code blocks
+       */
+      insertPEFs = function() {
+        respecEvents.sub("end-all", function() {
+          var parser = new DOMParser();
+          $(".code.pef").each(function(i, block) {
+            var pef = parser.parseFromString(block.textContent, "application/x-pef+xml").documentElement;
+            /* remove head and body because they are causing trouble */
+            $(pef).children("head").remove();
+            $(pef).children("body").children("volume").each(function(i, volume) {
+              var cols = parseInt(volume.getAttribute("cols"));
+              var rows = parseInt(volume.getAttribute("rows"));
+              $(volume).children().each(function(i, section) {
+                if (section.hasAttribute("cols"))
+                  cols = parseInt(section.getAttribute("cols"));
+                if (section.hasAttribute("rows"))
+                  rows = parseInt(section.getAttribute("rows"));
+                $(section).children().each(function(i, page) {
+                  $(page).children().each(function(i, row) {
+                    var text = row.textContent;
+                    for (var j = text.length; j < cols; j++) text += "\u2800";
+                    $(row).text(text);
+                  });
+                  for (var i = $(page).children().length; i < rows; i++) {
+                    var text = "";
+                    for (var j = text.length; j < cols; j++) text += "\u2800";
+                    $("<row>" + text + "</row>").appendTo(page);
+                  }
+                });
+              })
+            });
+            // unwrap doesn't work
+            $(pef).children("body").children("volume").detach().appendTo($(pef));
+            $(pef).children("body").remove();
+            $(pef).appendTo(block);
+          });
+        });
+      }
+      /*
+       * expand shortened links
+       */
+      expandLinks = function() {
+        respecEvents.sub("end-all", function() {
+          var biblio = respecConfig.biblio;
+          var re = /^(.+)#([A-Za-z][A-Za-z0-9_:\.\-]*)$/i;
+          $("a").each(function(i, a) {
+            var href = a.getAttribute("href");
+            var match = href.match(re);
+            if (match) {
+              var biblioEntry = biblio[match[1]];
+              while (biblioEntry && biblioEntry["aliasOf"])
+                biblioEntry = biblio[biblioEntry["aliasOf"]];
+              if (biblioEntry)
+                a.setAttribute("href", biblioEntry["href"] + "#" + match[2]);
+            }
+          });
+        });
+      }
+      /*
+       * create self-links on headings and dfn
+       */
+      createSelfLinks = function() {
+        respecEvents.sub("end-all", function() {
+          $("*[role='heading'], dfn").each(function(i, block) {
+            var id = block.getAttribute("id");
+            $("<a class='self-link' href='#" + id + "'></a>").appendTo(block);
+          });
+        });
+      }
+    ]]></script>
+    <script type="text/javascript" src="../respec/builds/respec-w3c-common-3.2.17-p1.js"
+            async="async" class="remove" id="respec"
+            onload="insertPEFs(); expandLinks(); createSelfLinks();"/>
+  </head>
+  <body>
+    <section id="abstract">
+      <p> TBD </p>
+    </section>
+    <section id="sotd">
+      <p>
+        Braille CSS was invented by the creators of <a href="http://www.daisy.org/pipeline2">DAISY
+        Pipeline 2</a> as a means of configuring the braille production scripts, and as an interface
+        between interchangeable components. Although the media types ‘braille’ (intended for braille
+        tactile feedback devices) and ‘embossed’ (intended for paged braille printers) exist, there
+        is no support in vanilla CSS for actually laying out content for braille devices or braille
+        paper. Indeed, because of its very restricted grid layout and its bulkiness, braille has
+        rather specific requirements, and the styling possibilities are limited. And thus was born
+        braille CSS. It has become a pick-and-mix of existing and new CSS features.
+      </p>
+      <p>
+        While virtually all of the core concepts of CSS remain intact, a great deal of existing
+        features were either not incorporated, or were incorporated in a slimmed-down form. One
+        reason is that a lot of features simply don't make sense in the context of braille. Also,
+        for the sake of simplicity, the authors didn't bother to include features that are not
+        supported by implementations. Still it was chosen not to write the specification from
+        scratch but to explicitely reference existing specifications whenever possible and to
+        explain the differences.
+      </p>
+      <p>
+        If you would like to give feedback or contribute to this specification, please file issues
+        at this <a href="https://github.com/snaekobbi/braille-css-spec/issues">project's home on
+        GitHub</a>.
+      </p>
+    </section>
+    <section id="introduction" class="informative">
+      <h2> Introduction </h2>
+      <p>
+        Braille is a tactile writing system used by the blind and visually impaired. Each braille
+        character is formed within a rectangular box with fixed dimensions known as a <dfn>braille
+        cell</dfn>. A character is made up of up to six raised <dfn title="dot">dots</dfn> arranged
+        in a 3 x 2 configuration, which yields sixty-four possible combinations. In <dfn>eight-dot
+        braille</dfn>, a full braille cell consists of eight (4 x 2) dots and there are 256
+        combinations. Unicode has reserved the U+2800..U+28FF range for the <a
+        href="http://www.unicode.org/charts/PDF/U2800.pdf">Braille Patterns</a> block.
+      </p>
+      <p>
+        The process of transforming text to braille is called <dfn>braille transcription</dfn>. The
+        rules that define the braille transcription in a certain language form the <dfn>braille
+        code</dfn> of that language. There are hundreds of braille codes in use all over the
+        world. Each language can have several codes, and each code can have several variants.
+      </p>
+      <p>
+        Braille can be read on paper or on a <dfn>refreshable braille display</dfn> connected to a
+        computer. Most braille printers (also called <dfn title="embosser">embossers</dfn>) and
+        braille displays have a fixed-pitch character grid or matrix layout. If <var>m</var>
+        represents the maximal number of lines a page can contain and <var>n</var> is the maximal
+        number of cells in a line, then a cell can only appear in one of <var>m</var> x <var>n</var>
+        possible positions.
+      </p>
+      <p>
+        Because braille cells take up a lot of space compared to printed words, paper braille books
+        are considerably bulkier than regular books. Usually braille books are divided into several
+        <dfn title="volume">volumes</dfn> in order to make them more handleable and suitable for
+        distribution.
+      </p>
+      <section id="terminology">
+        <h3> Terminology </h3>
+        <p>
+          <a href="CSS3CONFORM#user-agent" class="externalDFN">Agents</a> supporting braille CSS can
+          be subdivided into two categories:
+        </p>
+        <ul>
+          <li>
+            A <dfn>renderer</dfn> is a program that interprets a braille CSS style sheet and applies
+            it on a braille document. It may then print the document on paper, produce an
+            embosser-ready file from it, render it on a refreshable braille display, etc. A renderer
+            is limited to laying out existing braille characters (originating from either the
+            document or the style sheet) according to the rules defined in the style sheet and the
+            specification. It does not need to have any knowledge of <a title="braille code">braille
+            transcription codes</a>.
+          </li>
+          <li>
+            A <dfn>translator</dfn> is a renderer that is able to translate text to braille, in
+            addition to formatting it. Because each language has its own set of <a title="braille
+            code">braille translation rules</a>, a translator behaves differently depending on the
+            language the document is written in, or it could be limited to handling a single
+            language.
+          </li>
+        </ul>
+      </section>
+    </section>
+    <section id="how-to-read">
+      <h2> How to read this Specification </h2>
+      <p>
+        This specification follows the <a
+        href="http://www.w3.org/TR/CSS21/about.html#property-defs">CSS property definition
+        conventions</a> from [[CSS2]]. In addition to the property-specific values listed in their
+        definitions, all properties defined in this specification also accept the ‘<a
+        href="CSS3CASCADE#valuedef-inherit" class="externalDFN">inherit</a>’ and ‘<a
+        href="CSS3CASCADE#valuedef-initial" class="externalDFN">initial</a>’ keywords as their
+        values. For readability they have not been repeated explicitly.
+      </p>
+      <p>
+        Value types, properties, functions and at-rules not defined in this specification are
+        defined in CSS Level 2 Revision 1 [[CSS2]] or in other CSS modules. External definitions
+        will always be explicitely referenced from this specification. This specification will
+        further expand, restrict or override definitions. In that case the differences will be
+        explained in informative notes.
+      </p>
+      <p>
+        The examples included in this specification serve as illustrations as well as tests for two
+        implementations of braille CSS that are being developed within the <a
+        href="http://www.daisy.org/pipeline2">DAISY Pipeline 2</a> project. Test results of the <a
+        href="http://www.liblouis.org/">Liblouis</a> based renderer are marked with an “L”, those of
+        the <a href="http://code.google.com/p/dotify/">Dotify</a> based renderer are marked with a
+        “D”.
+      </p>
+      <p>
+        Examples are set off from the normative test with a yellow box, like this:
+      </p>
+      <div class="example">
+        <pre>This is an example.</pre>
+      </div>
+      <p>
+        Notes are set off from the normative test with a green box, like this:
+      </p>
+      <p class="note">
+        This is an informative note.
+      </p>
+      <!--
+      <p>
+        The specification may refer to the <a href="CSS3CASCADE#used-value" class="externalDFN">used
+        value</a> and the <a href="CSS3CASCADE#computed" class="externalDFN">computed value</a> of a
+        property. Unless stated explicitly, the short form “value” means the <a
+        href="CSS3CASCADE#computed" class="externalDFN">computed value</a>.
+      </p>
+      -->
+      <section id="conformance"/>
+    </section>
+    <section id="values-and-units">
+      <h2> Values and Units </h2>
+      <p>
+        [[CSS3VAL]] describes the common values and units that CSS properties accept and the syntax
+        used for describing them in CSS property definitions. Some but not all of them apply to
+        braille CSS. The following types are redefined or newly defined:
+      </p>
+      <dl>
+        <dt>
+          <dfn>&lt;length&gt;</dfn>
+        </dt>
+        <dd>
+          Lenghts are always expressed in multiples of braille cells (for horizontal measurement)
+          and braille lines (for vertical measurement). No unit identifier is required. Some
+          properties allow negative length values.
+        </dd>
+        <dt>
+          <dfn>&lt;braille-character&gt;</dfn>
+        </dt>
+        <dd>
+          A braille character is defined as a single Unicode character in the range U+2800..U+28FF.
+        </dd>
+        <dt>
+          <dfn>&lt;braille-string&gt;</dfn>
+        </dt>
+        <dd>
+          A braille string is defined as a sequence of braille characters, enclosed with double or
+          single quotes.
+        </dd>
+      </dl>
+      <p class="note">
+        <a>&lt;length&gt;</a> redefines <a href="CSS3VAL#length-value"
+        class="externalDFN">&lt;length&gt;</a> [[CSS3VAL]], <a>&lt;braille-character&gt;</a> and
+        <a>&lt;braille-string&gt;</a> are new.
+      </p>
+    </section>
+    <section id="selectors">
+      <h2> Selectors </h2>
+      <p class="issue">
+        See <a href="https://github.com/snaekobbi/braille-css-spec/issues/25"
+        class="ticket">braille-css-spec#25</a>.
+      </p>
+    </section>
+    <section id="cascade">
+      <h2> Cascading and Inheritance </h2>
+      <p class="issue">
+        See <a href="https://github.com/snaekobbi/braille-css-spec/issues/26"
+        class="ticket">braille-css-spec#26</a>.
+      </p>
+    </section>
+    <section id="style-attribute">
+      <h2> Style Attributes </h2>
+      <p class="issue">
+        See <a href="https://github.com/snaekobbi/braille-css-spec/issues/13"
+        class="ticket">braille-css-spec#13</a>.
+      </p>
+    </section>
+    <section id="media-types">
+      <h2> Media Types </h2>
+      <p>
+        Specifying media-dependent style sheets is done using <a href="CSS2MEDIA#media-types">media
+        types</a> [[CSS2]]. For braille CSS, only one media type is relevant: a braille
+        <a>renderer</a> shall only take into account style sheet rules for media type ‘<a
+        href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>’ (or ‘<a
+        href="CSS2MEDIA#media-types" class="externalDFN">all</a>’).
+      </p>
+      <p class="note">
+        A braille <a>translator</a> may also look at other media types (notably ‘<a
+        href="CSS2MEDIA#media-types" class="externalDFN">print</a>’) in order to find hints for the
+        translation. A typical use case is text-level styling in print such as boldfacing or
+        italicizing which is conveyed in braille using braille indicators.
+        <p class="issue">
+          Add examples of other media types. See <a
+          href="https://github.com/snaekobbi/braille-css-spec/issues/27"
+          class="ticket">braille-css-spec#27</a>.
+        </p>
+      </p>
+      <p class="issue">
+        Allow media ‘<a href="CSS2MEDIA#media-types" class="externalDFN">braille</a>’ in addition to
+        ‘<a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>’ in order to differentiate
+        between properties that only make sense for braille on paper, and properties that make sense
+        on refreshable braille displays too (examples would be ‘white-space’, ‘hyphens’,
+        ‘hyphen-character’, ‘text-transform’, etc.). See <a
+        href="https://github.com/snaekobbi/braille-css-spec/issues/1"
+        class="ticket">braille-css-spec#1</a>.
+      </p>
+    </section>
+    <xi:include href="box_model.html"/>
+    <xi:include href="text.html"/>
+    <xi:include href="generated_content.html"/>
+    <xi:include href="paged_media.html"/>
+    <xi:include href="volumes.html"/>
+    <xi:include href="flow.html"/>
+    <xi:include href="tables.html"/>
+    <section id="original-pagination">
+      <h2> Indication of Original Pagination </h2>
+      <p class="issue">
+          See <a href="https://github.com/snaekobbi/braille-css-spec/issues/14"
+          class="ticket">braille-css-spec#14</a>.
+      </p>
+    </section>
+  </body>
+</html>

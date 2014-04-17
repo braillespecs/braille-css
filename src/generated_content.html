@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="generated-content">
+  <h2> Generated Content, Automatic Numbering, and Lists </h2>
+  <section id="pseudo-elements">
+    <h3> Pseudo-elements </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/33"
+      class="ticket">braille-css-spec#33</a>.
+    </p>
+    <p>
+      Pseudo-elements provide a way to insert and style content that does not exist in the source
+      document. Pseudo-elements generate boxes just like normal elements do. For pseudo-elements to
+      be generated, they must not have their ‘<a>content</a>’ property set to ‘none’. In the general
+      case, pseudo-elements inherit any inheritable properties from the element in the document tree
+      to which they are associated (their <a class="externalDFN" href="CSS3GENCON#superior">superior
+      parent</a>), and their boxes are positioned with respect to the superior parent's box. The <a
+      href="CSS3GENCON#syntax">syntax for selecting pseudo-elements</a> is defined in
+      [[CSS3GENCON]].
+    </p>
+    <section>
+      <h4>
+        The ‘<a>::before</a>’ and ‘<a>::after</a>’ pseudo-elements
+      </h4>
+      <p>
+        The ‘<dfn>::before</dfn>’ and ‘<dfn>::after</dfn>’ pseudo-elements are used to insert
+        content immediately before and immediately after the content of an element (or other
+        pseudo-element). The generated boxes are contained within the <a class="externalDFN"
+        href="CSS3GENCON#superior">superior parent</a>'s box. The ‘<a>content</a>’ property is
+        used to specify the content to insert.
+      </p>
+    </section>
+    <section>
+      <h4>
+        Markers: the ‘<a>::marker</a>’ pseudo-element
+      </h4>
+      <p>
+        The ‘<dfn>::marker</dfn>’ pseudo-element is used to represent a list item's marker (the
+        bullet or number identifying the item). For a ‘<a>::marker</a>’ pseudo-element to be
+        generated, its <a class="externalDFN" href="CSS3GENCON#superior">superior parent</a>
+        must have a computed ‘<a>display</a>’ value of ‘<a>list-item</a>’. The default value of
+        the pseudo-element's ‘<a>content</a>’ property is determined by the
+        ‘<a>list-style-type</a>’ property of its <a class="externalDFN"
+        href="CSS3GENCON#superior">superior parent</a>.
+      </p>
+    </section>
+  </section>
+  <section id="counters">
+    <h3> Automatic Numbering with Counters </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/9"
+      class="ticket">braille-css-spec#9</a>.
+    </p>
+    <p>
+      A <a class="externalDFN" href="CSS3LIST#counter0">counter</a> is a special concept used to
+      automatically number list items, pages, etc. [[CSS3LIST]] describes how counters are
+      created and manipulated with the ‘<a>counter-increment</a>’, ‘<a>counter-set</a>’ and
+      ‘<a>counter-reset</a>’ properties, and used with the ‘<a>counter()</a>’ function.
+    </p>
+    <section>
+      <h4>
+        Manipulating Counters: the ‘<a>counter-increment</a>’, ‘<a>counter-set</a>’ and
+        ‘<a>counter-reset</a>’ properties
+      </h4>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>counter-reset</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              [ <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+              class="externalDFN"><var>&lt;custom-ident&gt;</var></a> <a class="externalDFN"
+              href="http://www.w3.org/TR/css3-syntax/#typedef-integer"><var>&lt;integer&gt;</var></a>?
+              ]+ | none
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td> none </td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              all elements and pseudo-elements
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td> no </td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td> the specified value </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The ‘<a>counter-reset</a>’ property <a class="externalDFN"
+        href="CSS3LIST#create-a-new-counter">creates</a> new counters on an element. Its values
+        are defined as follows:
+      </p>
+      <dl>
+        <dt>none</dt>
+        <dd>
+          The element does not <a class="externalDFN"
+          href="CSS3LIST#create-a-new-counter">create</a> any new counters.
+        </dd>
+        <dt>
+          [ <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+          class="externalDFN">&lt;custom-ident&gt;</a> <a class="externalDFN"
+          href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a>? ]+
+        </dt>
+        <dd>
+          The element <a class="externalDFN" href="CSS3LIST#create-a-new-counter">creates</a>
+          one or more new counters. If an <a class="externalDFN"
+          href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a> is
+          provided after a <a
+          href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+          class="externalDFN">&lt;custom-ident&gt;</a>, it is the starting value of the
+          counter. Otherwise, the starting value of the new counter is ‘0’.
+        </dd>
+      </dl>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>counter-set</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              [ <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+              class="externalDFN"><var>&lt;custom-ident&gt;</var></a> <a class="externalDFN"
+              href="http://www.w3.org/TR/css3-syntax/#typedef-integer"><var>&lt;integer&gt;</var></a>?
+              ]+ | none
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td> none </td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              all elements and pseudo-elements
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td> no </td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td> the specified value </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>counter-increment</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              [ <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+              class="externalDFN"><var>&lt;custom-ident&gt;</var></a> <a class="externalDFN"
+              href="http://www.w3.org/TR/css3-syntax/#typedef-integer"><var>&lt;integer&gt;</var></a>?
+              ]+ | none
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td> none </td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              all elements and pseudo-elements
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td> no </td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td> the specified value </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The ‘<a>counter-set</a>’ and ‘<a>counter-increment</a>’ properties manipulate the value
+        of existing counters. They only <a class="externalDFN"
+        href="CSS3LIST#create-a-new-counter">create</a> new counters if there is no counter of
+        the given name on the element yet. Their values are defined as follows:
+      </p>
+      <dl>
+        <dt>none</dt>
+        <dd>
+          The element does not alter the value of any counters.
+        </dd>
+        <dt>
+          [ <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+          class="externalDFN">&lt;custom-ident&gt;</a> <a class="externalDFN"
+          href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a>? ]+
+        </dt>
+        <dd>
+          The element alters the value of one or more counters on it. If there is not currently
+          a counter of the given name on the element, the element <a class="externalDFN"
+          href="CSS3LIST#create-a-new-counter">creates</a> a new counter of the given name. If
+          an <a class="externalDFN"
+          href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a> is
+          provided after a <a
+          href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+          class="externalDFN">&lt;custom-ident&gt;</a>, the value of the innermost counter of
+          the given name is set to that integer (for ‘<a>counter-set</a>’) or incremented by
+          that integer (for ‘<a>counter-increment</a>’). Otherwise, the value of the innermost
+          counter of the given name is set to ‘0’ (for ‘<a>counter-set</a>’) or incremented by
+          ‘1’ (for ‘<a>counter-increment</a>’).
+        </dd>
+      </dl>
+      <p>
+        Inheriting counters must be done before resetting counters, which must be done before
+        setting counters, which must be done before incrementing counters, which must be done
+        before using counters.
+      </p>
+      <p>
+        A counter in an element that does not generate a box cannot be set, reset, or
+        incremented.
+      </p>
+    </section>
+    <section>
+      <h4> Creating and Inheriting Counters </h4>
+      <p>
+        Every element has a collection of zero or more counters, which are inherited through the
+        document tree in a special way. A counter and its value are inherited separately,
+        possibly from different elements.
+      </p>
+      <p>
+        If an element has preceding <a href="CSS2CONFORM#sibling"
+        class="externalDFN">siblings</a>, it inherits all of the immediately preceding sibling's
+        counters. Otherwise, if the element has a <a href="CSS2CONFORM#parent"
+        class="externalDFN">parent</a>, it inherits all of the parent's counters.
+      </p>
+      <p>
+        The element then inherits counter values from the immediately <a
+        href="CSS2CONFORM#preceding" class="externalDFN">preceding element</a> in document
+        order. This is done by examining the set of counters that the immediately preceding
+        element has, and, for every counter that exists in both the element's set and the
+        preceding element's set, giving the element's counter the same value.
+      </p>
+      <p>
+        Additional counters can be created on elements with the ‘<a>counter-reset</a>’
+        property. The effect depends on what other counters of that name exist on the element:
+      </p>
+      <ul>
+        <li>
+          If no counters of that name exist on the element, create a new counter with that name.
+        </li>
+        <li>
+          Otherwise, if a counter of that name exists on the element, and it was created by a <a
+          href="CSS2CONFORM#sibling" class="externalDFN">preceding</a> sibling, replace the
+          innermost counter of that name on the element with a newly-created counter with that
+          name.
+        </li>
+        <li>
+          Otherwise, create a new counter with that name and nest it inside of the innermost
+          counter with that name.
+        </li>
+      </ul>
+      <p>
+        The value of the new counter is set to the provided starting value.
+      </p>
+      <p>
+        A ‘page’ counter is created automatically on the root element. Its purpose is for
+        numbering braille pages. The counter is implicitely incremented on each page. Depending
+        on the implementation, explicitely setting or incrementing this counter may or may not
+        have an effect. No new counters can be created with the name ‘page’.
+      </p>
+      <p>
+        Implementations may define additional automatic counters.
+      </p>
+    </section>
+    <section>
+      <h4> Printing Counters: the ‘<a>counter()</a>’ function </h4>
+      <p>
+        Counters can be used with the ‘<a>counter()</a>’ function. This happens automatically in
+        the default contents of ‘<a>::marker</a>’ pseudo-elements, but the function can be used
+        anywhere a string value is allowed. The function takes the name of a counter and an
+        optional <a href="CSS3COUNTERSTYLES#counter-style"
+        class="externalDFN">&lt;counter-style&gt;</a> name (which defaults to ‘decimal’) and
+        returns a <a href="CSS3VAL#string-value" class="externalDFN">&lt;string&gt;</a> value:
+      </p>
+      <p>
+        <pre style="white-space: normal">
+          <dfn>counter()</dfn> = counter( <a href="CSS3VAL#identifier-value"
+          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> [, [ <a
+          href="CSS3COUNTERSTYLES#counter-style"
+          class="externalDFN"><var>&lt;counter-style&gt;</var></a> | none ] ]? )
+        </pre>
+      </p>
+      <p>
+        The <a href="CSS3VAL#string-value" class="externalDFN">&lt;string&gt;</a> value returned
+        by the function is obtained as follows:
+      </p>
+      <ul>
+        <li>
+          If the second argument to the function is ‘none’, the function returns the empty
+          string.
+        </li>
+        <li>
+          Otherwise, the function <a href="CSS3COUNTERSTYLES#generate-a-counter"
+          class="externalDFN">generates a counter representation</a> for the value of the
+          innermost counter of that name on the element (or ‘0’ if the element has no counter of
+          that name), using the <a href="CSS3COUNTERSTYLES#counter-style"
+          class="externalDFN">&lt;counter-style&gt;</a> specified by the second argument.
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h4> Defining Counter Styles: the ‘<a>@counter-style</a>’ rule </h4>
+      <p>
+        The ‘<dfn>@counter-style</dfn>’ rule allows the definition of custom <a
+        href="CSS3COUNTERSTYLES#counter-style" class="externalDFN">counter styles</a>. A
+        ‘<a>@counter-style</a>’ rule consists of the keyword ‘@counter-style’, a name, and a
+        block of declaractions (called desciptors) which define how a counter value is converted
+        into a string. A counter styles's name must be a <a
+        href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+        class="externalDFN">&lt;custom-ident&gt;</a> not equal to ‘none’ or ‘decimal’. The
+        various descriptors that make up a counter style are described in [[CSS3COUNTERSTYLES]].
+      </p>
+      <p>
+        User agents must define the ‘decimal’ counter style as an ultimate fallback
+        style. Agents may include additional predefined styles in their UA stylesheet. All
+        counter styles, predefined or not, except for ‘decimal’, can be overridden.
+      </p>
+      <div class="note">
+        <p>
+          The ‘decimal’ counter style may be defined as follows:
+        </p>
+        <pre class="highlight css">@counter-style decimal {
+  system: numeric;
+  symbols: '<span class="braille">⠚</span>' '<span class="braille">⠁</span>' '<span
+  class="braille">⠃</span>' '<span class="braille">⠉</span>' '<span class="braille">⠙</span>' '<span
+  class="braille">⠑</span>' '<span class="braille">⠋</span>' '<span class="braille">⠛</span>' '<span
+  class="braille">⠓</span>' '<span class="braille">⠊</span>'
+}</pre>
+      </div>
+      <p>
+        In addition to the steps listed in [[CSS3COUNTERSTYLES]] for <a
+        href="CSS3COUNTERSTYLES#generate-a-counter" class="externalDFN">generating a counter
+        representation</a>, user agents in the ‘<a>translator</a>’ category must perform the
+        necessary steps to ensure that the resulting representation is a <a
+        title="&lt;braille-string&gt;">braille string</a>.
+      </p>
+    </section>
+    <section>
+      <h4> Default Marker Contents: the ‘<a>list-style-type</a>’ property </h4>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>list-style-type</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              <a><var>&lt;braille-string&gt;</var></a> | <a href="CSS3COUNTERSTYLES#counter-style"
+              class="externalDFN"><var>&lt;counter-style&gt;</var></a> | none
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td> none </td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td> list-item </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td> yes </td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td> specified value </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The ‘<a>list-style-type</a>’ property is used to construct the default contents of a
+        list item's marker; otherwise, ‘<a>list-style-type</a>’ is ignored. The values are
+        defined as follows:
+      </p>
+      <dl>
+        <dt>none</dt>
+        <dd>
+          The marker's default contents are ‘none’.
+        </dd>
+        <dt>
+          <a>&lt;braille-string&gt;</a>
+        </dt>
+        <dd>
+          The <a>&lt;braille-string&gt;</a> is used as the marker's default contents.
+        </dd>
+        <dt>
+          <a href="CSS3COUNTERSTYLES#counter-style"
+             class="externalDFN">&lt;counter-style&gt;</a>
+        </dt>
+        <dd>
+          The marker's default content are
+          <pre style="white-space: normal">
+            <var>&lt;counter-prefix&gt;</var> <a title="counter()">counter</a>( list-item, <a
+            href="CSS3COUNTERSTYLES#counter-style"
+            class="externalDFN"><var>&lt;counter-style&gt;</var></a> )
+            <var>&lt;counter-suffix&gt;</var>
+          </pre>
+          where <var>&lt;counter-prefix&gt;</var> and <var>&lt;counter-suffix&gt;</var> are the
+          values of the <a href="CSS3COUNTERSTYLES#descdef-counter-style-prefix">prefix</a> and
+          <a href="CSS3COUNTERSTYLES#descdef-counter-style-suffix">suffix</a> descriptors for
+          the specified counter style.
+        </dd>
+      </dl>
+    </section>
+  </section>
+  <section id="named-strings">
+    <h3> Named Strings </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/17"
+      class="ticket">braille-css-spec#17</a>.
+    </p>
+    <p>
+      The ‘<a>string-set</a>’ property sets the value of a <a href="CSS3GCPM#named-strings0"
+      class="externalDFN">named string</a>, which functions as a variable. The value can be
+      retrieved using the ‘<a>string()</a>’ function.
+    </p>
+    <section>
+      <h4> The ‘<a>string-set</a>’ property </h4>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>string-set</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              [ <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+              class="externalDFN"><var>&lt;custom-ident&gt;</var></a> <a title="string-set
+              content-list"><var>&lt;content-list&gt;</var></a> ] [, <a
+              href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+              class="externalDFN"><var>&lt;custom-ident&gt;</var></a>
+              <var>&lt;content-list&gt;</var> ]* | none
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td> none </td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td> all elements </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td> no </td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td> specified value </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The ‘<a>string-set</a>’ property contains one or more pairs, each consisting of a custom
+        identifier followed by a ‘<a title="string-set content-list">content-list</a>’ describing
+        how to construct the value of the named string.
+      </p>
+      <p>
+        <a title="string-set content-list">&lt;content-list&gt;</a> expands to one or more of the
+        following values, in any order. The generated content is the concatenation of all values in
+        the list.
+      </p>
+      <p>
+        <pre style="white-space: normal">
+          <dfn title="string-set content-list">content-list</dfn> = [ <a href="CSS3VAL#string-value"
+          class="externalDFN"><var>&lt;string&gt;</var></a> | <var>&lt;attr()&gt;</var> |
+          <var>&lt;content()&gt;</var> ]+
+        </pre>
+      </p>
+      <dl>
+        <dt>
+          <a href="CSS3VAL#string-value" class="externalDFN">&lt;string&gt;</a>
+        </dt>
+        <dd>
+          A <a href="CSS3VAL#string-value" class="externalDFN">string</a>.
+        </dd>
+        <dt>
+          &lt;attr()&gt;
+        </dt>
+        <dd>
+          An ‘<a href="CSS3VAL#attr-notation" class="externalDFN">attr()</a>’ function, as
+          defined in [[CSS3VAL]].
+        </dd>
+        <dt>
+          &lt;content()&gt;
+        </dt>
+        <dd>
+          A ‘content()’ function, which returns the string value of the element, determined as
+          if ‘white-space: normal’ had been set.
+        </dd>
+      </dl>
+    </section>
+    <section>
+      <h4> The ‘<a>string()</a>’ function </h4>
+      <p>
+        The ‘<a>string()</a>’ function returns the value of the named string at the current
+        element.
+      </p>
+      <p>
+        <pre style="white-space: normal">
+          <dfn>string()</dfn> = string( <a href="CSS3VAL#identifier-value"
+          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> )
+        </pre>
+      </p>
+    </section>
+  </section>
+  <section id="leaders">
+    <h3> Leaders: the ‘<a>leader()</a>’ function </h3>
+    <p>
+      A leader is a repeating pattern used to visually connect content across horizontal
+      spaces. They are most commonly used in tables of contents, between titles and page
+      numbers. The ‘<a>leader()</a>’ function, as a value for the ‘<a>content</a>’ property, is
+      used to create leaders. A <a><var>&lt;braille-string&gt;</var></a> describes the repeating
+      pattern for the leader.
+    </p>
+    <p>
+      <pre style="white-space: normal">
+        <dfn>leader()</dfn> = leader( <a><var>&lt;braille-string&gt;</var></a> )
+      </pre>
+    </p>
+    <p class="note">
+      This function differs from the original ‘<a href="CSS3GCPM#leaders"
+      class="externalDFN">leader()</a>’ function [[CSS3GCPM]] in that it only takes a
+      <a><var>&lt;braille-string&gt;</var></a> as an argument. <a href="CSS3GCPM#dotted-leader"
+      class="externalDFN">dotted</a>, <a href="CSS3GCPM#solid-leader"
+      class="externalDFN">solid</a>, <a href="CSS3GCPM/#space-leader"
+      class="externalDFN">space</a> or <a href="CSS3GCPM#string-leader"
+      class="externalDFN"><var>&lt;string&gt;</var></a> are not allowed.
+    </p>
+  </section>
+  <section id="cross-references">
+    <h3> Cross-references </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/34"
+      class="ticket">braille-css-spec#34</a>.
+    </p>
+    <section>
+      <h4> The ‘<a>target-counter()</a>’ function </h4>
+      <p>
+        The ‘<a>target-counter()</a>’ function retrieves the value of the <a
+        href="#counters">named counter</a> at the element referred to by the <a
+        href="CSS3VAL#url" class="externalDFN"><var>&lt;url&gt;</var></a>. The second argument
+        is the name of the counter.
+      </p>
+      <p>
+        <pre style="white-space: normal">
+          <dfn>target-counter()</dfn> = target-counter( <a href="CSS3VAL#url"
+          class="externalDFN"><var>&lt;url&gt;</var></a>, <a href="CSS3VAL#identifier-value"
+          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> )
+        </pre>
+      </p>
+      <p class="note">
+        This function differs from the original ‘<a href="CSS3GCPM#funcdef-target-counter"
+        class="externalDFN">target-counter()</a>’ function [[CSS3GCPM]] in that it doesn't take
+        an optional <a href="CSS3COUNTERSTYLES#counter-style"
+        class="externalDFN"><var>&lt;counter-style&gt;</var></a> argument.
+      </p>
+      <p class="note">
+        The ‘<a>target-counter()</a>’, ‘<a>target-string()</a>’ and ‘<a>target-text()</a>’
+        functions only take a fragment URL which points to a location in the current
+        document. The URL may also be provided indirectly using the ‘<a
+        href="CSS3VAL#attr-notation" class="externalDFN">attr()</a>’
+        function [[CSS3VAL]], in which case ‘url’ will be implied as the type argument if
+        omitted.
+      </p>
+      <p class="issue">
+        Add a ‘target-content()’ function. See <a
+        href="https://github.com/snaekobbi/braille-css-spec/issues/6"
+        class="ticket">braille-css-spec#6</a>.
+      </p>
+    </section>
+    <section>
+      <h4> The ‘<a>target-string()</a>’ function </h4>
+      <p>
+        The ‘<a>target-string()</a>’ function retrieves the value of the <a
+        href="#named-strings">named string</a> at the element referred to by the <a
+        href="CSS3VAL#url" class="externalDFN"><var>&lt;url&gt;</var></a>. The second argument
+        is the name of the counter.
+      </p>
+      <p>
+        <pre style="white-space: normal">
+          <dfn>target-string()</dfn> = target-string( <a href="CSS3VAL#url"
+          class="externalDFN"><var>&lt;url&gt;</var></a>, <a href="CSS3VAL#identifier-value"
+          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> )
+        </pre>
+      </p>
+    </section>
+    <section>
+      <h4> The ‘<a>target-text()</a>’ function </h4>
+      <p>
+        The ‘<a>target-text()</a>’ function retrieves the text value of the element referred to
+        by the <a href="CSS3VAL#url" class="externalDFN"><var>&lt;url&gt;</var></a>.
+      </p>
+      <p>
+        <pre style="white-space: normal">
+          <dfn>target-text()</dfn> = target-text( <a href="CSS3VAL#url"
+          class="externalDFN"><var>&lt;url&gt;</var></a> )
+        </pre>
+      </p>
+      <p class="note">
+        This function differs from the original ‘<a href="CSS3GCPM#target-text-function"
+        class="externalDFN">target-text()</a>’ function [[CSS3GCPM]] in that it doesn't take an
+        optional second argument.
+      </p>
+    </section>
+  </section>
+  <section id="the-content-property">
+    <h3> Inserting Content: the ‘<a>content</a>’ property </h3>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>content</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td>
+            none | <a><var>&lt;content-list&gt;</var></a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>none</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td>
+            all elements and <a href="#h3_pseudo-elements">pseudo-elements</a> and <a
+            href="CSS3PAGE#margin-context">margin contexts</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      The ‘<a>content</a>’ property dictates what is rendered inside the pseudo-element or
+      margin area.
+    </p>
+    <dl>
+      <dt>
+        none
+      </dt>
+      <dd>
+        Causes the pseudo-element or margin area to have no content.
+      </dd>
+      <dt>
+        <a>&lt;content-list&gt;</a>
+      </dt>
+      <dd>
+        <a>&lt;content-list&gt;</a> expands to one or more of the following values, in any
+        order. The generated content is the concatenation of all values in the list.
+        <p>
+          <pre style="white-space: normal">
+            <dfn>&lt;content-list&gt;</dfn> = [ <a href="CSS3VAL#string-value"
+            class="externalDFN"><var>&lt;string&gt;</var></a> | <var>&lt;attr()&gt;</var> |
+            <var>&lt;string()&gt;</var> | <var>&lt;counter()&gt;</var> |
+            <var>&lt;target-text()&gt;</var> | <var>&lt;target-string()&gt;</var> |
+            <var>&lt;target-counter()&gt;</var> | <var>&lt;leader()&gt;</var> ]+
+          </pre>
+        </p>
+        <dl>
+          <dt>
+            <a href="CSS3VAL#string-value" class="externalDFN">&lt;string&gt;</a>
+          </dt>
+          <dd>
+            A <a href="CSS3VAL#string-value" class="externalDFN">string</a>.
+          </dd>
+          <dt>
+            &lt;attr()&gt;
+          </dt>
+          <dd>
+            An ‘<a href="CSS3VAL#attr-notation" class="externalDFN">attr()</a>’ function, as
+            defined in [[CSS3VAL]].
+          </dd>
+          <dt>
+            &lt;string()&gt;
+          </dt>
+          <dd>
+            A ‘<a>string()</a>’ function.
+          </dd>
+          <dt>
+            &lt;counter()&gt;
+          </dt>
+          <dd>
+            A ‘<a>counter()</a>’ function.
+          </dd>
+          <dt>
+            &lt;target-text()&gt;
+          </dt>
+          <dd>
+            A ‘<a>target-text()</a>’ function.
+          </dd>
+          <dt>
+            &lt;target-string()&gt;
+          </dt>
+          <dd>
+            A ‘<a>target-string()</a>’ function.
+          </dd>
+          <dt>
+            &lt;target-counter()&gt;
+          </dt>
+          <dd>
+            A ‘<a>target-counter()</a>’ function.
+          </dd>
+          <dt>
+            &lt;leader()&gt;
+          </dt>
+          <dd>
+            A ‘<a>leader()</a>’ function.
+          </dd>
+        </dl>
+      </dd>
+    </dl>
+  </section>
+</section>

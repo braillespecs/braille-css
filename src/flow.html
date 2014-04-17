@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="out-of-flow-positioning">
+  <h2> Out-of-Flow Positioning </h2>
+  <p>
+    It is sometimes useful to take elements out of their normal flow and move or copy them into
+    other containers. Examples include <a href="#footnotes">footnotes</a>, <a
+    href="#endnotes">volume endnotes</a>, and <a href="#">repeated content at the beginning of
+    volumes</a>. This section describes a generic mechanism for moving content, called “<a
+    title="named flow">named flows</a>”. CSS is not a transformation language; the motivation for
+    supporting <a title="named flow">named flows</a> is presentational rather than structural.
+  </p>
+  <div class="note">
+    <p>
+      The approach taken in braille CSS is inspired by a number of CSS concepts and features
+      described elsewhere:
+    </p>
+    <ul>
+      <li>
+        The ‘<a href="http://www.princexml.com/doc/9.0/properties/prince-flow"
+        class="externalDFN">flow</a>’ property and the ‘flow()’ value of the ‘<a
+        href="http://www.princexml.com/doc/9.0/properties/content" class="externalDFN">content</a>’
+        property defined in [[PRINCE]].
+      </li>
+      <li>
+        The concept of <a class="externalDFN" href="CSS3REGIONS#named-flow">named flows</a> and the
+        ‘<a class="externalDFN" href="CSS3REGIONS#propdef-flow-into">flow-into</a>’ and ‘<a
+        href="CSS3REGIONS#propdef-flow-from" class="externalDFN">flow-from</a>’ properties defined
+        in [[CSS3REGIONS]].
+      </li>
+      <li>
+        The ‘flow()’ value of the ‘position’ property and the ‘pending()’ value of the ‘content’
+        property defined in an <a
+        href="http://www.w3.org/TR/2007/WD-css3-gcpm-20070205/#named0">earlier version</a> of
+        [[CSS3GCPM]].
+      </li>
+      <li>
+        The ‘<a href="CSS3GENCON#moving" class="externalDFN">move-to</a>’ property and the ‘<a
+        href="CSS3GENCON#pendingltidentifiergt" class="externalDFN">pending()</a>’ value of the
+        ‘content’ property defined in [[CSS3GENCON]].
+      </li>
+      <li>
+        The ‘:running’ pseudo-class defined in [[CSS3GCPM]].
+      </li>
+    </ul>
+  </div>
+  <section id="named-flows">
+    <h3> Named Flows </h3>
+    <p>
+      A <dfn>named flow</dfn> is the ordered sequence of content associated with a flow with a given
+      identifier. It could be seen as a first-in first-out buffer or a channel. Content is placed
+      into a named flow with the ‘<a>flow</a>’ property, and taken out using the ‘<a>flow()</a>’
+      value of the ‘<a>content</a>’ property. The same element can participate in more than one
+      flow (including the normal flow), and a named flow can have multiple sources and multiple
+      targets. This makes it possible to not only move but also copy or even repeat content.
+    </p>
+    <section id="the-flow-property">
+      <h4> The ‘<a>flow</a>’ property </h4>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>flow</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              [ normal | <a href="CSS3VAL#identifier-value"
+              class="externalDFN"><var>&lt;custom-ident&gt;</var></a> ]+
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>auto</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>all elements (but not pseudo-elements)</td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The ‘<a>flow</a>’ property causes an element to participate in the specified flow or
+        flows. The value must be a space separated list of one or more of the following:
+      </p>
+      <dl>
+        <dt>normal</dt>
+        <dd>
+          This value causes an element to participate in the normal flow. If ‘normal’ is not included
+          in the list of flows, the element does not generate a box at the original position in the
+          DOM. (It has the effect of setting ‘<a>display</a>’ to ‘none’.)
+        </dd>
+        <dt>
+          <a href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>
+        </dt>
+        <dd>
+          This value causes an element to participate in the <a>named flow</a> with the name <a
+          href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>.
+        </dd>
+      </dl>
+      <p>
+        For each <a>named flow</a> an element participates in, a pseudo-element is generated, which is
+        initially a duplicate. The ‘<a>flow</a>’ property does not affect the DOM position of an
+        element or its contents, and it does not affect the CSS cascade and
+        inheritance. Pseudo-elements generated by the ‘<a>flow</a>’ property inherit from their
+        associated element's parent, but not from the element itself.
+      </p>
+      <p>
+        The visual formatting model however uses the relationships between content in the <a>named
+        flow</a> as input, rather than the contents' original position in the DOM. The pseudo-elements
+        channelled into a <a>named flow</a> become siblings. A box establishes a containing block for
+        the content it consumes using the ‘<a>flow()</a>’ function. The pseudo-elements in a <a>named
+        flow</a> are ordered according to the document order of their associated elements.
+      </p>
+    </section>
+    <section id="the-flow-pseudo-class">
+      <h4> The ‘:flow()’ pseudo-class </h4>
+      <p>
+        Elements can be styled according to the flow they participate in. The ‘:flow(<a
+        href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>)’ <a
+        href="CSS3SELECT#CSS3SELECT">pseudo-class</a> represents a pseudo-element in the flow named <a
+        href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>.
+      </p>
+    </section>
+    <section id="the-flow-function">
+      <h4> The ‘<a>flow()</a>’ function </h4>
+      <p>
+        The ‘<a>flow()</a>’ function is used to consume <a title="named flow">named flows</a>, via the
+        ‘<a>content</a>’ property. The function requires one argument, the name of the flow. Contents
+        in the named flow are rendered as children of the block container on which the
+        ‘<a>content</a>’ property is specified. In the default case, each element in a named flow is
+        consumed only once, namely at the first content request after the element's entry at its
+        original position in the DOM. This behaviour can be overridden with an optional second
+        argument.
+      </p>
+      <p>
+        <pre style="white-space: normal">
+          <dfn>flow()</dfn> = flow( <a href="CSS3VAL#identifier-value"
+          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> [, [ backward | forward | all ] ]? )
+        </pre>
+      </p>
+      <p>
+        The second argument dictates the search direction and range and is one of the following
+        keywords:
+      </p>
+      <dl>
+        <dt> backward </dt>
+        <dd>
+          The elements that were added to the flow prior to this call and were not consumed yet by a
+          previous call are inserted here. ‘backward’ is the default value.
+        </dd>
+        <dt> forward </dt>
+        <dd>
+          The elements that will be added to the flow after this call and before the next are inserted
+          here.
+        </dd>
+        <dt> all </dt>
+        <dd>
+          All the elements that have been added to the flow or will be added later are inserted here.
+        </dd>
+      </dl>
+    </section>
+  </section>
+  <section id="generated-lists">
+    <h3> Generated Lists </h3>
+    <p>
+      Books typically have sections that can be referred to as generated lists. They are generated
+      from the main content, and have the nature of lists. Examples include a table of contents, an
+      index, a glossary, a list of figures, a list of tables and an endnote section.
+    </p>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/10"
+      class="ticket">braille-css-spec#10</a>.
+    </p>
+  </section>
+  <section id="footnotes">
+    <h3> Footnotes </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/3"
+      class="ticket">braille-css-spec#3</a>.
+    </p>
+    <section>
+      <h4> The ‘@footnotes’ area </h4>
+    </section>
+  </section>
+  <section id="endnotes">
+    <h3> Endnotes </h3>
+    <!--
+    <p>
+      <em>This section is informative.</em>
+    </p>
+    -->
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/5"
+      class="ticket">braille-css-spec#5</a>.
+    </p>
+  </section>
+</section>

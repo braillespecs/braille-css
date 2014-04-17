@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="text">
+  <h2> Text </h2>
+  <section>
+    <h3> Transforming Text </h3>
+    <p>
+      <a href="CSS2CONFORM#user-agent" class="externalDFN">User agents</a> in the ‘<a
+      title="renderer">braille renderer</a>’ category require that the document text (as well as
+      text in ‘<a>content</a>’ properties) consists of only <a>white space characters</a> and
+      Unicode braille. <a title="translator">Braille translators</a> don't have this
+      restriction, they can transform text to braille when necessary.
+    </p>
+    <p>
+      The specification doesn't impose a specific ordering between text transformation, white
+      space processing and line breaking, as long as in the end the <a
+      href="#white-space-processing">white space processing</a>, <a href="#line-breaking">line
+      breaking</a> and <a title="braille code">braille translation</a> rules are satisfied, and
+      all text can be rendered in <a title="braille cell">braille cells</a>.
+    </p>
+    <p class="issue">
+      Add a section that describes how the transformation from text to braille can be
+      controlled. See <a href="https://github.com/snaekobbi/braille-css-spec/issues/12"
+      class="ticket">braille-css-spec#12</a>.
+    </p>
+  </section>
+  <section id="the-white-space-property">
+    <h3> The ‘<a>white-space</a>’ property </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/30"
+      class="ticket">braille-css-spec#30</a>.
+    </p>
+    <p>
+      The source text of a document often contains formatting that is not relevant to the final
+      rendering: for example, breaking the source into segments (lines) for ease of editing, or
+      adding white space characters such as tabs and spaces to indent the source code. The
+      interpretation of such formatting can be controlled with the ‘<a>white-space</a>’
+      property. The property specifies whether and how white space is collapsed and whether
+      lines may wrap at unforced soft wrap opportunities.
+    </p>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>white-space</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td>
+            normal | pre-wrap | pre-line
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>normal</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td> all elements and pseudo-elements </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Values have the following meanings, which must be interpreted according to the <a
+      href="#white-space-processing">white space processing</a> and <a
+      href="#line-breaking">line breaking</a> rules:
+    </p>
+    <dl>
+      <dt>
+        <dfn>normal</dfn>
+      </dt>
+      <dd>
+        Sequences of <a title="white space characters">white space</a> are collapsed into a
+        single character, or in some cases, no character. Lines may wrap at allowed <a
+        href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap opportunities</a>.
+      </dd>
+      <dt>
+        <dfn>pre-wrap</dfn>
+      </dt>
+      <dd>
+        Like ‘<a>normal</a>’, this value allows <a href="CSS3TEXT#wrapping"
+        class="externalDFN">soft wrapping</a>, but sequences of <a title="white space
+        characters">white space</a> are not collapsed. <a href="CSS3TEXT#segment-break"
+        class="externalDFN">Segment breaks</a> are preserved as <a
+        href="CSS3TEXT#forced-line-break" class="externalDFN">forced line breaks</a>.
+      </dd>
+      <dt>
+        <dfn>pre-line</dfn>
+      </dt>
+      <dd>
+        Like ‘<a>normal</a>’, this value collapses consecutive spaces and allows <a
+        href="CSS3TEXT#wrapping" class="externalDFN">soft wrapping</a>, but <a
+        href="CSS3TEXT#segment-break" class="externalDFN">segment breaks</a> are preserved as <a
+        href="CSS3TEXT#forced-line-break" class="externalDFN">forced line breaks</a>.
+      </dd>
+    </dl>
+  </section>
+  <section id="white-space-processing">
+    <h3> White Space Processing Rules </h3>
+    <p>
+      White space processing affects only the <dfn>white space characters</dfn>: spaces (U+0020
+      <span style="font-variant: small-caps">space</span>), braille spaces (U+2800 <span
+      style="font-variant: small-caps">braille pattern blank</span>), tabs (U+0009 <span
+      style="font-variant: small-caps">character tabulation</span>), and <a
+      href="CSS3TEXT#segment-break" class="externalDFN">segment breaks</a> (U+000D <span
+      style="font-variant: small-caps">carriage return</span>, U+000A <span style="font-variant:
+      small-caps">line feed</span> and U+000D U+000A).
+    </p>
+    <p>
+      Within an <a title="inline-level formatting context">inline formatting context</a>,
+      white space characters are processed as follows:
+    </p>
+    <ol>
+      <li>
+        <p>
+          Every braille space and every tab is converted to a normal space (U+0020 <span
+          style="font-variant: small-caps">space</span>).
+        </p>
+      </li>
+      <li>
+        <p>
+          If ‘<a>white-space</a>’ is ‘<a>normal</a>’ or ‘<a>pre-line</a>’, all spaces and tabs
+          immediately preceding or following a segment break are removed.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="CSS3TEXT#segment-break" class="externalDFN">Segment breaks</a> are
+          transformed for rendering according to the segment break transformation rules:
+        </p>
+        <ul>
+          <li>
+            <p>
+              If ‘<a>white-space</a>’ is ‘<a>pre-wrap</a>’ or ‘<a>pre-line</a>’, segment breaks
+              are transformed into a preserved line feed (U+000A <span style="font-variant:
+              small-caps">line feed</span>).
+            </p>
+          </li>
+          <li>
+            <p>
+              If ‘<a>white-space</a>’ is ‘<a>normal</a>’, segment breaks are converted to a
+              <a>collapsible</a> space (U+0020 <span style="font-variant:
+              small-caps">space</span>), unless the character immediately before or immediately
+              after the segment break is the zero-width space character (U+200B <span
+              style="font-variant: small-caps">zero width space (zwsp)</span>), then the segment
+              break is removed.
+            </p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          If ‘<a>white-space</a>’ is ‘<a>normal</a>’ or ‘<a>pre-line</a>’, spaces are considered
+          <dfn>collapsible</dfn>. Any space immediately following another collapsible space is
+          collapsed to have zero advance width. It is invisible, but retains its <a
+          href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap opportunity</a>,
+          if any. If ‘<a>white-space</a>’ is ‘<a>pre-wrap</a>’, any sequence of spaces is
+          treated as a sequence of non-breaking spaces (U+00A0 <span style="font-variant:
+          small-caps">no-break space (nbsp)</span>). However, a <a
+          href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap opportunity</a>
+          exists at the end of the sequence.
+        </p>
+      </li>
+    </ol>
+    <p class="note">
+      Two characters in the same inline formatting context can follow each other regardless of
+      whether they are within the boundaries of the same inline box.
+    </p>
+    <p>
+      Then, as inline boxes are laid out:
+    </p>
+    <ol>
+      <li>
+        <p>
+          Sequences of <a title="collapsible">collapsible spaces</a> at the beginning of line
+          boxes are removed.
+        </p>
+      </li>
+      <li>
+        <p>
+          Each space is rendered as an empty <a>braille cell</a> (a horizontal shift of 1).
+        </p>
+      </li>
+      <li>
+        <p>
+          Sequences of <a title="collapsible">collapsible spaces</a> at the end of line boxes
+          are removed. If spaces at the end of a line are non-collapsible but have
+          ‘<a>white-space</a>’ set to ‘<a>pre-wrap</a>’ the <a href="CSS2CONFORM#user-agent"
+          class="externalDFN">UA</a> may visually collapse their character advance widths.
+        </p>
+      </li>
+    </ol>
+    <p>
+      White space that was not removed or collapsed during the white space processing steps is
+      called <dfn>preserved</dfn> white space.
+    </p>
+  </section>
+  <section id="line-breaking">
+    <h3> Line Breaking </h3>
+    <p>
+      When inline-level content is laid out into lines, it is broken across <a title="line
+      box">line boxes</a>. Line breaking is based on [[CSS3TEXT]]:
+    </p>
+    <ul>
+      <li>
+        <p>
+          Lines break at the start and end of blocks (<a href="CSS3TEXT#forced-line-break"
+          class="externalDFN">forced line breaks</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          Regardless of the ‘<a>white-space</a>’ value, line-breaking behavior defined for the
+          <a href="UAX14#LF" class="externalDFN">LF</a> line breaking class in [[UAX14]] must be
+          honored.
+        </p>
+        <p class="note">
+          In other words, line breaks are <a href="CSS3TEXT#forced-line-break"
+          class="externalDFN">forced</a> at preserved line feed characters (U+000A line feed).
+        </p>
+      </li>
+      <li>
+        <p>
+          When ‘<a>white-space</a>’ allows wrapping, line breaking behavior defined for the <a
+          href="UAX14#SP" class="externalDFN">SP</a>, <a href="UAX14#ZW"
+          class="externalDFN">ZW</a> and <a href="UAX14#GL" class="externalDFN">GL</a> (NBSP
+          only) line breaking classes in [[UAX14]] must be honored.
+        </p>
+        <p class="note">
+          In other words, spaces (U+0020 <span style="font-variant: small-caps">space</span>)
+          and zero width spaces (U+200B <span style="font-variant: small-caps">zero width space
+          (zwsp)</span>) form <a href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft
+          wrap opportunities</a>. Non-breaking spaces (U+00A0 <span style="font-variant:
+          small-caps">no-break space (nbsp)</span>) prohibit breaks unless overruled by a space
+          or zero-width space.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="CSS3TEXT#hyphenation-opportunity" class="externalDFN">Hyphenation
+          opportunities</a> create soft wrap opportunities within words (see <a
+          href="#breaking-within-words">Breaking within words</a> below).
+        </p>
+      </li>
+      <li>
+        <p>
+          For <a href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap
+          opportunities</a> before the first or after the last character of a box, the break
+          occurs immediately before/after the box (at its <a href="CSS3BOX#margin0"
+          class="externalDFN">margin edge</a>) rather than breaking the box between its <a
+          href="CSS3BOX#content0" class="externalDFN">content edge</a> and the content.
+        </p>
+      </li>
+    </ul>
+  </section>
+  <section id="breaking-within-words">
+    <h3> Breaking within Words </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/31"
+      class="ticket">braille-css-spec#31</a>.
+    </p>
+    <p>
+      Hyphenation allows the controlled splitting of words to improve the layout of paragraphs,
+      typically splitting words at syllabic or morphemic boundaries and visually indicating the
+      split. Especially for braille, where space is very limited, hyphenation can have a
+      significant impact on the layout. Braille CSS does not define the rules for hyphenation,
+      but provides ways to control whether hyphenation is allowed and how <a
+      href="CSS3TEXT#hyphenation-opportunity" class="externalDFN">hyphenation opportunities</a>
+      are determined.
+    </p>
+    <section id="the-hyphens-property">
+      <h4> The ‘<a>hyphens</a>’ property </h4>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>hyphens</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              none | manual | auto
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>manual</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td> all elements and pseudo-elements </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>yes</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Hyphenation is controlled with the ‘<a>hyphens</a>’ property. Values have the following
+        meanings:
+      </p>
+      <dl>
+        <dt>
+          <dfn>none</dfn>
+        </dt>
+        <dd>
+          Words are not hyphenated, even if characters inside the word explicitly define <a
+          href="CSS3TEXT#hyphenation-opportunity" class="externalDFN">hyphenation
+          opportunities</a>.
+        </dd>
+        <dt>
+          <dfn>manual</dfn>
+        </dt>
+        <dd>
+          Words are only hyphenated where there are soft hyphens (U+00AD <span
+          style="font-variant: small-caps">soft hyphen (shy)</span>) inside the word. Soft
+          hyphens are invisible format characters that explicitly suggest <a
+          href="CSS3TEXT#hyphenation-opportunity" class="externalDFN">hyphenation
+          opportunities</a>, and that produce a <a title="hyphenate-character">hyphenation
+          character</a> only when a line is broken at that point.
+          <p class="note">
+            [[UAX14]] describes the role of <a href="UAX14#SoftHyphen">soft hyphens</a> in
+            Unicode line breaking.
+          </p>
+        </dd>
+        <dt>
+          <dfn>auto</dfn>
+        </dt>
+        <dd>
+          Words may be broken at appropriate hyphenation points either as determined by soft
+          hyphens inside the word or as determined automatically by the <a
+          href="CSS2CONFORM#user-agent" class="externalDFN">user agent</a> (i.e. <a
+          title="translator">braille translator</a>), based on document language and <a>braille
+          code</a>. Hyphenation characters inside a word, if present, take priority over
+          automatic hyphenation.
+        </dd>
+      </dl>
+    </section>
+    <section id="the-hyphenate-character-property">
+      <h4> The ‘<a>hyphenate-character</a>’ property </h4>
+      <p>
+        The ‘<a>hyphenate-character</a>’ property specifies the character that is rendered at
+        the end of the line before a hyphenation break.
+      </p>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>hyphenate-character</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              auto | <a><var>&lt;braille-character&gt;</var></a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>auto</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td> all elements and pseudo-elements </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>yes</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The ‘auto’ value means that the user agent should find an appropriate value
+      </p>
+    </section>
+  </section>
+  <section id="the-text-align-property">
+    <h3> Text Alignment: the‘<a>text-align</a>’ property </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/32"
+      class="ticket">braille-css-spec#32</a>.
+    </p>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>text-align</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td> left | center | right </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>left</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="the-text-indent-property">
+    <h3> First Line Indentation: the ‘<a>text-indent</a>’ property </h3>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>text-indent</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td>
+            <a><var>&lt;length&gt;</var></a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+      </table><div class="example">
+      <div class="code xml">
+        <pre class="highlight"><![CDATA[<body>
+  <p> ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ </p>
+</body>]]></pre>
+       </div>
+       <div class="code css">
+         <pre class="highlight">@page { size: 10 3; }
+
+p {
+  display: block;
+  text-indent: 1; }</pre>
+       </div>
+       <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="3" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row>⠀⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+       </div>
+       <p>
+         The value of ‘text-indent’ may be negative:
+       </p>
+       <div class="code css">
+         <pre class="highlight">@page { size: 10 3; }
+
+body {
+  display: block;
+  margin-left: 3; }
+
+p {
+  display: block;
+  text-indent: -1; }</pre>
+       </div>
+       <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="3" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row>⠀⠀⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠀⠀⠀⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠀⠀⠀⠤⠤⠤</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+       </div>
+     </div>
+  </section>
+  <section>
+    <h3> Letter Spacing </h3>
+    <p class="issue">
+      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/15"
+      class="ticket">braille-css-spec#15</a>.
+    </p>
+  </section>
+</section>
