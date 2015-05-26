@@ -23,7 +23,7 @@ $(DEV_INDEX) : $(SOURCES)
 	mvn test -Dsource=$(SRC_DIR)/index.html -Dtarget=$@ -Dmy.skipTests=${SKIP_TESTS}
 
 publish : all
-	bash publish-on-gh-pages.sh $(TARGET_DIR) "git@github.com:snaekobbi/braille-css-spec.git"
+	bash publish-on-gh-pages.sh $(TARGET_DIR)
 
 respec/src :
 	git clone -b config-specref --depth 1 "https://github.com/snaekobbi/respec" $@
