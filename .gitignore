@@ -1,3 +1,4 @@
 *~
 target/
-respec/
+respec/src
+specref/src

@@ -264,13 +264,9 @@
             data: [{
               value: "https://github.com/snaekobbi/braille-css-spec/issues",
               href: "https://github.com/snaekobbi/braille-css-spec/issues" }]}],
+          specrefUrl: "http://specref:5000",
           /*
-           * see https://raw.githubusercontent.com/tobie/specref/88e937f32f9597d9cf85d354978fa8db25369ac9/biblio.json
-           */
-          /* FIXME:
-           * - remove dependency on drafts
-           * - use a fixed version of biblio.json
-           *   => e.g. CSS21 became an alias of CSS2 instead of the other way around, which led to a circular reference error because CSS2 was still defined as the alias locally
+           * FIXME: remove dependency on drafts
            */
           localBiblio: {
             "CSS2BOX": {
@@ -416,7 +412,7 @@
         });
       }
     ]]></script>
-    <script type="text/javascript" src="../respec/builds/respec-w3c-common-3.2.17-p1.js"
+    <script type="text/javascript" src="http://respec/respec-w3c-common.js"
             async="async" class="remove" id="respec"
             onload="insertPEFs(); expandLinks(); createSelfLinks();"/>
   </head>

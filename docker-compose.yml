@@ -1,0 +1,19 @@
+respec:
+  build: respec
+  expose:
+    - 80
+
+specref:
+  build: specref
+  expose:
+    - 5000
+
+respec2html:
+  build: respec
+  links:
+    - respec
+    - specref
+  volumes:
+    - target:/host/target
+  working_dir: /host
+  entrypoint: ["respec2html"]

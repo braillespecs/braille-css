@@ -1,0 +1,5 @@
+#!/bin/bash
+INPUT=$(readlink -f $1)
+OUTPUT=$(readlink -f $2)
+cd /root/respec
+phantomjs --ssl-protocol=any tools/respec2html.js $INPUT >$OUTPUT || true
