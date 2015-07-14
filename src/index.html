@@ -31,6 +31,18 @@
       [role='heading'], dfn {
         position: relative;
       }
+      .propname::before {
+        content: '‘';
+      }
+      .propname::after {
+        content: '’';
+      }
+      .propval::before {
+        content: '‘';
+      }
+      .propval::after {
+        content: '’';
+      }
       a.self-link {
         position: absolute;
         opacity: 0;
@@ -405,10 +417,22 @@
           });
         });
       }
+      /*
+       *
+       */
+      doStuff = function() {
+        insertPEFs();
+        expandLinks();
+        createSelfLinks();
+        respecEvents.sub("end-all", function() {
+          $("a.propname").removeClass("propname").wrap("<span class='propname'/>");
+          $("a.propval").removeClass("propval").wrap("<span class='propval'/>");
+        });
+      }
     ]]></script>
     <script type="text/javascript" src="http://respec/respec-w3c-common.js"
             async="async" class="remove" id="respec"
-            onload="insertPEFs(); expandLinks(); createSelfLinks();"/>
+            onload="doStuff();"/>
   </head>
   <body>
     <section id="abstract">
@@ -418,9 +442,10 @@
       <p>
         Braille CSS was invented by the creators of <a href="http://www.daisy.org/pipeline2">DAISY
         Pipeline 2</a> as a means of configuring the braille production scripts, and as an interface
-        between interchangeable components. Although the media types ‘braille’ (intended for braille
-        tactile feedback devices) and ‘embossed’ (intended for paged braille printers) exist, there
-        is no support in vanilla CSS for actually laying out content for braille devices or braille
+        between interchangeable components. Although the media types <span
+        class="propval">braille</span> (intended for braille tactile feedback devices) and <span
+        class="propval">embossed</span> (intended for paged braille printers) exist, there is no
+        support in vanilla CSS for actually laying out content for braille devices or braille
         paper. Indeed, because of its very restricted grid layout and its bulkiness, braille has
         rather specific requirements, and the styling possibilities are limited. And thus was born
         braille CSS. It has become a pick-and-mix of existing and new CSS features.
@@ -503,10 +528,10 @@
         This specification follows the <a
         href="http://www.w3.org/TR/CSS21/about.html#property-defs">CSS property definition
         conventions</a> from [[CSS2]]. In addition to the property-specific values listed in their
-        definitions, all properties defined in this specification also accept the ‘<a
-        href="CSS3CASCADE#valuedef-inherit" class="externalDFN">inherit</a>’ and ‘<a
-        href="CSS3CASCADE#valuedef-initial" class="externalDFN">initial</a>’ keywords as their
-        values. For readability they have not been repeated explicitly.
+        definitions, all properties defined in this specification also accept the <a
+        href="CSS3CASCADE#valuedef-inherit" class="externalDFN propval">inherit</a> and <a
+        href="CSS3CASCADE#valuedef-initial" class="externalDFN propval">initial</a> keywords as
+        their values. For readability they have not been repeated explicitly.
       </p>
       <p>
         Value types, properties, functions and at-rules not defined in this specification are
@@ -607,14 +632,14 @@
       <p>
         Specifying media-dependent style sheets is done using <a href="CSS2MEDIA#media-types">media
         types</a> [[CSS2]]. For braille CSS, only one media type is relevant: a braille
-        <a>renderer</a> shall only take into account style sheet rules for media type ‘<a
-        href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>’ (or ‘<a
-        href="CSS2MEDIA#media-types" class="externalDFN">all</a>’).
+        <a>renderer</a> shall only take into account style sheet rules for media type <a
+        href="CSS2MEDIA#media-types" class="externalDFN propval">embossed</a> (or <a
+        href="CSS2MEDIA#media-types" class="externalDFN propval">all</a>).
       </p>
       <p class="note">
-        A braille <a>translator</a> may also look at other media types (notably ‘<a
-        href="CSS2MEDIA#media-types" class="externalDFN">print</a>’) in order to find hints for the
-        translation. A typical use case is text-level styling in print such as boldfacing or
+        A braille <a>translator</a> may also look at other media types (notably <a
+        href="CSS2MEDIA#media-types" class="externalDFN propval">print</a>) in order to find hints
+        for the translation. A typical use case is text-level styling in print such as boldfacing or
         italicizing which is conveyed in braille using braille indicators.
         <p class="issue">
           Add examples of other media types. See <a
@@ -623,12 +648,13 @@
         </p>
       </p>
       <p class="issue">
-        Allow media ‘<a href="CSS2MEDIA#media-types" class="externalDFN">braille</a>’ in addition to
-        ‘<a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>’ in order to differentiate
-        between properties that only make sense for braille on paper, and properties that make sense
-        on refreshable braille displays too (examples would be ‘white-space’, ‘hyphens’,
-        ‘hyphen-character’, ‘text-transform’, etc.). See <a
-        href="https://github.com/snaekobbi/braille-css-spec/issues/1"
+        Allow media <a href="CSS2MEDIA#media-types" class="externalDFN propval">braille</a> in
+        addition to <a href="CSS2MEDIA#media-types" class="externalDFN propval">embossed</a> in
+        order to differentiate between properties that only make sense for braille on paper, and
+        properties that make sense on refreshable braille displays too (examples would be <span
+        class="propname">white-space</span>, <span class="propname">hyphens</span>, <span
+        class="propname">hyphen-character</span>, <span class="propname">text-transform</span>,
+        etc.). See <a href="https://github.com/snaekobbi/braille-css-spec/issues/1"
         class="ticket">braille-css-spec#1</a>.
       </p>
     </section>

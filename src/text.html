@@ -3,11 +3,11 @@
   <h2> Text </h2>
   <p>
     <a href="CSS2CONFORM#user-agent" class="externalDFN">User agents</a> in the ‘<a
-    title="renderer">braille renderer</a>’ category require that the document text (as well as
-    text in ‘<a>content</a>’ properties) consists of only <a>white space characters</a> and
-    Unicode braille. <a title="translator">Braille translators</a> don't have this restriction,
+    title="renderer">braille renderer</a>’ category require that the document text (as well as text
+    in <a class="propname">content</a> properties) consists of only <a>white space characters</a>
+    and Unicode braille. <a title="translator">Braille translators</a> don't have this restriction,
     they can transform text to braille when necessary. The transformation from text to braille can
-    be controlled on element level with the ‘<a>text-transform</a>’ property.
+    be controlled on element level with the <a class="propname">text-transform</a> property.
   </p>
   <p>
     The specification doesn't impose a specific ordering between text transformation, white
@@ -18,14 +18,14 @@
   </p>
   <section id="the-text-transform-property">
     <h3>
-      Transforming Text: the ‘<a>text-transform</a>’ property
+      Transforming Text: the <a class="propname">text-transform</a> property
     </h3>
     <p>
       When document text does not consist solely of Unicode braille and <a title="white space
       characters">white space</a>, the <a title="translator">braille translator</a> transforms it to
       braille somehow. How text is supposed to be transformed depends on the <a>braille code</a> but
-      also on the context. The ‘<a>text-transform</a>’ property can be used for providing the
-      translator with all the necessary context information to do its job correctly.
+      also on the context. The <a class="propname">text-transform</a> property can be used for
+      providing the translator with all the necessary context information to do its job correctly.
     </p>
     <table class="propdef">
       <tbody>
@@ -74,8 +74,8 @@
     </table>
     <p>
       Because braille transcription is a complex process influenced by <a title="braille
-      code">braille codes</a> and other factors, the possible values for ‘<a>text-transform</a>’ and
-      their exact meanings are UA-dependent.
+      code">braille codes</a> and other factors, the possible values for <a
+      class="propname">text-transform</a> and their exact meanings are UA-dependent.
     </p>
     <dl>
       <dt>auto</dt>
@@ -86,8 +86,9 @@
         <a href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a> +
       </dt>
       <dd>
-        A space separated list of arbitrary values not equal to ‘auto’. Values are assumed to be
-        “applied” by the <a title="translator">braille translator</a> from left to right.
+        A space separated list of arbitrary values not equal to <span
+        class="propval">auto</span>. Values are assumed to be “applied” by the <a
+        title="translator">braille translator</a> from left to right.
       </dd>
     </dl>
     <p class="issue">
@@ -105,43 +106,45 @@
     </p>
     <ul>
       <li>
-        A specified value of ‘auto’ computes to the computed value of the parent element.
+        A specified value of <span class="propval">auto</span> computes to the computed value of the
+        parent element.
       </li>
       <li>
         A <a href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>
-        list is combined with the computed value of the parent element. If the parent value is
-        ‘auto’, then the computed value of the child is equal to the specified value. Otherwise it
-        is the conjunction of the specified value and the computed value of the parent (in that
-        order).
+        list is combined with the computed value of the parent element. If the parent value is <span
+        class="propval">auto</span>, then the computed value of the child is equal to the specified
+        value. Otherwise it is the conjunction of the specified value and the computed value of the
+        parent (in that order).
       </li>
     </ul>
     <p>
       In other words, the computed value of an element is the conjunction of the
-      <var>&lt;custom-ident&gt;</var> lists of itself and all ancestors, or ‘auto’ if the conjoined
-      list is empty.
+      <var>&lt;custom-ident&gt;</var> lists of itself and all ancestors, or <span
+      class="propval">auto</span> if the conjoined list is empty.
     </p>
     <div class="note">
       <p>
-        There is a fundamental difference between this property and the original ‘<a
-        class="externalDFN" href="CSS3TEXT#text-transform">text-transform</a>’ property as defined
-        in [[CSS3TEXT]].  While the original property is about describing basic character transforms
-        (e.g. case transforms) for styling purposes, the Braille CSS property is about influencing
-        the braille transcription. It is obvious that a transformation to another writing system is
-        much more complex than simple case transforms, and this explains why the Braille CSS
-        property can have arbitrary values whereas the original property has well-defined values
-        (except for the ‘<a class="externalDFN" href="CSS3TEXT#capitalize">capitalize</a>’ value
-        which depends on how word boundaries are determined).
+        There is a fundamental difference between this property and the original <a
+        class="externalDFN propname" href="CSS3TEXT#text-transform">text-transform</a> property as
+        defined in [[CSS3TEXT]].  While the original property is about describing basic character
+        transforms (e.g. case transforms) for styling purposes, the Braille CSS property is about
+        influencing the braille transcription. It is obvious that a transformation to another
+        writing system is much more complex than simple case transforms, and this explains why the
+        Braille CSS property can have arbitrary values whereas the original property has
+        well-defined values (except for the <a class="externalDFN propval"
+        href="CSS3TEXT#capitalize">capitalize</a> value which depends on how word boundaries are
+        determined).
       </p>
       <p>
-        Note that for certain ‘<a>text-transform</a>’ values such as e.g. ‘uppercase’ one could
-        consider the transformation to braille as a two-step process consisting of a text-to-text
-        step and a text-to-braille step. However there is no reason to make that distinction
-        explicit as it would only be limiting.
+        Note that for certain <a class="propname">text-transform</a> values such as e.g. <span
+        class="propval">uppercase</span> one could consider the transformation to braille as a
+        two-step process consisting of a text-to-text step and a text-to-braille step. However there
+        is no reason to make that distinction explicit as it would only be limiting.
       </p>
     </div>
   </section>
   <section id="the-white-space-property">
-    <h3> The ‘<a>white-space</a>’ property </h3>
+    <h3> The <a class="propname">white-space</a> property </h3>
     <p class="issue">
       See <a href="https://github.com/snaekobbi/braille-css-spec/issues/30"
       class="ticket">braille-css-spec#30</a>.
@@ -150,9 +153,9 @@
       The source text of a document often contains formatting that is not relevant to the final
       rendering: for example, breaking the source into segments (lines) for ease of editing, or
       adding white space characters such as tabs and spaces to indent the source code. The
-      interpretation of such formatting can be controlled with the ‘<a>white-space</a>’
-      property. The property specifies whether and how white space is collapsed and whether
-      lines may wrap at unforced soft wrap opportunities.
+      interpretation of such formatting can be controlled with the <a
+      class="propname">white-space</a> property. The property specifies whether and how white space
+      is collapsed and whether lines may wrap at unforced soft wrap opportunities.
     </p>
     <table class="propdef">
       <tbody>
@@ -216,17 +219,17 @@
         <dfn>pre-wrap</dfn>
       </dt>
       <dd>
-        Like ‘<a>normal</a>’, this value allows <a href="CSS3TEXT#wrapping"
+        Like <a class="propval">normal</a>, this value allows <a href="CSS3TEXT#wrapping"
         class="externalDFN">soft wrapping</a>, but sequences of <a title="white space
         characters">white space</a> are not collapsed. <a href="CSS3TEXT#segment-break"
-        class="externalDFN">Segment breaks</a> are preserved as <a
-        href="CSS3TEXT#forced-line-break" class="externalDFN">forced line breaks</a>.
+        class="externalDFN">Segment breaks</a> are preserved as <a href="CSS3TEXT#forced-line-break"
+        class="externalDFN">forced line breaks</a>.
       </dd>
       <dt>
         <dfn>pre-line</dfn>
       </dt>
       <dd>
-        Like ‘<a>normal</a>’, this value collapses consecutive spaces and allows <a
+        Like <a class="propval">normal</a>, this value collapses consecutive spaces and allows <a
         href="CSS3TEXT#wrapping" class="externalDFN">soft wrapping</a>, but <a
         href="CSS3TEXT#segment-break" class="externalDFN">segment breaks</a> are preserved as <a
         href="CSS3TEXT#forced-line-break" class="externalDFN">forced line breaks</a>.
@@ -257,8 +260,9 @@
       </li>
       <li>
         <p>
-          If ‘<a>white-space</a>’ is ‘<a>normal</a>’ or ‘<a>pre-line</a>’, all spaces and tabs
-          immediately preceding or following a segment break are removed.
+          If <a class="propname">white-space</a> is <a class="propval">normal</a> or <a
+          class="propval">pre-line</a>, all spaces and tabs immediately preceding or following a
+          segment break are removed.
         </p>
       </li>
       <li>
@@ -269,15 +273,15 @@
         <ul>
           <li>
             <p>
-              If ‘<a>white-space</a>’ is ‘<a>pre-wrap</a>’ or ‘<a>pre-line</a>’, segment breaks
-              are transformed into a preserved line feed (U+000A <span style="font-variant:
-              small-caps">line feed</span>).
+              If <a class="propname">white-space</a> is <a class="propval">pre-wrap</a> or <a
+              class="propval">pre-line</a>, segment breaks are transformed into a preserved line
+              feed (U+000A <span style="font-variant: small-caps">line feed</span>).
             </p>
           </li>
           <li>
             <p>
-              If ‘<a>white-space</a>’ is ‘<a>normal</a>’, segment breaks are converted to a
-              <a>collapsible</a> space (U+0020 <span style="font-variant:
+              If <a class="propname">white-space</a> is <a class="propval">normal</a>, segment
+              breaks are converted to a <a>collapsible</a> space (U+0020 <span style="font-variant:
               small-caps">space</span>), unless the character immediately before or immediately
               after the segment break is the zero-width space character (U+200B <span
               style="font-variant: small-caps">zero width space (zwsp)</span>), then the segment
@@ -288,15 +292,16 @@
       </li>
       <li>
         <p>
-          If ‘<a>white-space</a>’ is ‘<a>normal</a>’ or ‘<a>pre-line</a>’, spaces are considered
-          <dfn>collapsible</dfn>. Any space immediately following another collapsible space is
-          collapsed to have zero advance width. It is invisible, but retains its <a
-          href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap opportunity</a>,
-          if any. If ‘<a>white-space</a>’ is ‘<a>pre-wrap</a>’, any sequence of spaces is
-          treated as a sequence of non-breaking spaces (U+00A0 <span style="font-variant:
+          If <a class="propname">white-space</a> is <a class="propval">normal</a> or <a
+          class="propval">pre-line</a>, spaces are considered <dfn>collapsible</dfn>. Any space
+          immediately following another collapsible space is collapsed to have zero advance
+          width. It is invisible, but retains its <a href="CSS3TEXT#soft-wrap-opportunity"
+          class="externalDFN">soft wrap opportunity</a>, if any. If <a
+          class="propname">white-space</a> is <a class="propval">pre-wrap</a>, any sequence of
+          spaces is treated as a sequence of non-breaking spaces (U+00A0 <span style="font-variant:
           small-caps">no-break space (nbsp)</span>). However, a <a
-          href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap opportunity</a>
-          exists at the end of the sequence.
+          href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap opportunity</a> exists
+          at the end of the sequence.
         </p>
       </li>
     </ol>
@@ -321,10 +326,11 @@
       </li>
       <li>
         <p>
-          Sequences of <a title="collapsible">collapsible spaces</a> at the end of line boxes
-          are removed. If spaces at the end of a line are non-collapsible but have
-          ‘<a>white-space</a>’ set to ‘<a>pre-wrap</a>’ the <a href="CSS2CONFORM#user-agent"
-          class="externalDFN">UA</a> may visually collapse their character advance widths.
+          Sequences of <a title="collapsible">collapsible spaces</a> at the end of line boxes are
+          removed. If spaces at the end of a line are non-collapsible but have <a
+          class="propname">white-space</a> set to <a class="propval">pre-wrap</a> the <a
+          href="CSS2CONFORM#user-agent" class="externalDFN">UA</a> may visually collapse their
+          character advance widths.
         </p>
       </li>
     </ol>
@@ -348,9 +354,9 @@
       </li>
       <li>
         <p>
-          Regardless of the ‘<a>white-space</a>’ value, line-breaking behavior defined for the
-          <a href="UAX14#LF" class="externalDFN">LF</a> line breaking class in [[UAX14]] must be
-          honored.
+          Regardless of the <a class="propname">white-space</a> value, line-breaking behavior
+          defined for the <a href="UAX14#LF" class="externalDFN">LF</a> line breaking class in
+          [[UAX14]] must be honored.
         </p>
         <p class="note">
           In other words, line breaks are <a href="CSS3TEXT#forced-line-break"
@@ -359,10 +365,10 @@
       </li>
       <li>
         <p>
-          When ‘<a>white-space</a>’ allows wrapping, line breaking behavior defined for the <a
-          href="UAX14#SP" class="externalDFN">SP</a>, <a href="UAX14#ZW"
-          class="externalDFN">ZW</a> and <a href="UAX14#GL" class="externalDFN">GL</a> (NBSP
-          only) line breaking classes in [[UAX14]] must be honored.
+          When <a class="propname">white-space</a> allows wrapping, line breaking behavior defined
+          for the <a href="UAX14#SP" class="externalDFN">SP</a>, <a href="UAX14#ZW"
+          class="externalDFN">ZW</a> and <a href="UAX14#GL" class="externalDFN">GL</a> (NBSP only)
+          line breaking classes in [[UAX14]] must be honored.
         </p>
         <p class="note">
           In other words, spaces (U+0020 <span style="font-variant: small-caps">space</span>)
@@ -407,7 +413,7 @@
       are determined.
     </p>
     <section id="the-hyphens-property">
-      <h4> The ‘<a>hyphens</a>’ property </h4>
+      <h4> The <a class="propname">hyphens</a> property </h4>
       <table class="propdef">
         <tbody>
           <tr>
@@ -453,8 +459,8 @@
         </tbody>
       </table>
       <p>
-        Hyphenation is controlled with the ‘<a>hyphens</a>’ property. Values have the following
-        meanings:
+        Hyphenation is controlled with the <a class="propname">hyphens</a> property. Values have the
+        following meanings:
       </p>
       <dl>
         <dt>
@@ -494,10 +500,10 @@
       </dl>
     </section>
     <section id="the-hyphenate-character-property">
-      <h4> The ‘<a>hyphenate-character</a>’ property </h4>
+      <h4> The <a class="propname">hyphenate-character</a> property </h4>
       <p>
-        The ‘<a>hyphenate-character</a>’ property specifies the character that is rendered at
-        the end of the line before a hyphenation break.
+        The <a class="propname">hyphenate-character</a> property specifies the character that is
+        rendered at the end of the line before a hyphenation break.
       </p>
       <table class="propdef">
         <tbody>
@@ -544,12 +550,13 @@
         </tbody>
       </table>
       <p>
-        The ‘auto’ value means that the user agent should find an appropriate value
+        The <span class="propval">auto</span> value means that it is up to the user agent to find an
+        appropriate value.
       </p>
     </section>
   </section>
   <section id="the-text-align-property">
-    <h3> Text Alignment: the‘<a>text-align</a>’ property </h3>
+    <h3> Text Alignment: the <a class="propname">text-align</a> property </h3>
     <p class="issue">
       See <a href="https://github.com/snaekobbi/braille-css-spec/issues/32"
       class="ticket">braille-css-spec#32</a>.
@@ -598,7 +605,7 @@
     </table>
   </section>
   <section id="the-text-indent-property">
-    <h3> First Line Indentation: the ‘<a>text-indent</a>’ property </h3>
+    <h3> First Line Indentation: the <a class="propname">text-indent</a> property </h3>
     <table class="propdef">
       <tbody>
         <tr>
@@ -676,7 +683,7 @@ p {
 </pef>]]></pre>
        </div>
        <p>
-         The value of ‘text-indent’ may be negative:
+         The value of <span class="propname">text-indent</span> may be negative:
        </p>
        <div class="code css">
          <pre class="highlight">@page { size: 10 3; }

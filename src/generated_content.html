@@ -10,12 +10,12 @@
     <p>
       Pseudo-elements provide a way to insert and style content that does not exist in the source
       document. Pseudo-elements generate boxes just like normal elements do. For pseudo-elements to
-      be generated, they must not have their ‘<a>content</a>’ property set to ‘none’. In the general
-      case, pseudo-elements inherit any inheritable properties from the element in the document tree
-      to which they are associated (their <a class="externalDFN" href="CSS3GENCON#superior">superior
-      parent</a>), and their boxes are positioned with respect to the superior parent's box. The <a
-      href="CSS3GENCON#syntax">syntax for selecting pseudo-elements</a> is defined in
-      [[CSS3GENCON]].
+      be generated, they must not have their <a class="propname">content</a> property set to <span
+      class="propval">none</span>. In the general case, pseudo-elements inherit any inheritable
+      properties from the element in the document tree to which they are associated (their <a
+      class="externalDFN" href="CSS3GENCON#superior">superior parent</a>), and their boxes are
+      positioned with respect to the superior parent's box. The <a href="CSS3GENCON#syntax">syntax
+      for selecting pseudo-elements</a> is defined in [[CSS3GENCON]].
     </p>
     <section>
       <h4>
@@ -25,8 +25,8 @@
         The ‘<dfn>::before</dfn>’ and ‘<dfn>::after</dfn>’ pseudo-elements are used to insert
         content immediately before and immediately after the content of an element (or other
         pseudo-element). The generated boxes are contained within the <a class="externalDFN"
-        href="CSS3GENCON#superior">superior parent</a>'s box. The ‘<a>content</a>’ property is
-        used to specify the content to insert.
+        href="CSS3GENCON#superior">superior parent</a>'s box. The <a class="propname">content</a>
+        property is used to specify the content to insert.
       </p>
     </section>
     <section>
@@ -36,10 +36,11 @@
       <p>
         The ‘<dfn>::marker</dfn>’ pseudo-element is used to represent a list item's marker (the
         bullet or number identifying the item). For a ‘<a>::marker</a>’ pseudo-element to be
-        generated, its <a class="externalDFN" href="CSS3GENCON#superior">superior parent</a>
-        must have a computed ‘<a>display</a>’ value of ‘<a>list-item</a>’. The default value of
-        the pseudo-element's ‘<a>content</a>’ property is determined by the
-        ‘<a>list-style-type</a>’ property of its <a class="externalDFN"
+        generated, its <a class="externalDFN" href="CSS3GENCON#superior">superior parent</a> must
+        have a computed <a class="propname">display</a> value of <a
+        class="propval">list-item</a>. The default value of the pseudo-element's <a
+        class="propname">content</a> property is determined by the <a
+        class="propname">list-style-type</a> property of its <a class="externalDFN"
         href="CSS3GENCON#superior">superior parent</a>.
       </p>
     </section>
@@ -52,14 +53,15 @@
     </p>
     <p>
       A <a class="externalDFN" href="CSS3LIST#counter0">counter</a> is a special concept used to
-      automatically number list items, pages, etc. [[CSS3LIST]] describes how counters are
-      created and manipulated with the ‘<a>counter-increment</a>’, ‘<a>counter-set</a>’ and
-      ‘<a>counter-reset</a>’ properties, and used with the ‘<a>counter()</a>’ function.
+      automatically number list items, pages, etc. [[CSS3LIST]] describes how counters are created
+      and manipulated with the <a class="propname">counter-increment</a>, <a
+      class="propname">counter-set</a> and <a class="propname">counter-reset</a> properties, and
+      used with the <a class="propval">counter()</a> function.
     </p>
     <section>
       <h4>
-        Manipulating Counters: the ‘<a>counter-increment</a>’, ‘<a>counter-set</a>’ and
-        ‘<a>counter-reset</a>’ properties
+        Manipulating Counters: the <a class="propname">counter-increment</a>, <a
+        class="propname">counter-set</a> and <a class="propname">counter-reset</a> properties
       </h4>
       <table class="propdef">
         <tbody>
@@ -109,9 +111,9 @@
         </tbody>
       </table>
       <p>
-        The ‘<a>counter-reset</a>’ property <a class="externalDFN"
-        href="CSS3LIST#create-a-new-counter">creates</a> new counters on an element. Its values
-        are defined as follows:
+        The <a class="propname">counter-reset</a> property <a class="externalDFN"
+        href="CSS3LIST#create-a-new-counter">creates</a> new counters on an element. Its values are
+        defined as follows:
       </p>
       <dl>
         <dt>none</dt>
@@ -125,13 +127,13 @@
           href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a>? ]+
         </dt>
         <dd>
-          The element <a class="externalDFN" href="CSS3LIST#create-a-new-counter">creates</a>
-          one or more new counters. If an <a class="externalDFN"
-          href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a> is
-          provided after a <a
-          href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+          The element <a class="externalDFN" href="CSS3LIST#create-a-new-counter">creates</a> one or
+          more new counters. If an <a class="externalDFN"
+          href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a> is provided
+          after a <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
           class="externalDFN">&lt;custom-ident&gt;</a>, it is the starting value of the
-          counter. Otherwise, the starting value of the new counter is ‘0’.
+          counter. Otherwise, the starting value of the new counter is <span
+          class="propval">0</span>.
         </dd>
       </dl>
       <table class="propdef">
@@ -229,10 +231,10 @@
         </tbody>
       </table>
       <p>
-        The ‘<a>counter-set</a>’ and ‘<a>counter-increment</a>’ properties manipulate the value
-        of existing counters. They only <a class="externalDFN"
-        href="CSS3LIST#create-a-new-counter">create</a> new counters if there is no counter of
-        the given name on the element yet. Their values are defined as follows:
+        The <a class="propname">counter-set</a> and <a class="propname">counter-increment</a>
+        properties manipulate the value of existing counters. They only <a class="externalDFN"
+        href="CSS3LIST#create-a-new-counter">create</a> new counters if there is no counter of the
+        given name on the element yet. Their values are defined as follows:
       </p>
       <dl>
         <dt>none</dt>
@@ -245,18 +247,18 @@
           href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a>? ]+
         </dt>
         <dd>
-          The element alters the value of one or more counters on it. If there is not currently
-          a counter of the given name on the element, the element <a class="externalDFN"
-          href="CSS3LIST#create-a-new-counter">creates</a> a new counter of the given name. If
-          an <a class="externalDFN"
-          href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a> is
-          provided after a <a
-          href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
-          class="externalDFN">&lt;custom-ident&gt;</a>, the value of the innermost counter of
-          the given name is set to that integer (for ‘<a>counter-set</a>’) or incremented by
-          that integer (for ‘<a>counter-increment</a>’). Otherwise, the value of the innermost
-          counter of the given name is set to ‘0’ (for ‘<a>counter-set</a>’) or incremented by
-          ‘1’ (for ‘<a>counter-increment</a>’).
+          The element alters the value of one or more counters on it. If there is not currently a
+          counter of the given name on the element, the element <a class="externalDFN"
+          href="CSS3LIST#create-a-new-counter">creates</a> a new counter of the given name. If an <a
+          class="externalDFN"
+          href="http://www.w3.org/TR/css3-syntax/#typedef-integer">&lt;integer&gt;</a> is provided
+          after a <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+          class="externalDFN">&lt;custom-ident&gt;</a>, the value of the innermost counter of the
+          given name is set to that integer (for <a class="propname">counter-set</a>) or incremented
+          by that integer (for <a class="propname">counter-increment</a>). Otherwise, the value of
+          the innermost counter of the given name is set to <span class="propval">0</span> (for <a
+          class="propname">counter-set</a>) or incremented by <span class="propval">1</span> (for <a
+          class="propname">counter-increment</a>).
         </dd>
       </dl>
       <p>
@@ -290,8 +292,9 @@
         preceding element's set, giving the element's counter the same value.
       </p>
       <p>
-        Additional counters can be created on elements with the ‘<a>counter-reset</a>’
-        property. The effect depends on what other counters of that name exist on the element:
+        Additional counters can be created on elements with the <a
+        class="propname">counter-reset</a> property. The effect depends on what other counters of
+        that name exist on the element:
       </p>
       <ul>
         <li>
@@ -312,24 +315,26 @@
         The value of the new counter is set to the provided starting value.
       </p>
       <p>
-        A ‘page’ counter is created automatically on the root element. Its purpose is for
-        numbering braille pages. The counter is implicitely incremented on each page. Depending
-        on the implementation, explicitely setting or incrementing this counter may or may not
-        have an effect. No new counters can be created with the name ‘page’.
+        A <span class="propval">page</span> counter is created automatically on the root
+        element. Its purpose is for numbering braille pages. The counter is implicitely incremented
+        on each page. Depending on the implementation, explicitely setting or incrementing this
+        counter may or may not have an effect. No new counters can be created with the name <span
+        class="propval">page</span>.
       </p>
       <p>
         Implementations may define additional automatic counters.
       </p>
     </section>
     <section>
-      <h4> Printing Counters: the ‘<a>counter()</a>’ function </h4>
+      <h4> Printing Counters: the <a class="propval">counter()</a> function </h4>
       <p>
-        Counters can be used with the ‘<a>counter()</a>’ function. This happens automatically in
-        the default contents of ‘<a>::marker</a>’ pseudo-elements, but the function can be used
-        anywhere a string value is allowed. The function takes the name of a counter and an
-        optional <a href="CSS3COUNTERSTYLES#counter-style"
-        class="externalDFN">&lt;counter-style&gt;</a> name (which defaults to ‘decimal’) and
-        returns a <a href="CSS3VAL#string-value" class="externalDFN">&lt;string&gt;</a> value:
+        Counters can be used with the <a class="propval">counter()</a> function. This happens
+        automatically in the default contents of ‘<a>::marker</a>’ pseudo-elements, but the function
+        can be used anywhere a string value is allowed. The function takes the name of a counter and
+        an optional <a href="CSS3COUNTERSTYLES#counter-style"
+        class="externalDFN">&lt;counter-style&gt;</a> name (which defaults to <span
+        class="propval">decimal</span>) and returns a <a href="CSS3VAL#string-value"
+        class="externalDFN">&lt;string&gt;</a> value:
       </p>
       <p>
         <pre style="white-space: normal">
@@ -345,14 +350,14 @@
       </p>
       <ul>
         <li>
-          If the second argument to the function is ‘none’, the function returns the empty
-          string.
+          If the second argument to the function is <span class="propval">none</span>, the function
+          returns the empty string.
         </li>
         <li>
           Otherwise, the function <a href="CSS3COUNTERSTYLES#generate-a-counter"
-          class="externalDFN">generates a counter representation</a> for the value of the
-          innermost counter of that name on the element (or ‘0’ if the element has no counter of
-          that name), using the <a href="CSS3COUNTERSTYLES#counter-style"
+          class="externalDFN">generates a counter representation</a> for the value of the innermost
+          counter of that name on the element (or <span class="propval">0</span> if the element has
+          no counter of that name), using the <a href="CSS3COUNTERSTYLES#counter-style"
           class="externalDFN">&lt;counter-style&gt;</a> specified by the second argument.
         </li>
       </ul>
@@ -366,18 +371,20 @@
         of declaractions (called desciptors) which define how a counter value is converted into a
         string. A counter styles's name must be a <a
         href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
-        class="externalDFN">&lt;custom-ident&gt;</a> not equal to ‘none’ or ‘decimal’. The various
-        descriptors that make up a counter style are described in [[CSS3COUNTERSTYLES]]. In
-        addition, a counter style in Braille CSS can also have a ‘<a>text-transform</a>’ descriptor.
+        class="externalDFN">&lt;custom-ident&gt;</a> not equal to <span class="propval">none</span>
+        or <span class="propval">decimal</span>. The various descriptors that make up a counter
+        style are described in [[CSS3COUNTERSTYLES]]. In addition, a counter style in Braille CSS
+        can also have a <a class="propname">text-transform</a> descriptor.
       </p>
       <p>
-        User agents must define the ‘decimal’ counter style as an ultimate fallback
-        style. Agents may include additional predefined styles in their UA stylesheet. All
-        counter styles, predefined or not, except for ‘decimal’, can be overridden.
+        User agents must define the <span class="propval">decimal</span> counter style as an
+        ultimate fallback style. Agents may include additional predefined styles in their UA
+        stylesheet. All counter styles, predefined or not, except for <span
+        class="propval">decimal</span>, can be overridden.
       </p>
       <div class="note">
         <p>
-          The ‘decimal’ counter style may be defined as follows:
+          The <span class="propval">decimal</span> counter style may be defined as follows:
         </p>
         <pre class="highlight css">@counter-style decimal {
   system: numeric;
@@ -393,11 +400,11 @@
         representation</a>, user agents in the ‘<a>translator</a>’ category must perform the
         necessary steps to ensure that the resulting representation is a <a
         title="&lt;braille-string&gt;">braille string</a>. The transformation to braille is
-        influenced by the ‘<a>text-transform</a>’ descriptor.
+        influenced by the <a class="propname">text-transform</a> descriptor.
       </p>
     </section>
     <section>
-      <h4> Default Marker Contents: the ‘<a>list-style-type</a>’ property </h4>
+      <h4> Default Marker Contents: the <a class="propname">list-style-type</a> property </h4>
       <table class="propdef">
         <tbody>
           <tr>
@@ -442,14 +449,14 @@
         </tbody>
       </table>
       <p>
-        The ‘<a>list-style-type</a>’ property is used to construct the default contents of a
-        list item's marker; otherwise, ‘<a>list-style-type</a>’ is ignored. The values are
-        defined as follows:
+        The <a class="propname">list-style-type</a> property is used to construct the default
+        contents of a list item's marker; otherwise, <a class="propname">list-style-type</a> is
+        ignored. The values are defined as follows:
       </p>
       <dl>
         <dt>none</dt>
         <dd>
-          The marker's default contents are ‘none’.
+          The marker's default contents are <span class="propval">none</span>.
         </dd>
         <dt>
           <a>&lt;braille-string&gt;</a>
@@ -484,12 +491,12 @@
       class="ticket">braille-css-spec#17</a>.
     </p>
     <p>
-      The ‘<a>string-set</a>’ property sets the value of a <a href="CSS3GCPM#named-strings0"
-      class="externalDFN">named string</a>, which functions as a variable. The value can be
-      retrieved using the ‘<a>string()</a>’ function.
+      The <a class="propname">string-set</a> property sets the value of a <a
+      href="CSS3GCPM#named-strings0" class="externalDFN">named string</a>, which functions as a
+      variable. The value can be retrieved using the <a class="propval">string()</a> function.
     </p>
     <section>
-      <h4> The ‘<a>string-set</a>’ property </h4>
+      <h4> The <a class="propname">string-set</a> property </h4>
       <table class="propdef">
         <tbody>
           <tr>
@@ -538,9 +545,9 @@
         </tbody>
       </table>
       <p>
-        The ‘<a>string-set</a>’ property contains one or more pairs, each consisting of a custom
-        identifier followed by a ‘<a title="string-set content-list">content-list</a>’ describing
-        how to construct the value of the named string.
+        The <a class="propname">string-set</a> property contains one or more pairs, each consisting
+        of a custom identifier followed by a <a class="propval" title="string-set
+        content-list">content-list</a> describing how to construct the value of the named string.
       </p>
       <p>
         <a title="string-set content-list">&lt;content-list&gt;</a> expands to one or more of the
@@ -565,23 +572,23 @@
           &lt;attr()&gt;
         </dt>
         <dd>
-          An ‘<a href="CSS3VAL#attr-notation" class="externalDFN">attr()</a>’ function, as
+          An <a href="CSS3VAL#attr-notation" class="externalDFN propval">attr()</a> function, as
           defined in [[CSS3VAL]].
         </dd>
         <dt>
           &lt;content()&gt;
         </dt>
         <dd>
-          A ‘content()’ function, which returns the string value of the element, determined as
-          if ‘white-space: normal’ had been set.
+          A <span class="propval">content()</span> function, which returns the string value of the
+          element, determined as if <span class="propval">white-space: normal</span> had been set.
         </dd>
       </dl>
     </section>
     <section>
-      <h4> The ‘<a>string()</a>’ function </h4>
+      <h4> The <a class="propval">string()</a> function </h4>
       <p>
-        The ‘<a>string()</a>’ function returns the value of the named string at the current
-        element.
+        The <a class="propval">string()</a> function returns the value of the named string at the
+        current element.
       </p>
       <p>
         <pre style="white-space: normal">
@@ -592,13 +599,13 @@
     </section>
   </section>
   <section id="leaders">
-    <h3> Leaders: the ‘<a>leader()</a>’ function </h3>
+    <h3> Leaders: the <a class="propval">leader()</a> function </h3>
     <p>
       A leader is a repeating pattern used to visually connect content across horizontal
       spaces. They are most commonly used in tables of contents, between titles and page
-      numbers. The ‘<a>leader()</a>’ function, as a value for the ‘<a>content</a>’ property, is
-      used to create leaders. A <a><var>&lt;braille-string&gt;</var></a> describes the repeating
-      pattern for the leader.
+      numbers. The <a class="propval">leader()</a> function, as a value for the <a
+      class="propname">content</a> property, is used to create leaders. A
+      <a><var>&lt;braille-string&gt;</var></a> describes the repeating pattern for the leader.
     </p>
     <p>
       <pre style="white-space: normal">
@@ -606,13 +613,13 @@
       </pre>
     </p>
     <p class="note">
-      This function differs from the original ‘<a href="CSS3GCPM#leaders"
-      class="externalDFN">leader()</a>’ function [[CSS3GCPM]] in that it only takes a
+      This function differs from the original <a href="CSS3GCPM#leaders" class="externalDFN
+      propval">leader()</a> function [[CSS3GCPM]] in that it only takes a
       <a><var>&lt;braille-string&gt;</var></a> as an argument. <a href="CSS3GCPM#dotted-leader"
-      class="externalDFN">dotted</a>, <a href="CSS3GCPM#solid-leader"
-      class="externalDFN">solid</a>, <a href="CSS3GCPM/#space-leader"
-      class="externalDFN">space</a> or <a href="CSS3GCPM#string-leader"
-      class="externalDFN"><var>&lt;string&gt;</var></a> are not allowed.
+      class="externalDFN propval">dotted</a>, <a href="CSS3GCPM#solid-leader" class="externalDFN
+      propval">solid</a>, <a href="CSS3GCPM/#space-leader" class="externalDFN propval">space</a> or
+      <a href="CSS3GCPM#string-leader" class="externalDFN propval"><var>&lt;string&gt;</var></a> are
+      not allowed.
     </p>
   </section>
   <section id="cross-references">
@@ -622,12 +629,12 @@
       class="ticket">braille-css-spec#34</a>.
     </p>
     <section>
-      <h4> The ‘<a>target-counter()</a>’ function </h4>
+      <h4> The <a class="propval">target-counter()</a> function </h4>
       <p>
-        The ‘<a>target-counter()</a>’ function retrieves the value of the <a
-        href="#counters">named counter</a> at the element referred to by the <a
-        href="CSS3VAL#url" class="externalDFN"><var>&lt;url&gt;</var></a>. The second argument
-        is the name of the counter.
+        The <a class="propval">target-counter()</a> function retrieves the value of the <a
+        href="#counters">named counter</a> at the element referred to by the <a href="CSS3VAL#url"
+        class="externalDFN"><var>&lt;url&gt;</var></a>. The second argument is the name of the
+        counter.
       </p>
       <p>
         <pre style="white-space: normal">
@@ -637,18 +644,17 @@
         </pre>
       </p>
       <p class="note">
-        This function differs from the original ‘<a href="CSS3GCPM#funcdef-target-counter"
-        class="externalDFN">target-counter()</a>’ function [[CSS3GCPM]] in that it doesn't take
-        an optional <a href="CSS3COUNTERSTYLES#counter-style"
+        This function differs from the original <a href="CSS3GCPM#funcdef-target-counter"
+        class="externalDFN propval">target-counter()</a> function [[CSS3GCPM]] in that it doesn't
+        take an optional <a href="CSS3COUNTERSTYLES#counter-style"
         class="externalDFN"><var>&lt;counter-style&gt;</var></a> argument.
       </p>
       <p class="note">
-        The ‘<a>target-counter()</a>’, ‘<a>target-string()</a>’ and ‘<a>target-text()</a>’
-        functions only take a fragment URL which points to a location in the current
-        document. The URL may also be provided indirectly using the ‘<a
-        href="CSS3VAL#attr-notation" class="externalDFN">attr()</a>’
-        function [[CSS3VAL]], in which case ‘url’ will be implied as the type argument if
-        omitted.
+        The <a class="propval">target-counter()</a>, <a class="propval">target-string()</a> and <a
+        class="propval">target-text()</a> functions only take a fragment URL which points to a
+        location in the current document. The URL may also be provided indirectly using the <a
+        href="CSS3VAL#attr-notation" class="externalDFN propval">attr()</a> function [[CSS3VAL]], in
+        which case ‘url’ will be implied as the type argument if omitted.
       </p>
       <p class="issue">
         Add a ‘target-content()’ function. See <a
@@ -657,12 +663,12 @@
       </p>
     </section>
     <section>
-      <h4> The ‘<a>target-string()</a>’ function </h4>
+      <h4> The <a class="propval">target-string()</a> function </h4>
       <p>
-        The ‘<a>target-string()</a>’ function retrieves the value of the <a
+        The <a class="propval">target-string()</a> function retrieves the value of the <a
         href="#named-strings">named string</a> at the element referred to by the <a
-        href="CSS3VAL#url" class="externalDFN"><var>&lt;url&gt;</var></a>. The second argument
-        is the name of the counter.
+        href="CSS3VAL#url" class="externalDFN"><var>&lt;url&gt;</var></a>. The second argument is
+        the name of the counter.
       </p>
       <p>
         <pre style="white-space: normal">
@@ -673,10 +679,10 @@
       </p>
     </section>
     <section>
-      <h4> The ‘<a>target-text()</a>’ function </h4>
+      <h4> The <a class="propval">target-text()</a> function </h4>
       <p>
-        The ‘<a>target-text()</a>’ function retrieves the text value of the element referred to
-        by the <a href="CSS3VAL#url" class="externalDFN"><var>&lt;url&gt;</var></a>.
+        The <a class="propval">target-text()</a> function retrieves the text value of the element
+        referred to by the <a href="CSS3VAL#url" class="externalDFN"><var>&lt;url&gt;</var></a>.
       </p>
       <p>
         <pre style="white-space: normal">
@@ -685,14 +691,14 @@
         </pre>
       </p>
       <p class="note">
-        This function differs from the original ‘<a href="CSS3GCPM#target-text-function"
-        class="externalDFN">target-text()</a>’ function [[CSS3GCPM]] in that it doesn't take an
-        optional second argument.
+        This function differs from the original <a href="CSS3GCPM#target-text-function"
+        class="externalDFN propval">target-text()</a> function [[CSS3GCPM]] in that it doesn't take
+        an optional second argument.
       </p>
     </section>
   </section>
   <section id="the-content-property">
-    <h3> Inserting Content: the ‘<a>content</a>’ property </h3>
+    <h3> Inserting Content: the <a class="propname">content</a> property </h3>
     <table class="propdef">
       <tbody>
         <tr>
@@ -741,8 +747,8 @@
       </tbody>
     </table>
     <p>
-      The ‘<a>content</a>’ property dictates what is rendered inside the pseudo-element or
-      margin area.
+      The <a class="propname">content</a> property dictates what is rendered inside the
+      pseudo-element or margin area.
     </p>
     <dl>
       <dt>
@@ -777,44 +783,44 @@
             &lt;attr()&gt;
           </dt>
           <dd>
-            An ‘<a href="CSS3VAL#attr-notation" class="externalDFN">attr()</a>’ function, as
+            An <a href="CSS3VAL#attr-notation" class="externalDFN propval">attr()</a> function, as
             defined in [[CSS3VAL]].
           </dd>
           <dt>
             &lt;string()&gt;
           </dt>
           <dd>
-            A ‘<a>string()</a>’ function.
+            A <a class="propval">string()</a> function.
           </dd>
           <dt>
             &lt;counter()&gt;
           </dt>
           <dd>
-            A ‘<a>counter()</a>’ function.
+            A <a class="propval">counter()</a> function.
           </dd>
           <dt>
             &lt;target-text()&gt;
           </dt>
           <dd>
-            A ‘<a>target-text()</a>’ function.
+            A <a class="propval">target-text()</a> function.
           </dd>
           <dt>
             &lt;target-string()&gt;
           </dt>
           <dd>
-            A ‘<a>target-string()</a>’ function.
+            A <a class="propval">target-string()</a> function.
           </dd>
           <dt>
             &lt;target-counter()&gt;
           </dt>
           <dd>
-            A ‘<a>target-counter()</a>’ function.
+            A <a class="propval">target-counter()</a> function.
           </dd>
           <dt>
             &lt;leader()&gt;
           </dt>
           <dd>
-            A ‘<a>leader()</a>’ function.
+            A <a class="propval">leader()</a> function.
           </dd>
         </dl>
       </dd>

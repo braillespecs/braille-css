@@ -53,14 +53,14 @@
   <section id="block-level-formatting">
     <h3> Block-level Formatting </h3>
     <p>
-      Elements with a value of ‘<a>block</a>’ or ‘<a>list-item</a>’ for the ‘<a>display</a>’
-      property are called <dfn title="block-level element">block-level
-      elements</dfn>. Block-level elements generate <dfn title="block-level box">block-level
-      boxes</dfn>, which are boxes that participate in a block formatting context. In a
-      <dfn>block formatting context</dfn>, boxes are laid out one after the other, vertically,
-      beginning at the top of a <a>containing block</a>. The vertical distance between two
-      sibling boxes is determined by the <a href="#the-margin-properties">‘margin’
-      properties</a>. Vertical margins between adjacent block-level boxes <a
+      Elements with a value of <a class="propval">block</a> or <a class="propval">list-item</a> for
+      the <a class="propname">display</a> property are called <dfn title="block-level
+      element">block-level elements</dfn>. Block-level elements generate <dfn title="block-level
+      box">block-level boxes</dfn>, which are boxes that participate in a block formatting
+      context. In a <dfn>block formatting context</dfn>, boxes are laid out one after the other,
+      vertically, beginning at the top of a <a>containing block</a>. The vertical distance between
+      two sibling boxes is determined by the <a href="#the-margin-properties"
+      class="propname">margin properties</a>. Vertical margins between adjacent block-level boxes <a
       title="collapsing margin">collapse</a>.
     </p>
     <p>
@@ -70,17 +70,17 @@
     </p>
     <p>
       <pre style="white-space: normal">
-        ‘<a><var>margin-left</var></a>’ + <var>border-left-width</var> +
-        ‘<a><var>padding-left</var></a>’ + <var>width</var> + ‘<a><var>padding-right</var></a>’
-        + <var>border-right-width</var> + ‘<a><var>margin-right</var></a>’ = <var>width of
-        <a>containing block</a></var>
+        <a class="propname"><var>margin-left</var></a> + <var>border-left-width</var> + <a
+        class="propname"><var>padding-left</var></a> + <var>width</var> + <a
+        class="propname"><var>padding-right</var></a> + <var>border-right-width</var> + <a
+        class="propname"><var>margin-right</var></a> = <var>width of <a>containing block</a></var>
       </pre>
     </p>
     <p>
-      In the equation above, <var>border-left-width</var> is equal to 1 if the value of
-      ‘<a>border-left</a>’ is not ‘none’, or 0 otherwise. Similarly,
-      <var>border-right-width</var> is equal to 1 if the value of ‘<a>border-right</a>’ is not
-      ‘none’, or 0 otherwise.
+      In the equation above, <var>border-left-width</var> is equal to 1 if the value of <a
+      class="propname">border-left</a> is not <span class="propval">none</span>, or 0
+      otherwise. Similarly, <var>border-right-width</var> is equal to 1 if the value of <a
+      class="propname">border-right</a> is not <span class="propval">none</span>, or 0 otherwise.
     </p>
     <p>
       However, if an element is <a>positioned</a>, the box's edges don't need to touch the edges
@@ -88,20 +88,20 @@
     </p>
     <p>
       <pre style="white-space: normal">
-        <var>left offset</var> + ‘<a><var>margin-left</var></a>’ + <var>border-left-width</var>
-        + ‘<a><var>padding-left</var></a>’ + <var>width</var> +
-        ‘<a><var>padding-right</var></a>’ + <var>border-right-width</var> +
-        ‘<a><var>margin-right</var></a>’ + <var>right offset</var> = <var>width of <a>initial
-        containing block</a></var>
+        <var>left offset</var> + <a class="propname"><var>margin-left</var></a> +
+        <var>border-left-width</var> + <a class="propname"><var>padding-left</var></a> +
+        <var>width</var> + <a class="propname"><var>padding-right</var></a> +
+        <var>border-right-width</var> + <a class="propname"><var>margin-right</var></a> + <var>right
+        offset</var> = <var>width of <a>initial containing block</a></var>
       </pre>
     </p>
     <p>
-      Here, <var>left offset</var> is equal to the value of ‘<a>left</a>’ if it is not ‘auto’,
-      or otherwise the distance from the left edge of the <a>containing block</a> to the left
-      edge of the <a>initial containing block</a>. Likewise, <var>right offset</var> is equal to
-      the value of ‘<a>right</a>’ if it is not ‘auto’, or otherwise the distance from the right
-      edge of the <a>containing block</a> to the right edge of the <a>initial containing
-      block</a>.
+      Here, <var>left offset</var> is equal to the value of <a class="propname">left</a> if it is
+      not <span class="propval">auto</span>, or otherwise the distance from the left edge of the
+      <a>containing block</a> to the left edge of the <a>initial containing block</a>. Likewise,
+      <var>right offset</var> is equal to the value of <a class="propname">right</a> if it is not
+      <span class="propval">auto</span>, or otherwise the distance from the right edge of the
+      <a>containing block</a> to the right edge of the <a>initial containing block</a>.
     </p>
     <p>
       If a box has only <a title="inline-level box">inline-level</a> children, the height is the
@@ -121,36 +121,38 @@
     <p class="note">
       Block formatting in braille CSS is considerably simplified with respect to [[CSS2]] and
       [[CSS3BOX]]. Since there is no <a href="CSS2VISUREN#floats">floating</a>, no <a
-      href="CSS2VISUREN#absolute-positioning">absolute positioning</a> and no ‘<a
-      href="CSS3BOX#inline-block" class="externalDFN">display: inline-block</a>’, each page has
-      only a single block formatting context. Furthermore, the text orientation is always
-      left-to-right and top-to-bottom (it is as if the ‘<a href="CSS3WRITINGMODES#direction"
-      class="externalDFN">direction</a>’ and ‘<a href="CSS3WRITINGMODES#writing-mode"
-      class="externalDFN">writing-mode</a>’ properties would have their values set to ‘<a
-      href="CSS3WRITINGMODES#ltr" class="externalDFN">ltr</a>’ and ‘<a
-      href="CSS3WRITINGMODES#horizontal-tb" class="externalDFN">horizontal-tb</a>’). Finally,
-      because there can be no <a href="CSS2CONFORM#replaced-element"
-      class="externalDFN">replaced elements</a> and there are no ‘<a href="CSS3BOX#width"
-      class="externalDFN">width</a>’, ‘<a href="CSS3BOX#height" class="externalDFN">height</a>’,
-      ‘<a href="CSS3BOX#min-width" class="externalDFN">min-width</a>’, ‘<a
-      href="CSS3BOX#min-height" class="externalDFN">min-height</a>’, ‘<a
-      href="CSS3BOX#max-width" class="externalDFN">max-width</a>’ and ‘<a
-      href="CSS3BOX#max-height" class="externalDFN">max-height</a>’ properties (it is as if
-      their values would be set to ‘auto’, ‘auto’, ‘0’, ‘0’, ‘none’ and ‘none’), calculating
-      widths, heights and margins becomes rather trivial.
+      href="CSS2VISUREN#absolute-positioning">absolute positioning</a> and no <a
+      href="CSS3BOX#inline-block" class="externalDFN propval">display: inline-block</a>, each page
+      has only a single block formatting context. Furthermore, the text orientation is always
+      left-to-right and top-to-bottom (it is as if the <a href="CSS3WRITINGMODES#direction"
+      class="externalDFN propname">direction</a> and <a href="CSS3WRITINGMODES#writing-mode"
+      class="externalDFN propname">writing-mode</a> properties would have their values set to <a
+      href="CSS3WRITINGMODES#ltr" class="externalDFN propval">ltr</a> and <a
+      href="CSS3WRITINGMODES#horizontal-tb" class="externalDFN propval">horizontal-tb</a>). Finally,
+      because there can be no <a href="CSS2CONFORM#replaced-element" class="externalDFN">replaced
+      elements</a> and there are no <a href="CSS3BOX#width" class="externalDFN propname">width</a>,
+      <a href="CSS3BOX#height" class="externalDFN propname">height</a>, <a href="CSS3BOX#min-width"
+      class="externalDFN propname">min-width</a>, <a href="CSS3BOX#min-height" class="externalDFN
+      propname">min-height</a>, <a href="CSS3BOX#max-width" class="externalDFN
+      propname">max-width</a> and <a href="CSS3BOX#max-height" class="externalDFN
+      propname">max-height</a>’ properties (it is as if their values would be set to <span
+      class="propval">auto</span>, <span class="propval">auto</span>, <span
+      class="propval">0</span>, <span class="propval">0</span>, <span class="propval">none</span>
+      and <span class="propval">none</span>), calculating widths, heights and margins becomes rather
+      trivial.
     </p>
   </section>
   <section id="inline-level-formatting">
     <h3> Inline-level Formatting </h3>
     <p>
-      Elements with a value of ‘<a>inline</a>’ for the ‘<a>display</a>’ property are called <dfn
-      title="inline-level element">inline-level elements</dfn>. Inline-level elements generate
-      <dfn title="inline-level box">inline-level boxes</dfn>, which are boxes that participate
-      in an inline-level formatting context. In an <dfn>inline-level formatting context</dfn>,
-      boxes are laid out horizontally, one after the other, beginning at the top of a
-      <a>containing block</a>. The rectangular area that contains the boxes that form a line is
-      called a <dfn>line box</dfn>. Line boxes are created as needed to hold inline-level
-      content.
+      Elements with a value of <a class="propval">inline</a> for the <a class="propname">display</a>
+      property are called <dfn title="inline-level element">inline-level
+      elements</dfn>. Inline-level elements generate <dfn title="inline-level box">inline-level
+      boxes</dfn>, which are boxes that participate in an inline-level formatting context. In an
+      <dfn>inline-level formatting context</dfn>, boxes are laid out horizontally, one after the
+      other, beginning at the top of a <a>containing block</a>. The rectangular area that contains
+      the boxes that form a line is called a <dfn>line box</dfn>. Line boxes are created as needed
+      to hold inline-level content.
     </p>
     <p>
       The height of a line box is 1. The width is determined by a containing block. The left
@@ -158,9 +160,9 @@
       touches the right edge of its <a>containing block</a>.
     </p>
     <p>
-      When the total width of the inline-level boxes on a line is less than the width of the
-      line box containing them, their horizontal distribution within the line box is determined
-      by the ‘<a>text-align</a>’ property. When an inline box exceeds the width of a line box,
+      When the total width of the inline-level boxes on a line is less than the width of the line
+      box containing them, their horizontal distribution within the line box is determined by the <a
+      class="propname">text-align</a> property. When an inline box exceeds the width of a line box,
       it is split into several boxes and these boxes are distributed across several line boxes.
     </p>
     <p class="note">
@@ -174,8 +176,8 @@
     <h3> Anonymous Boxes </h3>
     <p>
       <dfn title="anonymous box">Anonymous boxes</dfn> are created when the box model requires a
-      child box with a certain value for ‘<a>display</a>’, but the child actually has a
-      different value.
+      child box with a certain value for <a class="propname">display</a>, but the child actually has
+      a different value.
     </p>
     <ul>
       <li>
@@ -227,7 +229,7 @@
       href="CSS2VISUREN#propdef-clear">clearance</a>, no <a href="CSS2VISUFX#propdef-overflow"
       class="externalDFN">overflow</a>, no <a href="CSS2VISUREN#absolute-positioning">absolute
       positioning</a>, no <a href="CSS3BOX#vertical" class="externalDFN">vertical boxes</a> and no
-      ‘<a href="CSS3BOX#inline-block" class="externalDFN">display: inline-block</a>’.
+      <a href="CSS3BOX#inline-block" class="externalDFN propval">display: inline-block</a>.
     </p>
     <p class="issue">
       In the Liblouis implementation, paddings currently collapse. See <a
@@ -242,7 +244,7 @@
     </p>
   </section>
   <section id="the-display-property">
-    <h3> The ‘<a>display</a>’ property </h3>
+    <h3> The <a class="propname">display</a> property </h3>
     <table class="propdef">
       <tbody>
         <tr>
@@ -315,15 +317,17 @@
       <dd>
         This value causes an element to generate no boxes (i.e., the element has no effect on
         layout). Descendant elements do not generate any boxes either; this behavior cannot be
-        overridden by setting the ‘<a>display</a>’ property on the descendants.
+        overridden by setting the <a class="propname">display</a> property on the descendants.
       </dd>
     </dl>
   </section>
   <section id="box-offsets">
-    <h4> Box Offsets: the ‘<a>left</a>’ and ‘<a>right</a>’ properties </h4>
+    <h4>
+      Box Offsets: the <a class="propname">left</a> and <a class="propname">right</a> properties
+    </h4>
     <p>
-      An element is said to be <dfn>positioned</dfn> if its ‘<a>left</a>’ or ‘<a>right</a>’
-      properties have a value other than ‘auto’.
+      An element is said to be <dfn>positioned</dfn> if its <a class="propname">left</a> or <a
+      class="propname">right</a> properties have a value other than <span class="propval">auto</span>.
     </p>
     <table class="propdef">
       <tbody>
@@ -366,7 +370,8 @@
       </tbody>
     </table>
     <p>
-      The ‘<a>left</a>’ and ‘<a>right</a>’ properties... Values have the following meanings:
+      The <a class="propname">left</a> and <a class="propname">right</a> properties... Values have
+      the following meanings:
     </p>
     <dl>
       <dt> auto </dt>
@@ -382,16 +387,17 @@
       </dd>
     </dl>
     <p class="note">
-      Note that these properties have a different meaning than the ‘<a
-      href="CSS2VISUREN#propdef-left" class="externalDFN">left</a>’ and ‘<a
-      href="CSS2VISUREN#propdef-right" class="externalDFN">right</a>’ properties defined in
+      Note that these properties have a different meaning than the <a
+      href="CSS2VISUREN#propdef-left" class="externalDFN propname">left</a> and <a
+      href="CSS2VISUREN#propdef-right" class="externalDFN propname">right</a> properties defined in
       [[CSS2]] and [[CSS3POS]].
     </p>
   </section>
   <section id="the-margin-properties">
     <h4>
-      Margins: the ‘<a>margin-top</a>’, ‘<a>margin-right</a>’, ‘<a>margin-bottom</a>’,
-      ‘<a>margin-left</a>’, and ‘<a>margin</a>’ properties
+      Margins: the <a class="propname">margin-top</a>, <a class="propname">margin-right</a>, <a
+      class="propname">margin-bottom</a>, <a class="propname">margin-left</a>, and <a
+      class="propname">margin</a> properties
     </h4>
     <table class="propdef">
       <tbody>
@@ -436,9 +442,9 @@
       </tbody>
     </table>
     <p>
-      Margin properties set the thickness of the <a href="CSS3BOX#margin"
-      class="externalDFN">margin area</a>. The value may be a negative length for
-      ‘<a>margin-left</a>’ and ‘<a>margin-right</a>’.
+      Margin properties set the thickness of the <a href="CSS3BOX#margin" class="externalDFN">margin
+      area</a>. The value may be a negative length for <a class="propname">margin-left</a> and <a
+      class="propname">margin-right</a>.
     </p>
     <div class="note">
       <p>
@@ -451,7 +457,8 @@
           percentages are not allowed.
         </li>
         <li>
-          ‘<a>margin-top</a>’ and ‘<a>margin-bottom</a>’ may not be negative.
+          <a class="propname">margin-top</a> and <a class="propname">margin-bottom</a> may not be
+          negative.
         </li>
         <li>
           The properties don't apply on inline-level boxes.
@@ -490,7 +497,7 @@ p {
 </pef>]]></pre>
       </div>
       <p>
-        The value of ‘margin-left’ may be negative:
+        The value of <span class="propname">margin-left</span> may be negative:
       </p>
       <div class="code css">
         <pre class="highlight">@page { size: 10 3; }
@@ -563,12 +570,12 @@ p {
       </tbody>
     </table>
     <p>
-      ‘<a>margin</a>’ is a <a
+      <a class="propname">margin</a> is a <a
       href="http://www.w3.org/TR/css3-cascade/#shorthand-property--shorthand"
-      class="externalDFN">shorthand</a> for the other four properties. If ‘<a>margin</a>’ has
-      four values, they set top, right, bottom and left in that order. If left is omitted, it
-      is the same as right. If bottom is omitted, it is the same as top. If right is omitted
-      it is the same as top.
+      class="externalDFN">shorthand</a> for the other four properties. If <a
+      class="propname">margin</a> has four values, they set top, right, bottom and left in that
+      order. If left is omitted, it is the same as right. If bottom is omitted, it is the same as
+      top. If right is omitted it is the same as top.
     </p>
     <div class="example">
       <div class="code css">
@@ -601,8 +608,9 @@ p {
   </section>
   <section id="the-padding-properties">
     <h3>
-      Padding: the ‘<a>padding-top</a>’, ‘<a>padding-right</a>’, ‘<a>padding-bottom</a>’,
-      ‘<a>padding-left</a>’, and ‘<a>padding</a>’ properties
+      Padding: the <a class="propname">padding-top</a>, <a class="propname">padding-right</a>, <a
+      class="propname">padding-bottom</a>, <a class="propname">padding-left</a>, and <a
+      class="propname">padding</a> properties
     </h3>
     <table class="propdef">
       <tbody>
@@ -706,18 +714,19 @@ p {
       </tbody>
     </table>
     <p>
-      ‘<a>padding</a>’ is a <a
+      <a class="propname">padding</a> is a <a
       href="http://www.w3.org/TR/css3-cascade/#shorthand-property--shorthand"
-      class="externalDFN">shorthand</a> for the other four properties. If ‘<a>padding</a>’ has
-      four values, they set top, right, bottom and left in that order. If left is omitted, it is
-      the same as right. If bottom is omitted, it is the same as top. If right is omitted it is
-      the same as top.
+      class="externalDFN">shorthand</a> for the other four properties. If <a
+      class="propname">padding</a> has four values, they set top, right, bottom and left in that
+      order. If left is omitted, it is the same as right. If bottom is omitted, it is the same as
+      top. If right is omitted it is the same as top.
     </p>
   </section>
   <section id="the-border-properties">
     <h3>
-      Borders: the ‘<a>border-top</a>’, ‘<a>border-right</a>’, ‘<a>border-bottom</a>’,
-      ‘<a>border-left</a>’, and ‘<a>border</a>’ properties
+      Borders: the <a class="propname">border-top</a>, <a class="propname">border-right</a>, <a
+      class="propname">border-bottom</a>, <a class="propname">border-left</a>, and <a
+      class="propname">border</a> properties
     </h3>
     <table class="propdef">
       <tbody>
@@ -822,11 +831,11 @@ p {
       </tbody>
     </table>
     <p>
-      ‘<a>border</a>’ is a <a
+      <a class="propname">border</a> is a <a
       href="http://www.w3.org/TR/css3-cascade/#shorthand-property--shorthand"
       class="externalDFN">shorthand</a> for the other four. Its four values set the top, right,
-      bottom and left border respectively. A missing left is the same as right, a missing bottom
-      is the same as top, and a missing right is also the same as top.
+      bottom and left border respectively. A missing left is the same as right, a missing bottom is
+      the same as top, and a missing right is also the same as top.
     </p>
   </section>
 </section>
