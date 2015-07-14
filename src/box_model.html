@@ -218,23 +218,22 @@
       of the resulting margin is the maximum of the collapsing margins' widths.
     </p>
     <p class="note">
-      This simplified definition is almost equivalent to the original definition of <a
+      This simplified definition is equivalent to the original definition of <a
       href="CSS3BOX#collapsing-margins">collapsing margins</a> [[CSS2]] [[CSS3BOX]], considering
-      that in braille CSS each page has only a single block formatting context, that the height
-      of block-level boxes are auto-computed, that boxes can have no negative top or bottom
-      margins, that the <a href="#the-margin-properties">margin properties</a> do not apply on
-      inline-level boxes and that there is no <a href="CSS2VISUREN#floats">floating</a>, no <a
+      that in braille CSS each page has only a single block formatting context, that the height of
+      block-level boxes are auto-computed, that boxes can have no negative top or bottom margins,
+      that the <a href="#the-margin-properties">margin properties</a> do not apply on inline-level
+      boxes and that there is no <a href="CSS2VISUREN#floats">floating</a>, no <a
       href="CSS2VISUREN#propdef-clear">clearance</a>, no <a href="CSS2VISUFX#propdef-overflow"
       class="externalDFN">overflow</a>, no <a href="CSS2VISUREN#absolute-positioning">absolute
-      positioning</a>, no <a href="CSS3BOX#vertical" class="externalDFN">vertical boxes</a> and
-      no ‘<a href="CSS3BOX#inline-block" class="externalDFN">display: inline-block</a>’. The
-      only deviation from the original definition is that in braille CSS the margins of the <a
-      href="CSS2CONFORM#root" class="externalDFN">root element</a>'s box also collapse.
+      positioning</a>, no <a href="CSS3BOX#vertical" class="externalDFN">vertical boxes</a> and no
+      ‘<a href="CSS3BOX#inline-block" class="externalDFN">display: inline-block</a>’.
     </p>
     <p class="issue">
       In the Liblouis implementation, paddings currently collapse. See <a
       href="https://github.com/daisy/pipeline-mod-braille/issues/12"
-      class="ticket">pipeline-mod-braille#12</a>.
+      class="ticket">pipeline-mod-braille#12</a>. Also, the behavior of margins in liblouis at the
+      top of pages is not according to CSS.
     </p>
     <p class="issue">
       In the Dotify implementation, margins currently don't collapse. See <a
@@ -590,6 +589,7 @@ p {
     <volume rows="3" cols="10" rowgap="0" duplex="false">
       <section>
         <page>
+          <row/>
           <row>⠀⠤⠤⠤</row>
         </page>
       </section>
