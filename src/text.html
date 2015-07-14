@@ -1,27 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="text">
   <h2> Text </h2>
-  <section>
-    <h3> Transforming Text </h3>
+  <p>
+    <a href="CSS2CONFORM#user-agent" class="externalDFN">User agents</a> in the ‘<a
+    title="renderer">braille renderer</a>’ category require that the document text (as well as
+    text in ‘<a>content</a>’ properties) consists of only <a>white space characters</a> and
+    Unicode braille. <a title="translator">Braille translators</a> don't have this restriction,
+    they can transform text to braille when necessary. The transformation from text to braille can
+    be controlled on element level with the ‘<a>text-transform</a>’ property.
+  </p>
+  <p>
+    The specification doesn't impose a specific ordering between text transformation, white
+    space processing and line breaking, as long as in the end the <a
+    href="#white-space-processing">white space processing</a>, <a href="#line-breaking">line
+    breaking</a> and <a title="braille code">braille translation</a> rules are satisfied, and
+    all text can be rendered in <a title="braille cell">braille cells</a>.
+  </p>
+  <section id="the-text-transform-property">
+    <h3>
+      Transforming Text: the ‘<a>text-transform</a>’ property
+    </h3>
     <p>
-      <a href="CSS2CONFORM#user-agent" class="externalDFN">User agents</a> in the ‘<a
-      title="renderer">braille renderer</a>’ category require that the document text (as well as
-      text in ‘<a>content</a>’ properties) consists of only <a>white space characters</a> and
-      Unicode braille. <a title="translator">Braille translators</a> don't have this
-      restriction, they can transform text to braille when necessary.
+      When document text does not consist solely of Unicode braille and <a title="white space
+      characters">white space</a>, the <a title="translator">braille translator</a> transforms it to
+      braille somehow. How text is supposed to be transformed depends on the <a>braille code</a> but
+      also on the context. The ‘<a>text-transform</a>’ property can be used for providing the
+      translator with all the necessary context information to do its job correctly.
     </p>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>text-transform</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td>
+            auto | <a href="CSS3VAL#identifier-value"
+            class="externalDFN"><var>&lt;custom-ident&gt;</var></a> +
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>auto</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td> all elements and pseudo-elements (and in ‘<a>@counter-style</a>’ rules) </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>no</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            Values are inherited in a special way (see below).
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <p>
-      The specification doesn't impose a specific ordering between text transformation, white
-      space processing and line breaking, as long as in the end the <a
-      href="#white-space-processing">white space processing</a>, <a href="#line-breaking">line
-      breaking</a> and <a title="braille code">braille translation</a> rules are satisfied, and
-      all text can be rendered in <a title="braille cell">braille cells</a>.
+      Because braille transcription is a complex process influenced by <a title="braille
+      code">braille codes</a> and other factors, the possible values for ‘<a>text-transform</a>’ and
+      their exact meanings are UA-dependent.
+    </p>
+    <dl>
+      <dt>auto</dt>
+      <dd>
+        Text is transformed to braille the “default” way.
+      </dd>
+      <dt>
+        <a href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a> +
+      </dt>
+      <dd>
+        A space separated list of arbitrary values not equal to ‘auto’. Values are assumed to be
+        “applied” by the <a title="translator">braille translator</a> from left to right.
+      </dd>
+    </dl>
+    <p class="issue">
+      In order to get some indication of what kind of values could be supported and to create
+      uniformity across braille codes, a grammar could be made with a list of possible values and
+      approximate meanings.
     </p>
     <p class="issue">
-      Add a section that describes how the transformation from text to braille can be
-      controlled. See <a href="https://github.com/snaekobbi/braille-css-spec/issues/12"
-      class="ticket">braille-css-spec#12</a>.
+      A value of ‘none’ could mean that text must not be transformed at all. (It would only be
+      possible to have this value on text consisting of only Unicode braille and white space.)
+      Because it is unclear how this value would affect inheritance, it is omitted for now.
     </p>
+    <p>
+      Values are inherited in a cumulative way:
+    </p>
+    <ul>
+      <li>
+        A specified value of ‘auto’ computes to the computed value of the parent element.
+      </li>
+      <li>
+        A <a href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>
+        list is combined with the computed value of the parent element. If the parent value is
+        ‘auto’, then the computed value of the child is equal to the specified value. Otherwise it
+        is the conjunction of the specified value and the computed value of the parent (in that
+        order).
+      </li>
+    </ul>
+    <p>
+      In other words, the computed value of an element is the conjunction of the
+      <var>&lt;custom-ident&gt;</var> lists of itself and all ancestors, or ‘auto’ if the conjoined
+      list is empty.
+    </p>
+    <div class="note">
+      <p>
+        There is a fundamental difference between this property and the original ‘<a
+        class="externalDFN" href="CSS3TEXT#text-transform">text-transform</a>’ property as defined
+        in [[CSS3TEXT]].  While the original property is about describing basic character transforms
+        (e.g. case transforms) for styling purposes, the Braille CSS property is about influencing
+        the braille transcription. It is obvious that a transformation to another writing system is
+        much more complex than simple case transforms, and this explains why the Braille CSS
+        property can have arbitrary values whereas the original property has well-defined values
+        (except for the ‘<a class="externalDFN" href="CSS3TEXT#capitalize">capitalize</a>’ value
+        which depends on how word boundaries are determined).
+      </p>
+      <p>
+        Note that for certain ‘<a>text-transform</a>’ values such as e.g. ‘uppercase’ one could
+        consider the transformation to braille as a two-step process consisting of a text-to-text
+        step and a text-to-braille step. However there is no reason to make that distinction
+        explicit as it would only be limiting.
+      </p>
+    </div>
   </section>
   <section id="the-white-space-property">
     <h3> The ‘<a>white-space</a>’ property </h3>

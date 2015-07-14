@@ -362,12 +362,13 @@
       <p>
         The ‘<dfn>@counter-style</dfn>’ rule allows the definition of custom <a
         href="CSS3COUNTERSTYLES#counter-style" class="externalDFN">counter styles</a>. A
-        ‘<a>@counter-style</a>’ rule consists of the keyword ‘@counter-style’, a name, and a
-        block of declaractions (called desciptors) which define how a counter value is converted
-        into a string. A counter styles's name must be a <a
+        ‘<a>@counter-style</a>’ rule consists of the keyword ‘@counter-style’, a name, and a block
+        of declaractions (called desciptors) which define how a counter value is converted into a
+        string. A counter styles's name must be a <a
         href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
-        class="externalDFN">&lt;custom-ident&gt;</a> not equal to ‘none’ or ‘decimal’. The
-        various descriptors that make up a counter style are described in [[CSS3COUNTERSTYLES]].
+        class="externalDFN">&lt;custom-ident&gt;</a> not equal to ‘none’ or ‘decimal’. The various
+        descriptors that make up a counter style are described in [[CSS3COUNTERSTYLES]]. In
+        addition, a counter style in Braille CSS can also have a ‘<a>text-transform</a>’ descriptor.
       </p>
       <p>
         User agents must define the ‘decimal’ counter style as an ultimate fallback
@@ -391,7 +392,8 @@
         href="CSS3COUNTERSTYLES#generate-a-counter" class="externalDFN">generating a counter
         representation</a>, user agents in the ‘<a>translator</a>’ category must perform the
         necessary steps to ensure that the resulting representation is a <a
-        title="&lt;braille-string&gt;">braille string</a>.
+        title="&lt;braille-string&gt;">braille string</a>. The transformation to braille is
+        influenced by the ‘<a>text-transform</a>’ descriptor.
       </p>
     </section>
     <section>
