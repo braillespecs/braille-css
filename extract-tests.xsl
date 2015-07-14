@@ -3,8 +3,7 @@
                 xmlns:_xsl="http://www.w3.org/1999/XSL/TransformAlias"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:x="http://www.daisy.org/ns/xprocspec"
-                xmlns:louis="http://liblouis.org/liblouis"
-                xmlns:dotify="http://code.google.com/p/dotify/"
+                xmlns:px="http://www.daisy.org/ns/pipeline/xproc"
                 xmlns:pxi="http://www.daisy.org/ns/pipeline/xproc/internal"
                 xmlns:p="http://www.w3.org/ns/xproc"
                 xmlns:pef="http://www.daisy.org/ns/2008/pef"
@@ -37,9 +36,8 @@
 						</p:output>
 						<p:option name="stylesheet" required="false"/>
 						<p:option name="temp-dir" required="true"/>
-						<p:import href="http://www.daisy.org/pipeline/modules/braille/css-calabash/library.xpl"/>
-						<p:import href="http://www.daisy.org/pipeline/modules/braille/liblouis-formatter/library.xpl"/>
-						<p:import href="http://www.daisy.org/pipeline/modules/braille/dotify-formatter/library.xpl"/>
+						<p:import href="http://www.daisy.org/pipeline/modules/braille/css-utils/library.xpl"/>
+						<p:import href="http://www.daisy.org/pipeline/modules/braille/common-utils/library.xpl"/>
 						<p:choose>
 							<p:when test="p:value-available('stylesheet')">
 								<p:xslt template-name="main" name="link">
@@ -76,15 +74,16 @@
 							</p:otherwise>
 						</p:choose>
 						<p:identity name="css-inline"/>
-						<louis:format name="louis-format">
+						<px:transform query="(formatter:liblouis)(translator:bypass)" type="css" name="louis-format">
 							<p:with-option name="temp-dir" select="$temp-dir"/>
-						</louis:format>
+						</px:transform>
 						<p:sink/>
-						<dotify:format name="dotify-format">
+						<px:transform query="(formatter:dotify)(translator:bypass)" type="css" name="dotify-format">
 							<p:input port="source">
 								<p:pipe step="css-inline" port="result"/>
 							</p:input>
-						</dotify:format>
+							<p:with-option name="temp-dir" select="$temp-dir"/>
+						</px:transform>
 						<p:sink/>
 					</p:declare-step>
 				</x:script>
