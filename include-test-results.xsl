@@ -36,8 +36,6 @@
 			     title="Liblouis test {if ($liblouis-passed) then 'passed' else 'failed'}"/>
 			<div class="test test-dotify {if ($dotify-passed) then 'test-passed' else 'test-failed'}"
 			     title="Dotify test {if ($dotify-passed) then 'passed' else 'failed'}"/>
-			<div class="test test-fop test-failed"
-			     title="FOP test failed"/>
 		</xsl:copy>
 	</xsl:template>
 	
