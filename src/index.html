@@ -581,6 +581,26 @@
       -->
       <section id="conformance"/>
     </section>
+    <section id="syntax">
+      <h2> Syntax </h2>
+      <p>
+        [[CSS3SYN]] describes the basic structure and syntax of CSS stylesheets. The syntax also
+        applies to braille CSS.
+      </p>
+      <p>
+        Implementations of braille CSS may support vendor-specific properties and values. To avoid
+        clashes with future CSS features, the [[CSS2]] specification reserves a <a
+        href="CSS2SYN#vendor-keywords">prefixed syntax</a> for proprietary extensions. Other
+        implementations that not recognize such vendor-prefixed properties should ignore them.
+      </p>
+      <p class="issue">
+        For all known implementations with proprietary extensions, include references to relevant
+        documentation. For example, the <a href="http://code.google.com/p/dotify/">Dotify</a> based
+        implementation may support <span class="propname">-obfl-</span> prefixed properties. See <a
+        href="https://github.com/snaekobbi/braille-css-spec/issues/36"
+        class="ticket">braille-css-spec#36</a>.
+      </p>
+    </section>
     <section id="values-and-units">
       <h2> Values and Units </h2>
       <p>
