@@ -25,7 +25,7 @@
     containing block is formed by the <a href="CSS3BOX#content0" class="externalDFN">content
     edge</a> of the nearest <a title="block-level box">block-level</a> ancestor box.
   </p>
-  <p class="note">
+  <p class="note difference">
     These simplified definitions are equivalent to the original definitions of <a
     href="CSS3BOX#containing" class="externalDFN">containing block</a> and <a
     href="CSS3BOX#initial" class="externalDFN">initial containing block</a> [[CSS3BOX]]
@@ -43,7 +43,7 @@
     title="inline-level formatting context">inline formatting</a> of <a title="inline-level
     box">inline-level boxes</a>.
   </p>
-  <p class="note">
+  <p class="note difference">
     As opposed to [[CSS2]] where boxes can be <a href="CSS2VISUREN#floats">floated</a> or <a
     href="CSS2VISUREN#absolute-positioning">positioned absolutely</a> as well, braille CSS only
     supports the normal flow positioning scheme. Another difference is that normal flow in
@@ -118,7 +118,7 @@
       border, then the content ends at the bottom <a href="CSS3BOX#margin0"
       class="externalDFN">margin edge</a> of the bottommost child.
     </p>
-    <p class="note">
+    <p class="note difference">
       Block formatting in braille CSS is considerably simplified with respect to [[CSS2]] and
       [[CSS3BOX]]. Since there is no <a href="CSS2VISUREN#floats">floating</a>, no <a
       href="CSS2VISUREN#absolute-positioning">absolute positioning</a> and no <a
@@ -165,7 +165,7 @@
       class="propname">text-align</a> property. When an inline box exceeds the width of a line box,
       it is split into several boxes and these boxes are distributed across several line boxes.
     </p>
-    <p class="note">
+    <p class="note difference">
       Inline formatting in braille CSS is simplified with respect to [[CSS2]] and
       [[CSS3TEXT]]. The <a href="CSS2VISUDET#propdef-line-height" class="externalDFN">height</a>
       of a line box is always equal to 1, and there is no <a
@@ -219,7 +219,7 @@
       that margin (collapsing is “transitive”). When two or more margins collapse, the the width
       of the resulting margin is the maximum of the collapsing margins' widths.
     </p>
-    <p class="note">
+    <p class="note difference">
       This simplified definition is equivalent to the original definition of <a
       href="CSS3BOX#collapsing-margins">collapsing margins</a> [[CSS2]] [[CSS3BOX]], considering
       that in braille CSS each page has only a single block formatting context, that the height of
@@ -386,7 +386,7 @@
         page area
       </dd>
     </dl>
-    <p class="note">
+    <p class="note difference">
       Note that these properties have a different meaning than the <a
       href="CSS2VISUREN#propdef-left" class="externalDFN propname">left</a> and <a
       href="CSS2VISUREN#propdef-right" class="externalDFN propname">right</a> properties defined in
@@ -446,7 +446,7 @@
       area</a>. The value may be a negative length for <a class="propname">margin-left</a> and <a
       class="propname">margin-right</a>.
     </p>
-    <div class="note">
+    <div class="note difference">
       <p>
         These properties have a number differences with the original <a
         href="CSS3BOX#the-margin">margin properties</a> defined in [[CSS3BOX]]:
@@ -658,7 +658,7 @@ p {
       Padding properties set the thickness of the <a href="CSS3BOX#padding"
       class="externalDFN">padding area</a>. The value may not be negative.
     </p>
-    <div class="note">
+    <div class="note difference">
       <p>
         These properties have a number differences with the original <a
         href="CSS3BOX#the-padding">padding properties</a> defined in [[CSS3BOX]]:
