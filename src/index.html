@@ -28,9 +28,6 @@
       em.rfc2119 {
         font-size: 120%;
       }
-      [role='heading'], dfn {
-        position: relative;
-      }
       .propname::before {
         content: '‘';
       }
@@ -44,45 +41,46 @@
         content: '’';
       }
       a.self-link {
+        position: relative;
+        text-decoration: none;
+        color: inherit;
+      }
+      a.self-link::before {
         position: absolute;
         opacity: 0;
-        text-decoration: none;
         transition: opacity .2s;
       }
-      table.propdef a.self-link {
-        background-color: #def;
-      }
-      table.propdef a.self-link:hover {
-        background-color: #ffa;
-      }
-      .issue a.self-link {
-        background-color: #fbe9e9;
-      }
-      [role='heading'] > a.self-link {
-        top: -1px;
-        left: -1.2em;
-        width: 1.2em;
-      }
-      [role='heading'].issue-title > a.self-link {
-        left: -.8em;
-        width: .8em;
-      }
-      dfn > a.self-link {
-        font-size: 90%;
-        left: -0.8em;
-        width: 0.7em;
-        top: 2px;
-        padding-left: 0.1em;
-      }
-      [role='heading']:hover > a.self-link,
-      dfn:hover > a.self-link {
+      a.self-link:hover::before {
         opacity: 1;
       }
-      [role='heading'] > a.self-link::before {
+      [role='heading'] > .secno > a.self-link::before {
         content: "§";
+        font-size: 90%;
+        top: -1px;
+        left: -1em;
+        width: 1em;
+      }
+      [role='heading']:hover > .secno > a.self-link::before {
+        opacity: 1;
+      }
+      [role='heading'].issue-title > a.self-link::before {
+        content: "§";
+        font-size: 90%;
+        top: -3px;
+        left: -.8em;
+        width: .8em;
+        background-color: #fbe9e9;
       }
       dfn > a.self-link::before {
         content: "#";
+        left: -0.8em;
+        width: 0.7em;
+        top: -2px;
+        padding-left: 0.1em;
+        background-color: white;
+      }
+      table.propdef dfn a.self-link::before {
+        background-color: #def;
       }
       .example {
         margin: 1em 0;
@@ -411,9 +409,11 @@
        */
       createSelfLinks = function() {
         respecEvents.sub("end-all", function() {
-          $("*[role='heading'], dfn").each(function(i, block) {
-            var id = block.getAttribute("id");
-            $("<a class='self-link' href='#" + id + "'></a>").appendTo(block);
+          $("*[role='heading'] > .secno").wrapInner(function() {
+            return "<a class='self-link' href='#" + this.parentNode.getAttribute("id") + "'></a>";
+          });
+          $("*[role='heading'].issue-title, dfn").wrapInner(function() {
+            return "<a class='self-link' href='#" + this.getAttribute("id") + "'></a>";
           });
         });
       }
