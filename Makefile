@@ -1,7 +1,7 @@
 SRC_DIR              := src
 TARGET_DIR           := target/site
 SOURCES              := $(wildcard $(SRC_DIR)/*.html)
-RESOURCES            := $(addprefix $(SRC_DIR)/,odt2braille8.ttf)
+RESOURCES            := $(addprefix $(SRC_DIR)/,odt2braille8.ttf text-transform.html)
 TARGET_INDEX         := $(TARGET_DIR)/index.html
 DEV_INDEX            := target/tmp/index.html
 TARGET_RESOURCES     := $(patsubst $(SRC_DIR)/%,$(TARGET_DIR)/%,$(RESOURCES))
