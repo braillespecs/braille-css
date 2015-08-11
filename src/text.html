@@ -296,8 +296,15 @@
           class="propval">pre-line</a>, spaces are considered <dfn>collapsible</dfn>. Any space
           immediately following another collapsible space is collapsed to have zero advance
           width. It is invisible, but retains its <a href="CSS3TEXT#soft-wrap-opportunity"
-          class="externalDFN">soft wrap opportunity</a>, if any. If <a
-          class="propname">white-space</a> is <a class="propval">pre-wrap</a>, any sequence of
+          class="externalDFN">soft wrap opportunity</a>, if any. A <a>translator</a> may in some
+          cases completely remove collapsible spaces.
+        </p>
+        <p class="note">
+          As an example of space that is dropped between words, in EBAE English braille, “to have”
+          is translated to “<span class="braille">⠖⠓</span>”.
+        </p>
+        <p>
+          If <a class="propname">white-space</a> is <a class="propval">pre-wrap</a>, any sequence of
           spaces is treated as a sequence of non-breaking spaces (U+00A0 <span style="font-variant:
           small-caps">no-break space (nbsp)</span>). However, a <a
           href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap opportunity</a> exists
@@ -371,12 +378,14 @@
           line breaking classes in [[UAX14]] must be honored.
         </p>
         <p class="note">
-          In other words, spaces (U+0020 <span style="font-variant: small-caps">space</span>)
-          and zero width spaces (U+200B <span style="font-variant: small-caps">zero width space
-          (zwsp)</span>) form <a href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft
-          wrap opportunities</a>. Non-breaking spaces (U+00A0 <span style="font-variant:
-          small-caps">no-break space (nbsp)</span>) prohibit breaks unless overruled by a space
-          or zero-width space.
+          In other words, spaces (U+0020 <span style="font-variant: small-caps">space</span>) and
+          zero width spaces (U+200B <span style="font-variant: small-caps">zero width space
+          (zwsp)</span>) form <a href="CSS3TEXT#soft-wrap-opportunity" class="externalDFN">soft wrap
+          opportunities</a>. Non-breaking spaces (U+00A0 <span style="font-variant:
+          small-caps">no-break space (nbsp)</span>) prohibit breaks unless overruled by a space or
+          zero-width space. Note that if collapsible space between words is completely removed
+          during translation, the soft wrap opportunity is also gone. A <a>translator</a> may also
+          drop zero width spaces, e.g. when they appear inside a contraction.
         </p>
       </li>
       <li>
@@ -475,12 +484,13 @@
           <dfn>manual</dfn>
         </dt>
         <dd>
-          Words are only hyphenated where there are soft hyphens (U+00AD <span
-          style="font-variant: small-caps">soft hyphen (shy)</span>) inside the word. Soft
-          hyphens are invisible format characters that explicitly suggest <a
-          href="CSS3TEXT#hyphenation-opportunity" class="externalDFN">hyphenation
-          opportunities</a>, and that produce a <a title="hyphenate-character">hyphenation
-          character</a> only when a line is broken at that point.
+          Words are only hyphenated where there are soft hyphens (U+00AD <span style="font-variant:
+          small-caps">soft hyphen (shy)</span>) inside the word. Soft hyphens are invisible format
+          characters that explicitly suggest <a href="CSS3TEXT#hyphenation-opportunity"
+          class="externalDFN">hyphenation opportunities</a>, and that produce a <a
+          title="hyphenate-character">hyphenation character</a> only when a line is broken at that
+          point. A <a>translator</a> may drop soft hyphens, e.g. when they appears inside a
+          contraction.
           <p class="note">
             [[UAX14]] describes the role of <a href="UAX14#SoftHyphen">soft hyphens</a> in
             Unicode line breaking.
