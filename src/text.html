@@ -565,6 +565,72 @@
       </p>
     </section>
   </section>
+  <section id="the-line-height-property">
+    <h3> Line spacing: the <a class="propname">line-height</a> property </h3>
+    <p>
+      The height of a <a>line box</a> is determined by the <a class="propname">line-height</a>
+      property of its block container. Values must be strictly positive
+      <a><var>&lt;length&gt;</var></a>s. By default the line height is equal to the text height which
+      is always <span class="propval">1</span>. When <a class="propname">line-height</a> is set to a
+      higher value, text inside the line box touches the top edge of the box, and space is added at
+      the bottom. All line boxes in a block have the same height, including the last one. In other
+      words, the <a href="CSS3BOX#content" class="externalDFN">content area</a> of a block box
+      changes proportionately with the value of <a class="propname">line-height</a>. Top and bottom
+      padding and margins however are not affected by <a class="propname">line-height</a>.
+    </p>
+    <p class="issue">
+      Allow values between 1 and 2.
+    </p>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>line-height</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td><a><var>&lt;length&gt;</var></a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td><a>block</a> | <a>list-item</a></td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note difference">
+      [[CSS3LINE]] describes how the vertical positioning of text inside a line box is affected by
+      the <a href="#vertical-align" class="propname externalDFN">vertical-align</a> property.  There
+      is no such property in braille CSS. Text is always aligned vertically as if <a
+      href="#vertical-align" class="propname externalDFN">vertical-align</a> were <span
+      class="propval">top</span>.
+    </p>
+  </section>
   <section id="the-text-align-property">
     <h3> Text Alignment: the <a class="propname">text-align</a> property </h3>
     <p class="issue">
