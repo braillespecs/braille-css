@@ -22,13 +22,10 @@
       has a slightly simplified model.
     </p>
     <p>
-      In braille CSS, <a href="CSS3PAGE#page-box" class="externalDFN">page boxes</a> consist
-      only of margin and content areas, no borders or padding. Moreover, page margins are used
-      exclusively for creating page headers and footers, not for creating space between the
-      content and the page edges. They cover at most one braille line. The <a
-      href="CSS3PAGE#page-box" class="externalDFN">page box</a>'s top margin is ‘1’ when at
-      least one of the 3 top margin boxes is generated, ‘0’ otherwise. Similarly, its bottom
-      margin is ‘1’ when at least one of the 3 bottom margin boxes is generated.
+      In braille CSS, <a href="CSS3PAGE#page-box" class="externalDFN">page boxes</a> consist only of
+      content and margin areas, no borders or padding. Moreover, the top and bottom page margins can
+      only contain up to three <a href="CSS3PAGE#page-margin-boxes" class="externalDFN">page-margin
+      boxes</a> each.
     </p>
     <section id="the-page-rule">
       <h4> The ‘<a>@page</a>’ rule </h4>
@@ -132,9 +129,8 @@
       <p class="note difference">
         Note that while in the original specification the <a class="propname">size</a> property is
         meant to match the size of the <a href="CSS3PAGE#page-sheet" class="externalDFN">page
-        sheet</a>, in braille CSS it is meant to match the area on which will eventually be
-        printed. Page margins are only used for creating page headers and footers, not for creating
-        white space between the content and the page edges.
+        sheet</a>, in braille CSS it is meant to match the <a href="CSS3PAGE#printable-area"
+        class="externalDFN">printable area</a>.
       </p>
     </section>
     <section id="page-margin-boxes">
@@ -158,15 +154,12 @@
         class="externalDFN">bottom-right</a>.
       </p>
       <p>
-        <a href="CSS3PAGE#page-margin-boxes" class="externalDFN">Page-margin boxes</a> are
-        created by <a title="margin at-rule">margin at-rules</a> inside the <a
-        href="CSS3PAGE#page-context" class="externalDFN">page context</a>.
-      </p>
-      <p>
-        A <dfn>margin at-rule</dfn> consists of an <a
+        <a href="CSS3PAGE#page-margin-boxes" class="externalDFN">Page-margin boxes</a> are created
+        by <a title="margin at-rule">margin at-rules</a> inside the <a href="CSS3PAGE#page-context"
+        class="externalDFN">page context</a>. A <dfn>margin at-rule</dfn> consists of an <a
         href="CSS3PAGE#specializatons-of-ATKEYWORD" class="externalDFN">ATKEYWORD</a> that
-        identifies the <a href="CSS3PAGE#page-margin-boxes" class="externalDFN">page-margin
-        box</a> (e.g. ‘@top-left’) and a block of declaractions (said to be in the <a
+        identifies the <a href="CSS3PAGE#page-margin-boxes" class="externalDFN">page-margin box</a>
+        (e.g. ‘@top-left’) and a block of declaractions (said to be in the <a
         href="CSS3PAGE#margin-context" class="externalDFN">margin context</a>).
       </p>
       <p class="note difference">
@@ -175,9 +168,39 @@
         class="propname">content</a> property is allowed in declarations.
       </p>
       <p>
-        A <a href="CSS3PAGE#page-margin-boxes" class="externalDFN">page-margin box</a> is generated
-        if and only if the <a href="CSS3CASCADE#computed" class="externalDFN">computed value</a> of
-        its <a class="propname">content</a> property is not <span class="propval">none</span>.
+        Page-margin boxes have a height of <span class="propval">1</span> and can only contain a
+        single line of text. A page-margin box is generated if and only if the <a
+        href="CSS3CASCADE#computed" class="externalDFN">computed value</a> of its <a
+        class="propname">content</a> property is not <span class="propval">none</span> and does not
+        consist of <a title="collapsible">collapsible white space</a> only. However, using the <a
+        class="propname">margin-top</a> and <a class="propname">margin-bottom</a> properties the
+        heights of the top and bottom page-margin areas can be set to a value higher than <span
+        class="propval">1</span>. This way the <a href="CSS3PAGE#page-area" class="externalDFN">page
+        area</a> can be set off from the header and footer lines.
+      </p>
+      <p>
+        If the specified value of <a class="propname">margin-top</a> is a strictly positive length,
+        the offset between the top edges of <a href="CSS3PAGE#page-box" class="externalDFN">page
+        box</a> and <a href="CSS3PAGE#page-area" class="externalDFN">page area</a> is set to that
+        value. The <a href="CSS3PAGE#top-left-box-def" class="externalDFN">top-left</a>, <a
+        href="CSS3PAGE#top-center-box-def" class="externalDFN">top-center</a> and <a
+        href="CSS3PAGE#top-right-box-def" class="externalDFN">top-right</a> boxes, if they are
+        generated, touch the page box's top edge. If the value of <a class="propname">margin-top</a>
+        is <span class="propval">auto</span>, the offset is determined by the existence of the <a
+        href="CSS3PAGE#top-left-box-def" class="externalDFN">top-left</a> and <a
+        href="CSS3PAGE#top-center-box-def" class="externalDFN">top-center</a> page-margin boxes:
+        <span class="propval">1</span> when at least one of them is generated, <span
+        class="propval">0</span> otherwise.
+      </p>
+      <p>
+        If <a class="propname">margin-top</a> computes to <span class="propval">0</span> and a <a
+        href="CSS3PAGE#top-right-box-def" class="externalDFN">top-right</a> page-margin box is
+        generated, text in the <a href="CSS3PAGE#page-area" class="externalDFN">page area</a> flows
+        around the box.
+      </p>
+      <p>
+        Analogous rules govern the properties of the bottom page-margin area (with ‘top’ replaced by
+        ‘bottom’ everywhere).
       </p>
     </section>
     <section id="the-page-property">
