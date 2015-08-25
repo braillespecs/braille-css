@@ -105,18 +105,17 @@
     </p>
     <p>
       If a box has only <a title="inline-level box">inline-level</a> children, the height is the
-      number of <a title="line box">line boxes</a>. If the box has <a title="block-level
-      box">block-level</a> children, the height is the distance between the top <a
-      href="CSS3BOX#border0" class="externalDFN">border-edge</a> of the topmost block-level
-      child box that doesn't have margins <a href="CSS3BOX#collapsed"
-      class="externalDFN">collapsed through</a> it and the bottom <a href="CSS3BOX#border0"
-      class="externalDFN">border-edge</a> of the bottommost block-level child box that doesn't
-      have margins <a href="CSS3BOX#collapsed" class="externalDFN">collapsed through</a>
-      it. However, if the element has a nonzero top padding and/or top border, then the content
-      starts at the top <a href="CSS3BOX#margin0" class="externalDFN">margin edge</a> of the
-      topmost child. Similarly, if the element has a nonzero bottom padding and/or bottom
-      border, then the content ends at the bottom <a href="CSS3BOX#margin0"
-      class="externalDFN">margin edge</a> of the bottommost child.
+      number of <a title="line box">line boxes</a>. An empty box has height ‘0’. If the box has <a
+      title="block-level box">block-level</a> children, the height is the distance between the top
+      <a href="CSS3BOX#border0" class="externalDFN">border-edge</a> of the topmost block-level child
+      box that doesn't have margins <a href="CSS3BOX#collapsed" class="externalDFN">collapsed
+      through</a> it and the bottom <a href="CSS3BOX#border0" class="externalDFN">border-edge</a> of
+      the bottommost block-level child box that doesn't have margins <a href="CSS3BOX#collapsed"
+      class="externalDFN">collapsed through</a> it. However, if the element has a nonzero top
+      padding and/or top border, then the content starts at the top <a href="CSS3BOX#margin0"
+      class="externalDFN">margin edge</a> of the topmost child. Similarly, if the element has a
+      nonzero bottom padding and/or bottom border, then the content ends at the bottom <a
+      href="CSS3BOX#margin0" class="externalDFN">margin edge</a> of the bottommost child.
     </p>
     <p class="note difference">
       Block formatting in braille CSS is considerably simplified with respect to [[CSS2]] and
@@ -152,7 +151,8 @@
       <dfn>inline-level formatting context</dfn>, boxes are laid out horizontally, one after the
       other, beginning at the top of a <a>containing block</a>. The rectangular area that contains
       the boxes that form a line is called a <dfn>line box</dfn>. Line boxes are created as needed
-      to hold inline-level content.
+      to hold inline-level content. Line boxes are never empty and do never hold <a
+      title="collapsible">collapsible white space</a> only.
     </p>
     <p>
       The height of a line box is determined by the <a class="propname">line-height</a> property,
