@@ -298,17 +298,19 @@
   <section id="page-breaking">
     <h3> Page Breaking </h3>
     <p>
-      In order to avoid awkward breaks, the layout engine must be able to shift around content
-      that would fall across the page break. The CSS Fragmentation [[CSS3BREAK]] module defines
-      how and where CSS boxes can be fragmented, including across page breaks. It defines
-      properties for indicating where pages may or must be broken, and on what page (left or
-      right) the subsequent content resumes.
+      In order to avoid awkward breaks, the layout engine must be able to shift around content that
+      would otherwise fall across the page break. The generic term for breaking content across
+      containers such as page boxes is <a href="CSS3BREAK#fragmentation"
+      class="externalDFN">fragmentation</a>, and the containers are called <a
+      href="CSS3BREAK#fragmentainer" class="externalDFN">fragmentainers</a>. [[CSS3BREAK]] defines
+      how and where a sequence of boxes can be fragmented, including across page breaks. It defines
+      properties for indicating where pages may or must be broken, and on what page (<a
+      href="CSS3PAGE#left-page" class="externalDFN">left</a> or <a href="CSS3PAGE#right-page"
+      class="externalDFN">right</a>) the subsequent content resumes.
     </p>
     <p class="note">
-      The generic term for breaking content across containers is <a
-      href="CSS3BREAK#fragmentation" class="externalDFN">fragmentation</a>, and the containers
-      are called <a href="CSS3BREAK#fragmentainer" class="externalDFN">fragmentainers</a>. <a
-      title="volume">Volumes</a> are another example of fragmentainers.
+      <a title="line box">Lines</a> and <a href="#h2_volumes">volumes</a> are other examples of
+      fragmentainers.
     </p>
     <section id="controlling-page-breaks">
       <h4>
@@ -670,6 +672,24 @@
         specification requires that content does not overflow the page, it does not impose any
         particular algorithm for determining the exact break points.
       </p>
+    </section>
+    <section id="box-model-for-page-breaking">
+      <h4> Box Model for Page Breaking </h4>
+      <p>
+        Exactly how content breaks across pages is described in the section <a
+        href="CSS3BREAK#breaking-boxes">Box Model for Breaking</a> [[CSS3BREAK]]. In short:
+      </p>
+      <ul>
+        <li>
+          When a page break splits a block-level box, the box's margins, borders, and padding have
+          no visual effect where the split occurs.
+        </li>
+        <li>
+          When a page break splits a block-level box, the <a href="CSS3BREAK#box-fragment"
+          class="externalDFN">box fragments</a> may have different widths if the according page
+          boxes have different widths.
+        </li>
+      </ul>
     </section>
   </section>
 </section>

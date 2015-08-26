@@ -6,7 +6,7 @@
     class="ticket">braille-css-spec#29</a>.
   </p>
   <p>
-    The CSS <a href="CSS3BOX#css-basic">box model</a> [[CSS3BOX]] describes how each element and
+    The CSS <a href="CSS3BOX#css-basic">Box model</a> [[CSS3BOX]] describes how each element and
     each string of text is laid out by transforming the <a href="CSS2CONFORM#doctree"
     class="externalDFN">document tree</a> into a tree of rectangular boxes, each consisting of a
     <a href="CSS3BOX#content" class="externalDFN">content area</a> and optional surrounding <a
@@ -16,12 +16,28 @@
   </p>
   <p>
     Each element in the <a href="CSS2CONFORM#doctree" class="externalDFN">document tree</a>
-    generates zero or more boxes. The position and size of an element's box(es) are often
-    calculated with respect to the edges of a certain rectangle, called the <dfn>containing
-    block</dfn>. In general, generated boxes act as containing blocks for descendant boxes. The
-    containing block in which the <a href="CSS2CONFORM#root" class="externalDFN">root
-    element</a> lives is called the <dfn>initial containing block</dfn>, and is equal to the <a
-    href="CSS3PAGE#page-area" class="externalDFN">page area</a>. For other elements, the
+    generates zero or more boxes. Some other boxes are not the direct result of an element, such as
+    for instance <a title="line box">line boxes</a>, <a href="CSS3PAGE#page-box">page boxes</a>, and
+    <a title="anonymous box">anonymous boxes</a>. The parent box of another box is called the
+    containing box or <dfn>container</dfn>. In general, generated boxes of an element act as
+    containing boxes of descendant elements.
+  </p>
+  <p>
+    Elements that are broken across <a title="line box">lines</a> or <a
+    href="CSS3PAGE#page-box">pages</a> result in <a href="CSS3BREAK#box-fragment"
+    class="externalDFN">box fragments</a>. The generic term for containers like <a title="line
+    box">line</a> and <a href="CSS3PAGE#page-box">page</a> boxes is <a
+    href="CSS3BREAK#fragmentainer" class="externalDFN">fragmentainers</a>. How content breaks across
+    <a href="CSS3BREAK#fragmentainer" class="externalDFN">fragmentainers</a> is described in the
+    section <a href="CSS3BREAK#breaking-boxes">Box Model for Breaking</a> [[CSS3BREAK]].
+  </p>
+  <p>
+    The position and size of an element's box(es) are often calculated with respect to the edges of
+    a certain rectangle, called the <dfn>containing block</dfn>. The containing block in which the
+    <a href="CSS2CONFORM#root" class="externalDFN">root element</a> lives is called the <dfn>initial
+    containing block</dfn> which coincidences with the <a href="CSS3PAGE#page-area"
+    class="externalDFN">page area box</a>. Note that the initial containing block depends on the
+    context. Different pages have different initial containing blocks. For other elements, the
     containing block is formed by the <a href="CSS3BOX#content0" class="externalDFN">content
     edge</a> of the nearest <a title="block-level box">block-level</a> ancestor box.
   </p>
@@ -34,14 +50,15 @@
     other than <a href="CSS3POS#static" class="externalDFN">static positioning</a>.
   </p>
   <p>
-    There are <a title="block-level box">block-level boxes</a>, <a title="line box">line
-    boxes</a> and <a title="inline-level box">inline-level boxes</a>. A block-level box is like
-    a paragraph, a line box like a line of text, and inline-level boxes like words inside a
-    line. Boxes are laid out according to the <a href="CSS2VISUREN#normal-flow">normal flow</a>
-    positioning scheme, which consists of <a title="block formatting context">block
-    formatting</a> of <a title="block-level box">block-level boxes</a> and <a
-    title="inline-level formatting context">inline formatting</a> of <a title="inline-level
-    box">inline-level boxes</a>.
+    There are <a href="CSS3PAGE#page-box" class="externalDFN">page boxes</a>, <a title="block-level
+    box">block-level boxes</a>, <a title="line box">line boxes</a> and <a title="inline-level
+    box">inline-level boxes</a>. A block-level box is like a paragraph, a line box like a line of
+    text, and inline-level boxes like words inside a line. Page boxes are described in the section
+    <a href="#h2_paged-media">Paged Media</a>. Boxes are laid out according to the <a
+    href="CSS2VISUREN#normal-flow">normal flow</a> positioning scheme, which consists of <a
+    title="block formatting context">block formatting</a> of <a title="block-level box">block-level
+    boxes</a> and <a title="inline-level formatting context">inline formatting</a> of <a
+    title="inline-level box">inline-level boxes</a>.
   </p>
   <p class="note difference">
     As opposed to [[CSS2]] where boxes can be <a href="CSS2VISUREN#floats">floated</a> or <a
