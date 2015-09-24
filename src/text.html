@@ -630,6 +630,137 @@
       href="#vertical-align" class="propname externalDFN">vertical-align</a> were <span
       class="propval">top</span>.
     </p>
+    <div class="example">
+      <div class="code xml">
+        <pre class="highlight"><![CDATA[<body>
+  <p> ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ </p>
+</body>]]></pre>
+       </div>
+       <div class="code css">
+         <pre class="highlight">@page { size: 10 6; }
+
+body {
+  display: block;
+  line-height: 2; }</pre>
+       </div>
+       <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+       </div>
+       <p>
+         Margins are not affected by <span class="propname">line-height</span>:
+       </p>
+      <div class="code xml">
+        <pre class="highlight"><![CDATA[<body>
+  <p> ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ </p>
+</body>]]></pre>
+       </div>
+       <div class="code css">
+         <pre class="highlight">@page { size: 10 6; }
+
+body {
+  display: block;
+  line-height: 2; }
+
+p {
+  display: block;
+  margin-top: 3; }</pre>
+       </div>
+       <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row/>
+          <row/>
+          <row/>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+       </div>
+       <p>
+         Alternating lines on facing pages can be accomplished with a combination of <span
+         class="propname">line-height</span>, ‘<a href="CSS3PAGE#right"
+         class="externalDFN">@page:right</a>’, ‘<a href="CSS3PAGE#left"
+         class="externalDFN">@page:left</a>’ and <span class="propname">margin-top</span>:
+       </p>
+       <div class="code xml">
+        <pre class="highlight"><![CDATA[<body>
+  <p> ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ </p>
+  <p> ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ </p>
+  <p> ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ </p>
+</body>]]></pre>
+       </div>
+       <div class="code css">
+         <pre class="highlight">@page { size: 10 6; }
+
+@page:left { margin-top: 1; }
+
+body {
+  display: block;
+  line-height: 2; }
+
+p {
+  display: block; }</pre>
+       </div>
+       <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤</row>
+        </page>
+        <page>
+          <row/>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤</row>
+        </page>
+        <page>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row rowgap="4">⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+       </div>
+     </div>
   </section>
   <section id="the-text-align-property">
     <h3> Text Alignment: the <a class="propname">text-align</a> property </h3>

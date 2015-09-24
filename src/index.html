@@ -203,6 +203,18 @@
         letter-spacing: 0px;
         font-size: 125%;
       }
+      pef row[rowgap="1"] {
+        height: 1.25em;
+      }
+      pef row[rowgap="2"] {
+        height: 1.5em;
+      }
+      pef row[rowgap="3"] {
+        height: 1.75em;
+      }
+      pef row[rowgap="4"] {
+        height: 2em;
+      }
       table.propdef {
         page-break-inside: avoid;
         width: 100%;
@@ -369,22 +381,39 @@
             /* remove head and body because they are causing trouble */
             $(pef).children("head").remove();
             $(pef).children("body").children("volume").each(function(i, volume) {
-              var cols = parseInt(volume.getAttribute("cols"));
-              var rows = parseInt(volume.getAttribute("rows"));
+              var vCols = parseInt(volume.getAttribute("cols"));
+              var vRows = parseInt(volume.getAttribute("rows"));
+              var vRowgap = parseInt(volume.getAttribute("rowgap"));
               $(volume).children().each(function(i, section) {
+                var sCols = vCols;
                 if (section.hasAttribute("cols"))
-                  cols = parseInt(section.getAttribute("cols"));
+                  sCols = parseInt(section.getAttribute("cols"));
+                var sRows = vRows;
                 if (section.hasAttribute("rows"))
-                  rows = parseInt(section.getAttribute("rows"));
+                  sRows = parseInt(section.getAttribute("rows"));
+                var sRowgap = vRowgap;
+                if (section.hasAttribute("rowgap"))
+                  sRowgap = parseInt(section.getAttribute("rowgap"));
                 $(section).children().each(function(i, page) {
+                  var pRowgap = sRowgap;
+                  if (page.hasAttribute("rowgap"))
+                    pRowgap = parseInt(page.getAttribute("rowgap"));
+                  var dotLines = 0;
                   $(page).children().each(function(i, row) {
+                    var rRowgap = pRowgap;
+                    if (row.hasAttribute("rowgap"))
+                      rRowgap = parseInt(row.getAttribute("rowgap"));
+                    else
+                      row.setAttribute("rowgap", "" + rRowgap);
                     var text = row.textContent;
-                    for (var j = text.length; j < cols; j++) text += "\u2800";
+                    for (var j = text.length; j < sCols; j++) text += "\u2800";
                     $(row).text(text);
+                    dotLines += 4;
+                    dotLines += rRowgap;
                   });
-                  for (var i = $(page).children().length; i < rows; i++) {
+                  for (var i = Math.ceil(dotLines/4); i < sRows; i++) {
                     var text = "";
-                    for (var j = text.length; j < cols; j++) text += "\u2800";
+                    for (var j = text.length; j < sCols; j++) text += "\u2800";
                     $("<row>" + text + "</row>").appendTo(page);
                   }
                 });

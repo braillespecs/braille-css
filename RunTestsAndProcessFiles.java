@@ -84,6 +84,8 @@ public class RunTestsAndProcessFiles {
 			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.common").versionAsInProject(),
 			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.translator.impl").versionAsInProject(),
 			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.formatter.impl").versionAsInProject(),
+			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.task-api").versionAsInProject(),
+			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.task.impl").versionAsInProject(),
 			brailleModule("liblouis-core"),
 			brailleModule("liblouis-saxon"),
 			brailleModule("liblouis-calabash"),
