@@ -865,5 +865,40 @@ p {
       bottom and left border respectively. A missing left is the same as right, a missing bottom is
       the same as top, and a missing right is also the same as top.
     </p>
+    <div class="example">
+      <div class="code xml">
+        <pre class="highlight"><![CDATA[<body>
+  <h> ⠿⠿⠿ </h>
+</body>]]></pre>
+       </div>
+       <div class="code css">
+         <pre class="highlight">@page { size: 10 3; }
+
+h {
+  display: block;
+  padding: 0 1;
+  border: ⠒ ⠸ ⠒ ⠇; }</pre>
+       </div>
+       <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="3" cols="10" rowgap="0" duplex="false">
+      <section>
+        <page>
+          <row>⠖⠒⠒⠒⠒⠒⠒⠒⠒⠲</row>
+          <row>⠇⠀⠿⠿⠿⠀⠀⠀⠀⠸</row>
+          <row>⠓⠒⠒⠒⠒⠒⠒⠒⠒⠚</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+       </div>
+     </div>
   </section>
 </section>
