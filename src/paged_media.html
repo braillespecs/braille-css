@@ -191,42 +191,56 @@
       <p class="note difference">
         This rules differs from the original ‘<a href="CSS3PAGE#margin-at-rule"
         class="externalDFN">margin at-rule</a>’ [[CSS3PAGE]] in that only the <a
-        class="propname">content</a> property is allowed in declarations.
+        class="propname">content</a> and <a class="propname">white-space</a> properties are allowed
+        in declarations.
       </p>
       <p>
-        Page-margin boxes have a height of <span class="propval">1</span> and can only contain a
-        single line of text. A page-margin box is generated if and only if the <a
-        href="CSS3CASCADE#computed" class="externalDFN">computed value</a> of its <a
-        class="propname">content</a> property is not <span class="propval">none</span> and does not
-        consist of <a title="collapsible">collapsible white space</a> only. However, using the <a
-        class="propname">margin-top</a> and <a class="propname">margin-bottom</a> properties the
-        heights of the top and bottom page-margin areas can be set to a value higher than <span
-        class="propval">1</span>. This way the <a href="CSS3PAGE#page-area" class="externalDFN">page
-        area</a> can be set off from the header and footer lines.
+        A page-margin box is generated if and only if the <a href="CSS3CASCADE#computed"
+        class="externalDFN">computed value</a> of its <a class="propname">content</a> property is
+        not <span class="propval">none</span> and does not consist of <a
+        title="collapsible">collapsible white space</a> only. The height of a page-margin box is
+        determined by the number of line boxes it contains. <a href="CSS3TEXT#wrapping"
+        class="externalDFN">Soft wrapping</a> is not allowed in page-margin boxes, but <a
+        class="externalDFN" href="CSS3TEXT#forced-line-break">forced line breaks</a> are. This means
+        that if <a class="propname">white-space</a> is <a class="propval">normal</a>, the height is
+        <span class="propval">1</span>, and if <a class="propname">white-space</a> is <a
+        class="propval">pre-wrap</a> or <a class="propval">pre-line</a>, the height is equal to the
+        number of <a href="CSS3TEXT#segment-break" class="externalDFN">segment breaks</a> plus <span
+        class="propval">1</span>. Text that falls outside of the page-margin box edges
+        (horizontally) is clipped.
       </p>
       <p>
-        If the specified value of <a class="propname">margin-top</a> is a strictly positive length,
-        the offset between the top edges of <a href="CSS3PAGE#page-box" class="externalDFN">page
-        box</a> and <a href="CSS3PAGE#page-area" class="externalDFN">page area</a> is set to that
-        value. The <a href="CSS3PAGE#top-left-box-def" class="externalDFN">top-left</a>, <a
+        The <a href="CSS3PAGE#top-left-box-def" class="externalDFN">top-left</a>, <a
         href="CSS3PAGE#top-center-box-def" class="externalDFN">top-center</a> and <a
         href="CSS3PAGE#top-right-box-def" class="externalDFN">top-right</a> boxes, if they are
-        generated, touch the page box's top edge. If the value of <a class="propname">margin-top</a>
-        is <span class="propval">auto</span>, the offset is determined by the existence of the <a
-        href="CSS3PAGE#top-left-box-def" class="externalDFN">top-left</a> and <a
-        href="CSS3PAGE#top-center-box-def" class="externalDFN">top-center</a> page-margin boxes:
-        <span class="propval">1</span> when at least one of them is generated, <span
-        class="propval">0</span> otherwise.
-      </p>
-      <p>
-        If <a class="propname">margin-top</a> computes to <span class="propval">0</span> and a <a
-        href="CSS3PAGE#top-right-box-def" class="externalDFN">top-right</a> page-margin box is
-        generated, text in the <a href="CSS3PAGE#page-area" class="externalDFN">page area</a> flows
-        around the box.
+        generated, touch the <a href="CSS3PAGE#page-box" class="externalDFN">page box</a>'s top
+        edge. The offset between the <a href="CSS3PAGE#page-box" class="externalDFN">page box</a>'s
+        top edge and the <a href="CSS3PAGE#page-area" class="externalDFN">page area</a> is
+        determined by the <a class="propname">margin-top</a> property, which defaults to <span
+        class="propval">0</span>. Page-margin boxes with a height less than this offset have empty
+        space between them and the page area. Page-margin boxes with a height greater than <a
+        class="propname">margin-top</a> extend into the page area, with the text in the page area
+        wrapping around the page-margin boxes.
       </p>
       <p>
         Analogous rules govern the properties of the bottom page-margin area (with ‘top’ replaced by
         ‘bottom’ everywhere).
+      </p>
+      <p class="issue">
+        Need to define how text in the page area should wrap around page-margin boxes.
+      </p>
+      <p>
+        Text in <a href="CSS3PAGE#top-left-box-def" class="externalDFN">top-left</a> and <a
+        href="CSS3PAGE#bottom-left-box-def" class="externalDFN">bottom-left</a> boxes is
+        left-aligned (as if <a class="propname">text-align</a> was set to <span
+        class="propval">left</span>), text in <a href="CSS3PAGE#top-center-box-def"
+        class="externalDFN">top-center</a> and <a href="CSS3PAGE#bottom-center-box-def"
+        class="externalDFN">bottom-center</a> boxes is centered (as if <a
+        class="propname">text-align</a> was set to <span class="propval">center</span>) and text in
+        <a href="CSS3PAGE#top-right-box-def" class="externalDFN">top-right</a> and <a
+        href="CSS3PAGE#bottom-right-box-def" class="externalDFN">bottom-right</a> boxes is
+        right-aligned (as if <a class="propname">text-align</a> was set to <span
+        class="propval">right</span>).
       </p>
     </section>
     <section id="the-page-property">
