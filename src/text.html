@@ -5,9 +5,10 @@
     <a href="CSS2CONFORM#user-agent" class="externalDFN">User agents</a> in the ‘<a
     title="renderer">braille renderer</a>’ category require that the document text (as well as text
     in <a class="propname">content</a> properties) consists of only <a>white space characters</a>
-    and Unicode braille. <a title="translator">Braille translators</a> don't have this restriction,
-    they can transform text to braille when necessary. The transformation from text to braille can
-    be controlled on element level with the <a class="propname">text-transform</a> property.
+    and <a href="http://www.unicode.org/charts/PDF/U2800.pdf">Unicode braille</a>. <a
+    title="translator">Braille translators</a> don't have this restriction, they can transform text
+    to braille when necessary. The transformation from text to braille can be controlled on element
+    level with the <a class="propname">text-transform</a> property.
   </p>
   <p>
     The specification doesn't impose a specific ordering between text transformation, white
@@ -21,11 +22,13 @@
       Transforming Text: the <a class="propname">text-transform</a> property
     </h3>
     <p>
-      When document text does not consist solely of Unicode braille and <a title="white space
-      characters">white space</a>, the <a title="translator">braille translator</a> transforms it to
-      braille somehow. How text is supposed to be transformed depends on the <a>braille code</a> but
-      also on the context. The <a class="propname">text-transform</a> property can be used for
-      providing the translator with all the necessary context information to do its job correctly.
+      When document text does not consist solely of <a
+      href="http://www.unicode.org/charts/PDF/U2800.pdf">Unicode braille</a> and <a title="white
+      space characters">white space</a>, the <a title="translator">braille translator</a> transforms
+      it to braille somehow. How text is supposed to be transformed depends on the <a>braille
+      code</a> but also on the context. The <a class="propname">text-transform</a> property can be
+      used for providing the translator with all the necessary context information to do its job
+      correctly.
     </p>
     <table class="propdef">
       <tbody>
@@ -54,7 +57,7 @@
           <th>
             <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
           </th>
-          <td>no</td>
+          <td>yes</td>
         </tr>
         <tr>
           <th>Media:</th>
@@ -82,13 +85,19 @@
       <dd>
         Text is transformed to braille the “default” way.
       </dd>
+      <dt>none</dt>
+      <dd>
+        Text must not be transformed. This implies that the text already consists of <a
+        href="http://www.unicode.org/charts/PDF/U2800.pdf">Unicode braille</a> and <a title="white
+        space characters">white space</a> only.
+      </dd>
       <dt>
         <a href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a> +
       </dt>
       <dd>
-        A space separated list of arbitrary values not equal to <span
-        class="propval">auto</span>. Values are assumed to be “applied” by the <a
-        title="translator">braille translator</a> from left to right.
+        A space separated list of arbitrary but distinct values not equal to <span
+        class="propval">auto</span> or <span class="propval">none</span>. Values are assumed to be
+        “applied” by the <a title="translator">braille translator</a> from left to right.
       </dd>
     </dl>
     <p class="issue">
@@ -96,32 +105,32 @@
       uniformity across braille codes, a <a href="text-transform.html">grammar</a> could be made
       with a list of possible values and approximate meanings.
     </p>
-    <p class="issue">
-      A value of ‘none’ could mean that text must not be transformed at all. (It would only be
-      possible to have this value on text consisting of only Unicode braille and white space.)
-      Because it is unclear how this value would affect inheritance, it is omitted for now.
-    </p>
     <p>
       Values are inherited in a cumulative way:
     </p>
     <ul>
       <li>
+        <a href="CSS3CASCADE#specified" class="externalDFN">Specified values</a> are determined
+        according to the normal cascading and inheritance rules.
+      </li>
+      <li>
+        A specified value of <span class="propval">none</span> computes to <span
+        class="propval">none</span>.
+      </li>
+      <li>
         A specified value of <span class="propval">auto</span> computes to the computed value of the
-        parent element.
+        parent element, or <span class="propval">auto</span> if there is no parent or if the parent
+        value is <span class="propval">none</span>.
       </li>
       <li>
         A <a href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>
-        list is combined with the computed value of the parent element. If the parent value is <span
-        class="propval">auto</span>, then the computed value of the child is equal to the specified
-        value. Otherwise it is the conjunction of the specified value and the computed value of the
-        parent (in that order).
+        + list is combined with the computed value of the parent element. If the parent value is
+        <span class="propval">auto</span> or <span class="propval">none</span>, or if there is no
+        parent, then the computed value of the child is equal to the specified value. Otherwise it
+        is the conjunction of the specified value and the computed value of the parent (in that
+        order). Duplicate values are removed from the list.
       </li>
     </ul>
-    <p>
-      In other words, the computed value of an element is the conjunction of the
-      <var>&lt;custom-ident&gt;</var> lists of itself and all ancestors, or <span
-      class="propval">auto</span> if the conjoined list is empty.
-    </p>
     <div class="note difference">
       <p>
         There is a fundamental difference between this property and the original <a
