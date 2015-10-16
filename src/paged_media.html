@@ -308,6 +308,302 @@
         href="CSS3CASCADE#used" class="externalDFN">used value</a> for <span
         class="propval">auto</span> is the empty string.
       </p>
+      <div class="example">
+        <div class="code xml">
+          <pre class="highlight"><![CDATA[<body>
+  <div id="a">
+    <p>
+      ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤
+      ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤
+    </p>
+  </div>
+  <div id="b">
+    <p>
+      ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+      ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+    </p>
+  </div>
+</body>]]></pre>
+        </div>
+        <p>
+          Setting the size of the page and page margins:
+        </p>
+        <div class="code css">
+         <pre class="highlight">@page {
+  size: 10 7;
+  margin-top: 1;
+  margin-bottom: 2;
+}</pre>
+        </div>
+        <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="7" cols="10" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row/>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+        </page>
+        <page>
+          <row/>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+        <page>
+          <row/>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+        <p>
+          Setting different page sizes for different sections:
+        </p>
+        <div class="code css">
+         <pre class="highlight">@page a { size: 8 4; }
+@page b { size: 4 8; }
+#a { page: a; }
+#b { page: b; }</pre>
+        </div>
+        <div class="code pef">
+          <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="4" cols="8" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+        </page>
+        <page>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+        </page>
+      </section>
+      <section rows="8" cols="4">
+        <page>
+          <row>⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+        <p>
+          Generating content in the page margin:
+        </p>
+        <div class="code css">
+         <pre class="highlight">@page {
+  size: 10 6;
+  margin-top: 1;
+  @top-right {
+    content: '⠒⠒⠒⠒';
+  }
+}
+@page b { margin-top: 2; }
+#b { page: b; }</pre>
+        </div>
+        <div class="code pef">
+          <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="10" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠒⠒⠒⠒</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+        </page>
+      </section>
+      <section>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠒⠒⠒⠒</row>
+          <row/>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠒⠒⠒⠒</row>
+          <row/>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+        <p>
+          Multiline content in the page margin:
+        </p>
+        <div class="code css">
+         <pre class="highlight">@page {
+  size: 10 6;
+  margin-top: 2;
+  @top-right {
+    content: '⠒⠒⠒\A⠸⠸';
+    white-space: pre-line;
+  }
+}</pre>
+        </div>
+        <div class="code pef">
+          <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="10" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠒⠒⠒</row>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠸⠸</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+        </page>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠒⠒⠒</row>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠸⠸</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠒⠒⠒</row>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠸⠸</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+        <p>
+          Making text in the page area wrap around page margin boxes:
+        </p>
+        <div class="code css">
+         <pre class="highlight">@page {
+  size: 10 6;
+  @top-right {
+    content: '⠒⠒⠒⠒';
+  }
+}</pre>
+        </div>
+        <div class="code pef">
+          <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="10" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠤⠤⠤⠀⠀⠀⠒⠒⠒⠒</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠿⠿⠿⠀⠀⠀⠒⠒⠒⠒</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+        <p>
+          Setting a different page layout for left- and right-hand pages:
+        </p>
+        <div class="code css">
+         <pre class="highlight">@page { size: 10 6; }
+@page:left {
+  @bottom-center {
+    content: '⠂⠂⠂⠂⠂⠂'
+  }
+}</pre>
+        </div>
+        <div class="code pef">
+          <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="10" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row/>
+          <row>⠀⠀⠂⠂⠂⠂⠂⠂⠀⠀</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+      </div>
     </section>
   </section>
   <section id="page-breaking">
