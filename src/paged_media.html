@@ -506,6 +506,103 @@
         container. Likewise a <a class="propname">page-break-after</a> value on a last-child box is
         propagated to its container.
       </p>
+      <div class="example">
+        <div class="code xml">
+          <pre class="highlight"><![CDATA[<body>
+  <p id="1"> ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ ⠤⠤⠤ </p>
+  <p id="2"> ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ </p>
+  <p id="3"> ⠛⠛⠛ </p>
+  <p id="4"> ⠸⠸⠸ ⠸⠸⠸ ⠸⠸⠸ ⠸⠸⠸ ⠸⠸⠸ </p>
+</body>]]></pre>
+        </div>
+        <p>
+          Forcing page breaks:
+        </p>
+        <div class="code css">
+         <pre class="highlight">@page { size: 10 5; }
+p { display: block; }
+p#1 { page-break-before: always; }
+p#2 { page-break-after: always; }
+p#3 { page-break-after: right; }</pre>
+        </div>
+        <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="5" cols="10" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠛⠛⠛</row>
+        </page>
+      </section>
+      <section>
+        <page>
+          <row>⠸⠸⠸⠀⠸⠸⠸</row>
+          <row>⠸⠸⠸⠀⠸⠸⠸</row>
+          <row>⠸⠸⠸</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+        <p>
+          Forbidding page breaks:
+        </p>
+        <div class="code css">
+         <pre class="highlight">@page { size: 10 5; }
+p { display: block; }
+p#2 { page-break-inside: avoid;}
+p#3 { margin-top: 1; }
+p#4 { page-break-before: avoid; }</pre>
+        </div>
+        <div class="code pef">
+         <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="5" cols="10" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤⠀⠤⠤⠤</row>
+          <row>⠤⠤⠤</row>
+        </page>
+        <page>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+        </page>
+        <page>
+          <row/>
+          <row>⠛⠛⠛</row>
+          <row>⠸⠸⠸⠀⠸⠸⠸</row>
+          <row>⠸⠸⠸⠀⠸⠸⠸</row>
+          <row>⠸⠸⠸</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+     </div>
       <table class="propdef">
         <tbody>
           <tr>
