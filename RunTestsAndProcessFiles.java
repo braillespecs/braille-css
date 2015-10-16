@@ -22,9 +22,12 @@ import net.sf.saxon.s9api.XsltTransformer;
 import org.daisy.maven.xproc.api.XProcEngine;
 import org.daisy.maven.xproc.xprocspec.XProcSpecRunner;
 
+import org.daisy.pipeline.braille.common.AbstractTransform;
+import org.daisy.pipeline.braille.common.AbstractTransform.Provider.util.Iterables;
+import org.daisy.pipeline.braille.common.BrailleTranslator;
 import org.daisy.pipeline.braille.common.CSSBlockTransform;
+import org.daisy.pipeline.braille.common.TextTransform;
 import org.daisy.pipeline.braille.common.Transform;
-import org.daisy.pipeline.braille.common.Transform.AbstractTransform;
 import static org.daisy.pipeline.braille.common.util.Tuple3;
 import static org.daisy.pipeline.braille.common.util.URIs.asURI;
 import org.daisy.pipeline.braille.common.XProcTransform;
@@ -124,23 +127,39 @@ public class RunTestsAndProcessFiles {
 	public void registerBypassBlockTransformProvider() {
 		BypassBlockTransform.Provider provider = new BypassBlockTransform.Provider();
 		Hashtable<String,Object> properties = new Hashtable<String,Object>();
+		context.registerService(BrailleTranslator.Provider.class.getName(), provider, properties);
+		context.registerService(TextTransform.Provider.class.getName(), provider, properties);
 		context.registerService(CSSBlockTransform.Provider.class.getName(), provider, properties);
 		context.registerService(XProcTransform.Provider.class.getName(), provider, properties);
 	}
 	
-	private static class BypassBlockTransform extends AbstractTransform implements CSSBlockTransform, XProcTransform {
+	private static class BypassBlockTransform extends AbstractTransform
+	                                          implements BrailleTranslator,
+	                                                     TextTransform,
+	                                                     CSSBlockTransform,
+	                                                     XProcTransform {
+		public String transform(String text) {
+			return text;
+		}
+		public String[] transform(String[] text) {
+			return text;
+		}
 		private final URI href = asURI(new File(new File(PathUtils.getBaseDir()), "identity.xpl"));
+		public TextTransform asTextTransform() {
+			return this;
+		}
 		public Tuple3<URI,javax.xml.namespace.QName,Map<String,String>> asXProc() {
 			return new Tuple3<URI,javax.xml.namespace.QName,Map<String,String>>(href, null, null);
 		}
-		private static final Iterable<BypassBlockTransform> instance = Optional.of(new BypassBlockTransform()).asSet();
-		private static final Iterable<BypassBlockTransform> empty = Optional.<BypassBlockTransform>absent().asSet();
-		public static class Provider implements CSSBlockTransform.Provider<BypassBlockTransform>, XProcTransform.Provider<BypassBlockTransform> {
-			public Iterable<BypassBlockTransform> get(String query) {
+		public static class Provider extends AbstractTransform.Provider<BypassBlockTransform>
+		                             implements BrailleTranslator.Provider<BypassBlockTransform>,
+		                                        TextTransform.Provider<BypassBlockTransform>,
+		                                        CSSBlockTransform.Provider<BypassBlockTransform>,
+		                                        XProcTransform.Provider<BypassBlockTransform> {
+			private static final Iterable<BypassBlockTransform> instance = Iterables.of(new BypassBlockTransform());
+			private static final Iterable<BypassBlockTransform> empty = Iterables.<BypassBlockTransform>empty();
+			public Iterable<BypassBlockTransform> _get(String query) {
 				return query.equals("(translator:bypass)") ? instance : empty;
-			}
-			public Transform.Provider<BypassBlockTransform> withContext(Logger context) {
-				return this;
 			}
 		}
 	}
