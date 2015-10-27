@@ -361,6 +361,56 @@
           class="externalDFN">&lt;counter-style&gt;</a> specified by the second argument.
         </li>
       </ul>
+      <div class="example">
+        Braille pages can be numbered by printing the <span class="propval">page</span> counter in
+        the page margin. (See also the section <a href="#h4_page-margin-boxes">Page-Margin
+        Boxes</a> below.)
+        <div class="code xml">
+          <pre class="highlight"><![CDATA[<body>
+  ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+  ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+  ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+</body>]]></pre>
+        </div>
+        <div class="code css">
+          <pre class="highlight">@page {
+  size: 10 5;
+  margin-top: 1;
+  @top-right {
+    content: counter(page);
+  }
+}</pre>
+        </div>
+        <div class="code pef">
+          <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="5" cols="10" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+      </div>
     </section>
     <section>
       <h4> Defining Counter Styles: the ‘<a>@counter-style</a>’ rule </h4>

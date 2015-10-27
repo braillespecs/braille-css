@@ -2,6 +2,8 @@ import java.io.File;
 import java.net.URI;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -138,11 +140,40 @@ public class RunTestsAndProcessFiles {
 	                                                     TextTransform,
 	                                                     CSSBlockTransform,
 	                                                     XProcTransform {
+		private final static Pattern NUMBER = Pattern.compile("[0-9]+");
+		private final static String NUMSIGN = "\u283c";
+		private final static String[] DIGIT_TABLE = new String[]{
+			"\u281a","\u2801","\u2803","\u2809","\u2819","\u2811","\u280b","\u281b","\u2813","\u280a"};
 		public String transform(String text) {
-			return text;
+			return translateNumbers(text);
 		}
 		public String[] transform(String[] text) {
-			return text;
+			String[] result = new String[text.length];
+			for (int i = 0; i < text.length; i++)
+				result[i] = transform(text[i]);
+			return result;
+		}
+		private static String translateNumbers(String text) {
+			Matcher m = NUMBER.matcher(text);
+			int idx = 0;
+			StringBuilder sb = new StringBuilder();
+			for (; m.find(); idx = m.end()) {
+				sb.append(text.substring(idx, m.start()));
+				sb.append(translateNaturalNumber(Integer.parseInt(m.group()))); }
+			if (idx == 0)
+				return text;
+			sb.append(text.substring(idx));
+			return sb.toString();
+		}
+		private static String translateNaturalNumber(int number) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(NUMSIGN);
+			if (number == 0)
+				sb.append(DIGIT_TABLE[0]);
+			while (number > 0) {
+				sb.insert(1, DIGIT_TABLE[number % 10]);
+				number = number / 10; }
+			return sb.toString();
 		}
 		private final URI href = asURI(new File(new File(PathUtils.getBaseDir()), "identity.xpl"));
 		public TextTransform asTextTransform() {
