@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Braille CSS ‘-obfl-’ prefixed properties </title>
+    <title> Braille CSS ‘-obfl-’ prefixed properties and values </title>
     <meta charset="utf-8"/>
     <style type="text/css">
       table {
@@ -17,7 +17,7 @@
     </style>
   </head>
   <body>
-    <h1> Braille CSS ‘-obfl-’ prefixed properties </h1>
+    <h1> Braille CSS ‘-obfl-’ prefixed properties and values </h1>
     <table>
       <thead>
         <tr>
@@ -28,19 +28,18 @@
             Value
           </th>
           <th>
-            <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>
+            <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value"
+            class="externalDFN">Initial</a>
           </th>
           <th>
             Applies to
           </th>
           <th>
-            <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>
+            <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property"
+            class="externalDFN">Inherited</a>
           </th>
           <th>
             Comments
-          </th>
-          <th>
-            Documentation
           </th>
         </tr>
       </thead>
@@ -62,13 +61,13 @@
             no
           </td>
           <td>
-            <a href="index.html#dfn-length"><var>&lt;length&gt;</var></a> must be non-negative
-          </td>
-          <td>
-            <a href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L1023">block (OBFL)</a>
+            This property corresponds with the ‘vertical-position’ attribute of the ‘<a
+            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L1023">block</a>’
+            element. <a href="index.html#dfn-length"><var>&lt;length&gt;</var></a> must be
+            non-negative.
           </td>
         </tr>
-       <tr>
+        <tr>
           <td>
             <dfn>-obfl-vertical-align</dfn>
           </td>
@@ -84,9 +83,100 @@
           <td>
             no
           </td>
-          <td/>
           <td>
-            <a href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L1023">block (OBFL)</a>
+            This property corresponds with the ‘vertical-align’ attribute of the ‘<a
+            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L1023">block</a>’
+            element.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="index.html#dfn-display">display</a>
+          </td>
+          <td>
+            <dfn id="dfn-obfl-toc">-obfl-toc</dfn>
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            This value creates a ‘<a
+            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L735">table-of-contents</a>’
+            and a ‘<a
+            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L9241">toc-sequence</a>’
+            that references this ‘table-of-contents’ with the ‘toc’ attribute.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <dfn>-obfl-toc-range</dfn>
+          </td>
+          <td>
+            document | volume
+          </td>
+          <td>
+            document
+          </td>
+          <td>
+            <a href="#dfn-obfl-toc">-obfl-toc</a>
+          </td>
+          <td>
+            no
+          </td>
+          <td>
+            This property corresponds with the ‘range’ attribute of the ‘<a
+            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L9241">toc-sequence</a>’
+            element.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <dfn>::-obfl-toc-group::before</dfn>
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            <a href="#dfn-obfl-toc">-obfl-toc</a>
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            This pseudo-element corresponds with the ‘<a
+            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L969">on-volume-start</a>’
+            element.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <dfn>::-obfl-toc-group::after</dfn>
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            <a href="#dfn-obfl-toc">-obfl-toc</a>
+          </td>
+          <td>
+            N/A
+          </td>
+          <td>
+            This pseudo-element corresponds with the ‘<a
+            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L987">on-volume-end</a>’
+            element.
           </td>
         </tr>
       </tbody>
