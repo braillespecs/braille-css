@@ -87,16 +87,16 @@
 						<p:sink/>
 					</p:declare-step>
 				</x:script>
-				<xsl:for-each select="$index//div[pxi:with-class(., 'code pef')]">
+				<xsl:for-each select="$index//div[pxi:with-class(., 'code code-pef')]">
 					<x:scenario label="{@id}">
 						<x:call step="pxi:css-inline-and-format">
-							<xsl:variable name="xml" select="preceding::div[pxi:with-class(., 'code xml')][1]"/>
+							<xsl:variable name="xml" select="preceding::div[pxi:with-class(., 'code code-xml')][1]"/>
 							<x:input port="source">
 								<x:document type="file" href="{$xml/@id}"/>
 							</x:input>
-							<xsl:variable name="css" select="preceding::div[pxi:with-class(., 'code css')]
+							<xsl:variable name="css" select="preceding::div[pxi:with-class(., 'code code-css')]
 							                                 intersect $xml/following::*
-							                                 except preceding::div[pxi:with-class(., 'code pef')][1]/preceding::*"/>
+							                                 except preceding::div[pxi:with-class(., 'code code-pef')][1]/preceding::*"/>
 							<xsl:if test="exists($css)">
 								<x:option name="stylesheet" select="'{string-join($css/@id, ' ')}'"/>
 							</xsl:if>
@@ -131,23 +131,23 @@
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="div[pxi:with-class(., 'code xml') and not(@id)]">
+	<xsl:template match="div[pxi:with-class(., 'code code-xml') and not(@id)]">
 		<xsl:copy>
-			<xsl:attribute name="id" select="concat('xml_', 1 + count(preceding::div[pxi:with-class(., 'code xml') and not(@id)]), '.xml')"/>
+			<xsl:attribute name="id" select="concat('xml_', 1 + count(preceding::div[pxi:with-class(., 'code code-xml') and not(@id)]), '.xml')"/>
 			<xsl:apply-templates select="@*|node()"/>
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="div[pxi:with-class(., 'code css') and not(@id)]">
+	<xsl:template match="div[pxi:with-class(., 'code code-css') and not(@id)]">
 		<xsl:copy>
-			<xsl:attribute name="id" select="concat('css_', 1 + count(preceding::div[pxi:with-class(., 'code css') and not(@id)]), '.css')"/>
+			<xsl:attribute name="id" select="concat('css_', 1 + count(preceding::div[pxi:with-class(., 'code code-css') and not(@id)]), '.css')"/>
 			<xsl:apply-templates select="@*|node()"/>
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="div[pxi:with-class(., 'code pef') and not(@id)]">
+	<xsl:template match="div[pxi:with-class(., 'code code-pef') and not(@id)]">
 		<xsl:copy>
-			<xsl:attribute name="id" select="concat('pef_', 1 + count(preceding::div[pxi:with-class(., 'code pef') and not(@id)]), '.pef')"/>
+			<xsl:attribute name="id" select="concat('pef_', 1 + count(preceding::div[pxi:with-class(., 'code code-pef') and not(@id)]), '.pef')"/>
 			<xsl:apply-templates select="@*|node()"/>
 		</xsl:copy>
 	</xsl:template>

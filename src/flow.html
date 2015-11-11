@@ -17,30 +17,31 @@
     <ul>
       <li>
         The <a href="http://www.princexml.com/doc/9.0/properties/prince-flow" class="externalDFN
-        propname">flow</a> property and the <span class="propval">flow()</span> value of the <a
-        href="http://www.princexml.com/doc/9.0/properties/content" class="externalDFN
-        propname">content</a> property defined in [[PRINCE]].
+        css-propname">flow</a> property and the <span class="css-propval">flow()</span> value of the
+        <a href="http://www.princexml.com/doc/9.0/properties/content" class="externalDFN
+        css-propname">content</a> property defined in [[PRINCE]].
       </li>
       <li>
         The concept of <a class="externalDFN" href="CSS3REGIONS#named-flow">named flows</a> and the
-        <a class="externalDFN propname" href="CSS3REGIONS#propdef-flow-into">flow-into</a> and <a
-        href="CSS3REGIONS#propdef-flow-from" class="externalDFN propname">flow-from</a> properties
+        <a class="externalDFN css-propname" href="CSS3REGIONS#propdef-flow-into">flow-into</a> and <a
+        href="CSS3REGIONS#propdef-flow-from" class="externalDFN css-propname">flow-from</a> properties
         defined in [[CSS3REGIONS]].
       </li>
       <li>
-        The <span class="propval">flow()</span> value of the <span class="propname">position</span>
-        property and the <span class="propval">pending()</span> value of the <span
-        class="propname">content</span> property defined in an <a
+        The <span class="css-propval">flow()</span> value of the <span
+        class="css-propname">position</span> property and the <span
+        class="css-propval">pending()</span> value of the <span class="css-propname">content</span>
+        property defined in an <a
         href="http://www.w3.org/TR/2007/WD-css3-gcpm-20070205/#named0">earlier version</a> of
         [[CSS3GCPM]].
       </li>
       <li>
-        The <a href="CSS3GENCON#moving" class="externalDFN propname">move-to</a> property and the <a
-        href="CSS3GENCON#pendingltidentifiergt" class="externalDFN propval">pending()</a> value of
-        the <span class="propname">content</span> property defined in [[CSS3GENCON]].
+        The <a href="CSS3GENCON#moving" class="externalDFN css-propname">move-to</a> property and the <a
+        href="CSS3GENCON#pendingltidentifiergt" class="externalDFN css-propval">pending()</a> value of
+        the <span class="css-propname">content</span> property defined in [[CSS3GENCON]].
       </li>
       <li>
-        The ‘:running’ pseudo-class defined in [[CSS3GCPM]].
+        The <span class="css">:running</span> pseudo-class defined in [[CSS3GCPM]].
       </li>
     </ul>
   </div>
@@ -48,15 +49,14 @@
     <h3> Named Flows </h3>
     <p>
       A <dfn>named flow</dfn> is the ordered sequence of content associated with a flow with a given
-      identifier. It could be seen as a first-in first-out buffer or a channel. Content is placed
-      into a named flow with the <a class="propname">flow</a> property, and taken out using the <a
-      class="propval">flow()</a> value of the <a class="propname">content</a> property. The same
-      element can participate in more than one flow (including the normal flow), and a named flow
-      can have multiple sources and multiple targets. This makes it possible to not only move but
-      also copy or even repeat content.
+      identifier. Content is placed into a named flow with the <a class="css-propname">flow</a>
+      property, and taken out using the <a class="css-propval">flow()</a> value of the <a
+      class="css-propname">content</a> property. The same element can participate in more than one flow
+      (including the normal flow), and a named flow can have multiple sources and multiple
+      destinations. This makes it possible to not only move but also copy and repeat content.
     </p>
     <section id="the-flow-property">
-      <h4> The <a class="propname">flow</a> property </h4>
+      <h4> The <a class="css-propname">flow</a> property </h4>
       <table class="propdef">
         <tbody>
           <tr>
@@ -66,19 +66,22 @@
           <tr>
             <th>Value:</th>
             <td>
-              [ normal | <a href="CSS3VAL#identifier-value"
-              class="externalDFN"><var>&lt;custom-ident&gt;</var></a> ]+
+              normal | <a href="CSS3VAL#identifier-value"
+              class="externalDFN"><var>&lt;custom-ident&gt;</var></a>
             </td>
           </tr>
           <tr>
             <th>
               <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
             </th>
-            <td>auto</td>
+            <td>normal</td>
           </tr>
           <tr>
             <th>Applies to:</th>
-            <td>all elements (but not pseudo-elements)</td>
+            <td>
+              all elements and <a class="css">::alternate</a> and <a class="css">::duplicate</a>
+              pseudo-elements
+            </td>
           </tr>
           <tr>
             <th>
@@ -103,76 +106,93 @@
         </tbody>
       </table>
       <p>
-        The <a class="propname">flow</a> property causes an element to participate in the specified
-        flow or flows. The value must be a space separated list of one or more of the following:
+        The <a class="css-propname">flow</a> property causes an element to participate in the specified
+        flow. The value must be one of the following:
       </p>
       <dl>
         <dt>normal</dt>
         <dd>
-          This value causes an element to participate in the normal flow. If <span
-          class="propval">normal</span> is not included in the list of flows, the element does not
-          generate a box at the original position in the DOM. (It has the effect of setting <a
-          class="propname">display</a> to <span class="propval">none</span>.)
+          This value causes an element or pseudo-element to participate in the normal flow.
         </dd>
         <dt>
           <a href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>
         </dt>
         <dd>
-          This value causes an element to participate in the <a>named flow</a> with the name <a
-          href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>.
+          This value causes an element or pseudo-element to participate in the <a>named flow</a>
+          with the specified name. The element or pseudo-element will not generate a box at the
+          original position in the DOM.
         </dd>
       </dl>
       <p>
-        For each <a>named flow</a> an element participates in, a pseudo-element is generated, which
-        is initially a duplicate. The <a class="propname">flow</a> property does not affect the DOM
-        position of an element or its contents, and it does not affect the CSS cascade and
-        inheritance. Pseudo-elements generated by the <a class="propname">flow</a> property inherit
-        from their associated element's parent, but not from the element itself.
+        The <a class="css-propname">flow</a> property does not affect the DOM position of an element or
+        its contents, and it does not affect the CSS cascade and inheritance.
       </p>
       <p>
         The visual formatting model however uses the relationships between content in the <a>named
-        flow</a> as input, rather than the contents' original position in the DOM. The
-        pseudo-elements channelled into a <a>named flow</a> become siblings. A box establishes a
-        containing block for the content it consumes using the <a class="propval">flow()</a>
-        function. The pseudo-elements in a <a>named flow</a> are ordered according to the document
-        order of their associated elements.
+        flow</a> as input, rather than the contents' original position in the DOM. Elements
+        channelled into a <a>named flow</a> become siblings. A box establishes a containing block
+        for the content it consumes using the <a class="css-propval">flow()</a> function. Elements in a
+        <a>named flow</a> are ordered according to their document order.
       </p>
     </section>
-    <section id="the-flow-pseudo-class">
-      <h4> The ‘:flow()’ pseudo-class </h4>
+    <section id="the-alternate-and-duplicate-pseudo-elements">
+      <h4>
+        The <a class="css">::alternate</a> and <a class="css">::duplicate</a> pseudo-elements
+      </h4>
       <p>
-        Elements can be styled according to the flow they participate in. The ‘:flow(<a
-        href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>)’ <a
-        href="CSS3SELECT#CSS3SELECT">pseudo-class</a> represents a pseudo-element in the flow named <a
-        href="CSS3VAL#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a>.
+        Content can be generated or duplicated using the <a class="css">::alternate</a> and <a
+        class="css">::duplicate</a> pseudo-elements. The content of an <dfn
+        class="css">::alternate</dfn> pseudo-element is determined by its <a
+        class="css-propname">content</a> property. The content of a <dfn
+        class="css">::duplicate</dfn> pseudo-element is copied from the element in the document tree
+        to which it is associated. The <code>::alternate(<var>&lt;n&gt;</var>)</code> and
+        <code>::duplicate(<var>&lt;n&gt;</var>)</code> notations can be used to create several <span
+        class="css">::alternate</span> or <span class="css">::duplicate</span> pseudo-elements for
+        one given element.
+      </p>
+      <p>
+        The <a class="css-propname">flow</a> property dictates in which flow a pseudo-element
+        participates. A value <span class="css-propval">normal</span> causes the pseudo-element to
+        be included where the element in the document tree to which it is associated would be
+        positioned. It is not allowed that several pseudo-elements associated to the same element
+        participate in the same flow (normal or named flow), nor that they participate in the same
+        flow as the element they are associated to.
+      </p>
+      <p>
+        Unlike other <a href="#h3_pseudo-elements">pseudo-elements</a>, these pseudo-elements
+        inherit from the parent of the element to which it they are associated, not from that
+        element itself.
       </p>
     </section>
     <section id="the-flow-function">
-      <h4> The <a class="propval">flow()</a> function </h4>
+      <h4> The <a class="css-propval">flow()</a> function </h4>
       <p>
-        The <a class="propval">flow()</a> function is used to consume <a title="named flow">named
-        flows</a>, via the <a class="propname">content</a> property. The function requires one
-        argument, the name of the flow. Contents in the named flow are rendered as children of the
-        block container on which the <a class="propname">content</a> property is specified. In the
-        default case, each element in a named flow is consumed only once, namely at the first
-        content request after the element's entry at its original position in the DOM. This
-        behaviour can be overridden with an optional second argument.
+        The <a class="css-propval">flow()</a> function is used to consume <a title="named flow">named
+        flows</a>, via the <a class="css-propname">content</a> property. The function requires one
+        argument, the name of the flow. Elements in the named flow are rendered as children of the
+        block container on which the <a class="css-propname">content</a> property is specified. In the
+        default case, all elements in a named flow are consumed as many times as there are <span
+        class="css-propval">flow()</span> calls. This behaviour can be overridden with an optional
+        second argument that specifies which elements should be included. Elements in a flow are
+        duplicated as many times as needed in order to meet the demand.
       </p>
       <p>
-        <pre style="white-space: normal">
+        <code>
           <dfn>flow()</dfn> = flow( <a href="CSS3VAL#identifier-value"
-          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> [, [ backward | forward | all ] ]? )
-        </pre>
+          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> [, [ document | volume ] ]?
+          )
+        </code>
       </p>
       <p>
         The second argument dictates the search direction and range and is one of the following
         keywords:
       </p>
       <dl>
+        <!--
         <dt> backward </dt>
         <dd>
           The elements that were added to the flow prior to this call and were not consumed yet by a
-          previous call are inserted here. <span class="propval">backward</span> is the default
+          previous call are inserted here. <span class="css-propval">backward</span> is the default
           value.
         </dd>
         <dt> forward </dt>
@@ -180,9 +200,15 @@
           The elements that will be added to the flow after this call and before the next are inserted
           here.
         </dd>
-        <dt> all </dt>
+        -->
+        <dt> document </dt>
         <dd>
           All the elements that have been added to the flow or will be added later are inserted here.
+        </dd>
+        <dt> volume </dt>
+        <dd>
+          All the elements that have been added to the flow within the current volume or will be
+          added later within the current volume are inserted here.
         </dd>
       </dl>
     </section>
@@ -206,7 +232,7 @@
       class="ticket">braille-css-spec#3</a>.
     </p>
     <section>
-      <h4> The ‘@footnotes’ area </h4>
+      <h4> The <span class="css">@footnotes</span> area </h4>
     </section>
   </section>
   <section id="endnotes">

@@ -16,7 +16,7 @@
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="div[pxi:with-class(., 'code pef')]">
+	<xsl:template match="div[pxi:with-class(., 'code code-pef')]">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
 			<xsl:variable name="id" select="@id"/>

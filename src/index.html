@@ -28,16 +28,14 @@
       em.rfc2119 {
         font-size: 120%;
       }
-      .propname::before {
+      .css::before,
+      .css-propname::before,
+      .css-propval::before {
         content: '‘';
       }
-      .propname::after {
-        content: '’';
-      }
-      .propval::before {
-        content: '‘';
-      }
-      .propval::after {
+      .css::after,
+      .css-propname::after,
+      .css-propval::after {
         content: '’';
       }
       a.self-link {
@@ -111,13 +109,13 @@
         font-size: 80%;
         color: #b9ab2d;
       }
-      .code.css::before {
+      .code-css::before {
         content: "css";
       }
-      .code.css.with-label[id] {
+      .code-css.with-label[id] {
         position: relative;
       }
-      .code.css.with-label[id]::after {
+      .code-css.with-label[id]::after {
         content: attr(id);
         display: block;
         position: absolute;
@@ -126,28 +124,28 @@
         font-family: monospace;
         color: #b9ab2d;
       }
-      .code.css pre a {
+      .code-css pre a {
         border-bottom: 1px dotted #0088cc;
         text-decoration: none;
       }
-      .code.xml {
+      .code-xml {
         max-height: 500px;
         overflow: auto;
       }
-      .code.xml::before {
+      .code-xml::before {
         content: "xml";
       }
-      .code.pef {
+      .code-pef {
         position: relative;
         line-height: normal;
       }
-      .code.pef::before {
+      .code-pef::before {
         content: "braille";
       }
-      .code.pef pre {
+      .code-pef pre {
         display: none;
       }
-      .code.pef .test {
+      .code-pef .test {
         position: absolute;
         top: 5px;
         width: 24px;
@@ -163,22 +161,22 @@
         border-radius: 8px;
         box-shadow: 0 1px rgba(255,255,255,.2) inset;
       }
-      .code.pef .test-liblouis {
+      .code-pef .test-liblouis {
         right: 48px;
       }
-      .code.pef .test-dotify {
+      .code-pef .test-dotify {
         right: 5px;
       }
-      .code.pef .test-liblouis::before {
+      .code-pef .test-liblouis::before {
         content: "L";
       }
-      .code.pef .test-dotify::before {
+      .code-pef .test-dotify::before {
         content: "D";
       }
-      .code.pef .test-passed {
+      .code-pef .test-passed {
         background-color: #449900;
       }
-      .code.pef .test-failed {
+      .code-pef .test-failed {
         background-color: #ee2200;
       }
       pef {
@@ -376,7 +374,7 @@
       insertPEFs = function() {
         respecEvents.sub("end-all", function() {
           var parser = new DOMParser();
-          $(".code.pef").each(function(i, block) {
+          $(".code-pef").each(function(i, block) {
             var pef = parser.parseFromString(block.textContent, "application/x-pef+xml").documentElement;
             /* remove head and body because they are causing trouble */
             $(pef).children("head").remove();
@@ -467,8 +465,8 @@
         expandLinks();
         createSelfLinks();
         respecEvents.sub("end-all", function() {
-          $("a.propname").removeClass("propname").wrap("<span class='propname'/>");
-          $("a.propval").removeClass("propval").wrap("<span class='propval'/>");
+          $("a.css-propname").removeClass("css-propname").wrap("<span class='css-propname'/>");
+          $("a.css-propval").removeClass("css-propval").wrap("<span class='css-propval'/>");
         });
       }
     ]]></script>
@@ -485,8 +483,8 @@
         Braille CSS was invented by the creators of <a href="http://www.daisy.org/pipeline2">DAISY
         Pipeline 2</a> as a means of configuring the braille production scripts, and as an interface
         between interchangeable components. Although the media types <span
-        class="propval">braille</span> (intended for braille tactile feedback devices) and <span
-        class="propval">embossed</span> (intended for paged braille printers) exist, there is no
+        class="css-propval">braille</span> (intended for braille tactile feedback devices) and <span
+        class="css-propval">embossed</span> (intended for paged braille printers) exist, there is no
         support in vanilla CSS for actually laying out content for braille devices or braille
         paper. Indeed, because of its very restricted grid layout and its bulkiness, braille has
         rather specific requirements, and the styling possibilities are limited. And thus was born
@@ -571,8 +569,8 @@
         href="http://www.w3.org/TR/CSS21/about.html#property-defs">CSS property definition
         conventions</a> from [[CSS2]]. In addition to the property-specific values listed in their
         definitions, all properties defined in this specification also accept the <a
-        href="CSS3CASCADE#valuedef-inherit" class="externalDFN propval">inherit</a> and <a
-        href="CSS3CASCADE#valuedef-initial" class="externalDFN propval">initial</a> keywords as
+        href="CSS3CASCADE#valuedef-inherit" class="externalDFN css-propval">inherit</a> and <a
+        href="CSS3CASCADE#valuedef-initial" class="externalDFN css-propval">initial</a> keywords as
         their values. For readability they have not been repeated explicitly.
       </p>
       <p>
@@ -627,7 +625,7 @@
       <p class="issue">
         For all known implementations with proprietary extensions, include references to relevant
         documentation. For example, the <a href="http://code.google.com/p/dotify/">Dotify</a> based
-        implementation may support <a href="obfl.html"><span class="propname">-obfl-</span> prefixed
+        implementation may support <a href="obfl.html"><span class="css-propname">-obfl-</span> prefixed
         properties</a>. See <a href="https://github.com/snaekobbi/braille-css-spec/issues/36"
         class="ticket">braille-css-spec#36</a>.
       </p>
@@ -695,12 +693,12 @@
         Specifying media-dependent style sheets is done using <a href="CSS2MEDIA#media-types">media
         types</a> [[CSS2]]. For braille CSS, only one media type is relevant: a braille
         <a>renderer</a> shall only take into account style sheet rules for media type <a
-        href="CSS2MEDIA#media-types" class="externalDFN propval">embossed</a> (or <a
-        href="CSS2MEDIA#media-types" class="externalDFN propval">all</a>).
+        href="CSS2MEDIA#media-types" class="externalDFN css-propval">embossed</a> (or <a
+        href="CSS2MEDIA#media-types" class="externalDFN css-propval">all</a>).
       </p>
       <p class="note">
         A braille <a>translator</a> may also look at other media types (notably <a
-        href="CSS2MEDIA#media-types" class="externalDFN propval">print</a>) in order to find hints
+        href="CSS2MEDIA#media-types" class="externalDFN css-propval">print</a>) in order to find hints
         for the translation. A typical use case is text-level styling in print such as boldfacing or
         italicizing which is conveyed in braille using braille indicators.
         <p class="issue">
@@ -710,12 +708,12 @@
         </p>
       </p>
       <p class="issue">
-        Allow media <a href="CSS2MEDIA#media-types" class="externalDFN propval">braille</a> in
-        addition to <a href="CSS2MEDIA#media-types" class="externalDFN propval">embossed</a> in
+        Allow media <a href="CSS2MEDIA#media-types" class="externalDFN css-propval">braille</a> in
+        addition to <a href="CSS2MEDIA#media-types" class="externalDFN css-propval">embossed</a> in
         order to differentiate between properties that only make sense for braille on paper, and
         properties that make sense on refreshable braille displays too (examples would be <span
-        class="propname">white-space</span>, <span class="propname">hyphens</span>, <span
-        class="propname">hyphen-character</span>, <span class="propname">text-transform</span>,
+        class="css-propname">white-space</span>, <span class="css-propname">hyphens</span>, <span
+        class="css-propname">hyphen-character</span>, <span class="css-propname">text-transform</span>,
         etc.). See <a href="https://github.com/snaekobbi/braille-css-spec/issues/1"
         class="ticket">braille-css-spec#1</a>.
       </p>
@@ -734,7 +732,7 @@
           class="ticket">braille-css-spec#14</a>.
       </p>
       <div class="example">
-        <div class="code xml">
+        <div class="code code-xml">
           <pre class="highlight"><![CDATA[<body>
   <span class="pagenum">⠼⠁</span>
   <p>
@@ -753,7 +751,7 @@
         <p>
           Print page numbers can be rendered in the page footer:
         </p>
-        <div class="code css">
+        <div class="code code-css">
           <pre class="highlight">@page {
   size: 12 6;
   margin-bottom: 1;
@@ -770,7 +768,7 @@ p {
   string-set: print-page content();
 }</pre>
         </div>
-        <div class="code pef">
+        <div class="code code-pef">
           <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
   <head xmlns:dc="http://purl.org/dc/elements/1.1/">
     <meta>
@@ -805,7 +803,7 @@ p {
           Print page breaks can be indicated with full lines across the width of the page, followed by
           the page number of the next print page:
         </p>
-        <div class="code css">
+        <div class="code code-css">
           <pre class="highlight">@page { size: 12 6; }
 p {
   display: block;
@@ -819,7 +817,7 @@ p {
   content: leader('⠒') '⠀';
 }</pre>
         </div>
-        <div class="code pef">
+        <div class="code code-pef">
           <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
   <head xmlns:dc="http://purl.org/dc/elements/1.1/">
     <meta>
