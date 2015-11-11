@@ -543,7 +543,9 @@
     <p>
       The <a class="propname">string-set</a> property sets the value of a <a
       href="CSS3GCPM#named-strings0" class="externalDFN">named string</a>, which functions as a
-      variable. The value can be retrieved using the <a class="propval">string()</a> function.
+      variable. The value can be retrieved using the <a class="propval">string()</a> function. Since
+      these variables may change on a given page, an optional second value for the <a
+      class="propval">string()</a> function allows authors to choose which value on a page is used.
     </p>
     <section>
       <h4> The <a class="propname">string-set</a> property </h4>
@@ -607,8 +609,8 @@
       <p>
         <pre style="white-space: normal">
           <dfn title="string-set content-list">content-list</dfn> = [ <a href="CSS3VAL#string-value"
-          class="externalDFN"><var>&lt;string&gt;</var></a> | <var>&lt;attr()&gt;</var> |
-          <var>&lt;content()&gt;</var> ]+
+          class="externalDFN"><var>&lt;string&gt;</var></a> |
+          <var>&lt;attr(&lt;identifier&gt;)&gt;</var> | <var>&lt;content()&gt;</var> ]+
         </pre>
       </p>
       <dl>
@@ -619,7 +621,7 @@
           A <a href="CSS3VAL#string-value" class="externalDFN">string</a>.
         </dd>
         <dt>
-          &lt;attr()&gt;
+          &lt;attr(&lt;identifier&gt;)&gt;
         </dt>
         <dd>
           An <a href="CSS3VAL#attr-notation" class="externalDFN propval">attr()</a> function, as
@@ -630,22 +632,90 @@
         </dt>
         <dd>
           A <span class="propval">content()</span> function, which returns the string value of the
-          element, determined as if <span class="propval">white-space: normal</span> had been set.
+          element. Any text that is generated inside ‘<a>::before</a>’ or ‘<a>::after</a>’
+          pseudo-elements are not part of this. Elements that do not generate boxes can also have a
+          non-empty string value.
         </dd>
       </dl>
+      <p>
+        Named strings contain unformatted text. XML structure and CSS styling are not preserved. <a
+        href="#h3_the-text-transform-property">Text transformation</a> and <a
+        href="#h3_white-space-processing">white space processing</a> of strings happens after
+        evaluation of the variable (with the <a class="propval">string()</a> function) and not
+        before assignment (with the <a class="propname">string-set</a> property). This means that <a
+        class="propname">text-transform</a> and <a class="propname">white-space</a> properties can
+        have an effect at the place of insertion, but not at the original position in the DOM.
+      </p>
+      <p>
+        The content values of named strings are assigned at the point when the <a
+        href="CSS3BOX#content" class="externalDFN">content box</a> (or first content box fragment)
+        of the element is created, or if the element does not generate any boxes, <i>would have
+        been</i> created if it was a non-empty inline element.
+      </p>
     </section>
     <section>
       <h4> The <a class="propval">string()</a> function </h4>
       <p>
-        The <a class="propval">string()</a> function returns the value of the named string at the
-        current element.
+        The <a class="propval">string()</a> function is used to insert the value of a named string
+        into the document via the <a class="propname">content</a> property. This function requires
+        one argument, the name of the named string. Since the value of a named string may change
+        several times on a page an optional second argument indicates which value of the named
+        string should be used.
       </p>
       <p>
         <pre style="white-space: normal">
           <dfn>string()</dfn> = string( <a href="CSS3VAL#identifier-value"
-          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> )
+          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> [ , [ first | start | start-except
+          | last | spread-first | spread-start | spread-start-except | spread-last ] ]? )
         </pre>
       </p>
+      <p>
+        The second argument of the <a class="propval">string()</a> function is one of the following
+        keywords:
+      </p>
+      <dl>
+        <dt>first</dt>
+        <dd>
+          The value of the first assignment on the page is used. If there is no assignment on the
+          page, the assignment in effect at the end of the previous page (<a
+          href="CSS3GCPM#entry-value" class="externalDFN">entry value</a>) is used. <span
+          class="propval">first</span> is the default value.
+        </dd>
+        <dt>start</dt>
+        <dd>
+          The value of the first assignment on the page is used if the content box (fragment) of
+          that element does not follow any other content boxes on the page. Otherwise the assignment
+          in effect at the end of the previous page (<a href="CSS3GCPM#entry-value"
+          class="externalDFN">entry value</a>) is used.
+        </dd>
+        <dt>start-except</dt>
+        <dd>
+          Identical to <span class="propval">start</span>, except that the empty string is used
+          instead of the first assignment on the page.
+        </dd>
+        <dt>last</dt>
+        <dd>
+          The assignment in effect at the end of the current page (<a href="CSS3GCPM#exit-value"
+          class="externalDFN">exit value</a>) is used.
+        </dd>
+        <dt>spread-first</dt>
+        <dd>
+          Analogous to <span class="propval">first</span> with ‘page’ replaced by ‘page spread’.
+        </dd>
+        <dt>spread-start</dt>
+        <dd>
+          Analogous to <span class="propval">start</span> with ‘page’ replaced by ‘page spread’.
+        </dd>
+        <dt>spread-start-except</dt>
+        <dd>
+          Analogous to <span class="propval">start-except</span> with ‘page’ replaced by ‘page
+          spread’.
+        </dd>
+        <dt>spread-last</dt>
+        <dd>
+          Analogous to <span class="propval">last</span> with ‘page’ replaced by ‘page spread’.
+        </dd>
+      </dl>
     </section>
   </section>
   <section id="leaders">
