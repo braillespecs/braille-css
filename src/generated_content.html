@@ -665,8 +665,9 @@
       <p>
         <code>
           <dfn>string()</dfn> = string( <a href="CSS3VAL#identifier-value"
-          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> [ , [ first | start | start-except
-          | last | spread-first | spread-start | spread-start-except | spread-last ] ]? )
+          class="externalDFN"><var>&lt;custom-ident&gt;</var></a> [ , [ first | start | last |
+          last-except-start | page-first | page-start | page-last | page-last-except-start |
+          spread-first | spread-start | spread-last | spread-last-except-start | ] ]? )
         </code>
       </p>
       <p>
@@ -675,6 +676,7 @@
       </p>
       <dl>
         <dt>first</dt>
+        <dt>page-first</dt>
         <dd>
           The value of the first assignment on the page is used. If there is no assignment on the
           page, the assignment in effect at the end of the previous page (<a
@@ -682,21 +684,26 @@
           class="css-propval">first</span> is the default value.
         </dd>
         <dt>start</dt>
+        <dt>page-start</dt>
         <dd>
           The value of the first assignment on the page is used if the content box (fragment) of
           that element does not follow any other content boxes on the page. Otherwise the assignment
           in effect at the end of the previous page (<a href="CSS3GCPM#entry-value"
           class="externalDFN">entry value</a>) is used.
         </dd>
-        <dt>start-except</dt>
-        <dd>
-          Identical to <span class="css-propval">start</span>, except that the empty string is used
-          instead of the first assignment on the page.
-        </dd>
         <dt>last</dt>
+        <dt>page-last</dt>
         <dd>
           The assignment in effect at the end of the current page (<a href="CSS3GCPM#exit-value"
           class="externalDFN">exit value</a>) is used.
+        </dd>
+        <dt>last-except-start</dt>
+        <dt>page-last-except-start</dt>
+        <dd>
+          The last assignment following a content box on the current page is used, or the empty
+          string if there is no such assignment. Effectively this is the same as <span
+          class="css-propval">last</span> but excluding the assignment that would be used by <span
+          class="css-propval">start</span> (and all assignments that precede it).
         </dd>
         <dt>spread-first</dt>
         <dd>
@@ -706,14 +713,14 @@
         <dd>
           Analogous to <span class="css-propval">start</span> with ‘page’ replaced by ‘page spread’.
         </dd>
-        <dt>spread-start-except</dt>
-        <dd>
-          Analogous to <span class="css-propval">start-except</span> with ‘page’ replaced by ‘page
-          spread’.
-        </dd>
         <dt>spread-last</dt>
         <dd>
           Analogous to <span class="css-propval">last</span> with ‘page’ replaced by ‘page spread’.
+        </dd>
+        <dt>spread-last-except-start</dt>
+        <dd>
+          Analogous to <span class="css-propval">last-except-start</span> with ‘page’ replaced by
+          ‘page spread’.
         </dd>
       </dl>
     </section>
