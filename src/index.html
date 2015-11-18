@@ -742,14 +742,19 @@
   <span class="pagenum">⠼⠃</span>
   <p>
     ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭
-    ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭
     <span class="pagenum">⠼⠉</span>
     ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭
+  </p>
+  <p>
+    ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+    ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
   </p>
 </body>]]></pre>
         </div>
         <p>
-          Print page numbers can be rendered in the page footer:
+          Using the <a class="propname">string-set</a> property and the <a
+          class="css-propval">string()</a> function, print page numbers can be rendered in the page
+          footer:
         </p>
         <div class="code code-css">
           <pre class="highlight">@page {
@@ -789,10 +794,139 @@ p {
         <page>
           <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
           <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠀⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉</row>
+        </page>
+        <page>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row/>
+          <row/>
+          <row/>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+        <p>
+          The range of print pages covered on a braille page can be rendered in the page footer:
+        </p>
+        <div class="code code-css">
+          <pre class="highlight">@page {
+  size: 12 6;
+  margin-bottom: 1;
+  @bottom-right {
+    content: string(print-page, start) string(dash-print-page, last-except-start);
+  }
+}
+p {
+  display: block;
+  text-indent: 2;
+}
+.pagenum {
+  display: none;
+  string-set: print-page content(), dash-print-page '⠒' content();
+}</pre>
+        </div>
+        <div class="code code-pef">
+          <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="12" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠀⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠀⠀⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠼⠁⠒⠼⠃</row>
+        </page>
+        <page>
           <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
           <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
-          <row>⠭⠭⠭</row>
-          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃</row>
+          <row>⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠀⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠼⠃⠒⠼⠉</row>
+        </page>
+        <page>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row/>
+          <row/>
+          <row/>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+        </div>
+        <p>
+          The range of print pages covered on the current page spread can be rendered in the footer
+          of the right-hand page:
+        </p>
+        <div class="code code-css">
+          <pre class="highlight">@page {
+  size: 12 6;
+  margin-bottom: 1;
+}
+@page:right {
+  @bottom-right {
+    content: string(print-page, spread-start) string(dash-print-page, spread-last-except-start);
+  }
+}
+p {
+  display: block;
+  text-indent: 2;
+}
+.pagenum {
+  display: none;
+  string-set: print-page content(), dash-print-page '⠒' content();
+}</pre>
+        </div>
+        <div class="code code-pef">
+          <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="12" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠀⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠀⠀⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠼⠁⠒⠼⠃</row>
+        </page>
+        <page>
+          <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠀⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row/>
+        </page>
+        <page>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+          <row/>
+          <row/>
+          <row/>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠼⠃⠒⠼⠉</row>
         </page>
       </section>
     </volume>
@@ -838,13 +972,15 @@ p {
         <page>
           <row>⠀⠀⠭⠭⠭⠀⠭⠭⠭</row>
           <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
-          <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
-          <row>⠭⠭⠭⠀⠭⠭⠭</row>
           <row>⠒⠒⠒⠒⠒⠒⠒⠒⠒⠀⠼⠉</row>
           <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠀⠀⠿⠿⠿⠀⠿⠿⠿</row>
         </page>
         <page>
-          <row>⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
         </page>
       </section>
     </volume>
