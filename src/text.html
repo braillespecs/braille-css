@@ -342,7 +342,14 @@
       </li>
       <li>
         <p>
-          Each space is rendered as an empty <a>braille cell</a> (a horizontal shift of 1).
+          Each non-collapsed space (U+0020 <span style="font-variant: small-caps">space</span>) is
+          rendered as a number of empty <a title="braille cell">braille cells</a> specified by the
+          <a class="css-propname">word-spacing</a> property (by default <span
+          class="css-propval">1</span>). Non-breaking spaces (U+00A0 <span style="font-variant:
+          small-caps">no-break space (nbsp)</span>) are not considered word-separator characters and
+          are treated as any other character. Zero-width space characters (U+200B <span
+          style="font-variant: small-caps">zero width space (zwsp)</span>) have a zero advance
+          width.
         </p>
       </li>
       <li>
@@ -940,10 +947,162 @@ p {
      </div>
   </section>
   <section>
-    <h3> Letter Spacing </h3>
-    <p class="issue">
-      See <a href="https://github.com/snaekobbi/braille-css-spec/issues/15"
-      class="ticket">braille-css-spec#15</a>.
+    <h3>
+      Word Spacing: the <a class="css-propname">word-spacing</a> property
+    </h3>
+    <p>
+      The <a class="css-propname">word-spacing</a> property specifies spacing between “words”,
+      expressed in multiples of an empty <a title="braille cell">cell</a>. Values must be
+      non-negative <a><var>&lt;length&gt;</var></a>s. Word boundaries are determined and word
+      spacing applied as part of the <a href="#white-space-processing">white space
+      processing</a>. By default <a class="css-propname">word-spacing</a> is <span
+      class="css-propval">1</span>. A zero value results in all inter-word spacing being eliminated.
+    </p>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>word-spacing</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td>
+            <a><var>&lt;length&gt;</var></a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td>
+            all elements and <a href="#h3_pseudo-elements">pseudo-elements</a> and <a
+            href="CSS3PAGE#margin-context">margin contexts</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note difference">
+      This property differs from the original <a href="CSS3TEXT#word-spacing" class="externalDFN
+      css-propname">word-spacing</a> property [[CSS3TEXT]] in that it specifies the
+      <em>absolute</em> inter-word spacing and not the (absolute or relative) <em>additional</em>
+      inter-word spacing. Also, in braille CSS non-breaking spaces are not considered <a
+      href="CSS3TEXT#word-separator" class="externalDFN">word-separator characters</a>.
+    </p>
+  </section>
+  <section>
+    <h3>
+      Letter Spacing: the <a class="css-propname">letter-spacing</a> property
+    </h3>
+    <p>
+      The <a class="css-propname">letter-spacing</a> property specifies the spacing, expressed in
+      multiples of an empty <a title="braille cell">cell</a>, between adjacent “base units” of the
+      language, script or text. What these base units are is determined by the <a>braille
+      code</a>. The exact result of applying <a class="css-propname">letter-spacing</a> is therefore
+      UA-dependent.
+    </p>
+    <div class="note">
+      <p>
+        The base unit could for example be defined as the smallest unit of the script (called a <a
+        class="externalDFN" href="CSS3TEXT#grapheme-cluster0">grapheme</a>) which in the case of
+        braille is any (non-blank) <a title="&lt;braille-character&gt;">braille character</a>
+        (Unicode character in the range U+2801..U+28FF).
+      </p>
+      <p>
+        Another definition of the base unit could be any group of braille characters that
+        corresponds with a single grapheme when written in a certain other writing system (such as
+        Latin). In the case of contracted braille, this definition could be extended to any group of
+        braille characters that corresponds with a group of graphemes in the other writing system
+        and can not be further divided in smaller such groups.
+      </p>
+      <p>
+        A last example of a definition is any group of braille characters that corresponds with a
+        single <em><a href="CSS3TEXT#letter" class="externalDFN">letter</a></em> in another writing
+        system. This would mean among other things that capital and number signs are attached to the
+        next character, and that punctuation marks are attached to the previous character.
+      </p>
+    </div>
+    <table class="propdef">
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><dfn>letter-spacing</dfn></td>
+        </tr>
+        <tr>
+          <th>Value:</th>
+          <td>
+            <a><var>&lt;length&gt;</var></a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+          </th>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>Applies to:</th>
+          <td>
+            all elements and <a href="#h3_pseudo-elements">pseudo-elements</a> and <a
+            href="CSS3PAGE#margin-context">margin contexts</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+          </th>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <th>Media:</th>
+          <td>
+            <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+          </th>
+          <td>
+            the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      The values of <a class="css-propname">letter-spacing</a> must be non-negative
+      <a><var>&lt;length&gt;</var></a>s. The default is <span class="css-propval">0</span>. Letter
+      spacing is not applied at the beginning or at the end of a <a title="line
+      box">line</a>. Letter spacing between two characters effectively “belongs” to the innermost
+      element that contains the two characters: the total letter spacing between two adjacent
+      characters is specified by and rendered within the innermost element that <em>contains</em>
+      the boundary between the two characters. Letter spacing ignores zero-width spaces (U+200B
+      <span style="font-variant: small-caps">zero width space (zwsp)</span>). Non-breaking spaces
+      (U+00A0 <span style="font-variant: small-caps">no-break space (nbsp)</span>) are treated like
+      any other character.
     </p>
   </section>
 </section>
