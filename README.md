@@ -12,7 +12,7 @@ First start the [ReSpec][] and [Specref][] services:
     make respec/src
     make specref/src
     docker compose build
-    docker compose up respec specref
+    docker compose up respec specref &
 
 Then build the site (target/site/index.html) with:
 
