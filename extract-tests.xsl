@@ -34,51 +34,18 @@
 						<p:output port="dotify-result" primary="false">
 							<p:pipe step="dotify-format" port="result"/>
 						</p:output>
-						<p:option name="stylesheet" required="false"/>
+						<p:option name="stylesheet" required="false" select="''"/>
 						<p:option name="temp-dir" required="true"/>
 						<p:import href="http://www.daisy.org/pipeline/modules/braille/css-utils/library.xpl"/>
 						<p:import href="http://www.daisy.org/pipeline/modules/braille/common-utils/library.xpl"/>
-						<p:choose>
-							<p:when test="p:value-available('stylesheet')">
-								<p:xslt template-name="main" name="link">
-									<p:input port="stylesheet">
-										<p:inline>
-											<_xsl:stylesheet version="2.0" exclude-result-prefixes="#all">
-												<_xsl:param name="stylesheet"/>
-												<_xsl:template name="main">
-													<links>
-														<_xsl:for-each select="tokenize(normalize-space($stylesheet), ' ')">
-															<link rel="stylesheet" media="embossed" type="text/css">
-																<_xsl:attribute name="href" select="resolve-uri(.)"/>
-															</link>
-														</_xsl:for-each>
-													</links>
-												</_xsl:template>
-											</_xsl:stylesheet>
-										</p:inline>
-									</p:input>
-									<p:with-param name="stylesheet" select="$stylesheet"/>
-								</p:xslt>
-								<p:insert match="/*" position="first-child">
-									<p:input port="source">
-										<p:pipe step="main" port="source"/>
-									</p:input>
-									<p:input port="insertion" select="/*/link">
-										<p:pipe step="link" port="result"/>
-									</p:input>
-								</p:insert>
-								<css:inline/>
-							</p:when>
-							<p:otherwise>
-								<p:identity/>
-							</p:otherwise>
-						</p:choose>
-						<p:identity name="css-inline"/>
-						<px:transform query="(formatter:liblouis)(translator:bypass)" type="css" name="louis-format">
+						<css:inline name="css-inline">
+							<p:with-option name="default-stylesheet" select="$stylesheet"/>
+						</css:inline>
+						<px:transform query="(input:css)(output:pef)(formatter:liblouis)(translator:bypass)" name="louis-format">
 							<p:with-option name="temp-dir" select="$temp-dir"/>
 						</px:transform>
 						<p:sink/>
-						<px:transform query="(formatter:dotify)(translator:bypass)" type="css" name="dotify-format">
+						<px:transform query="(input:css)(output:pef)(formatter:dotify)(translator:bypass)" name="dotify-format">
 							<p:input port="source">
 								<p:pipe step="css-inline" port="result"/>
 							</p:input>

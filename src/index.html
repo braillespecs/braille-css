@@ -5,37 +5,67 @@
     <title> Braille CSS </title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="style.css" type="text/css"></link>
-    <script type="text/javascript" src="respecConfig.js" class="remove"/>
+    <script type="text/javascript" src="localBiblio.js" class="remove"/>
+    <script type="text/javascript" class="remove">
+      var respecConfig = {
+        specStatus: "unofficial",
+        shortName: "braille-css",
+        editors: [{
+          name:   "Bert Frees",
+          mailto: "bertfrees@gmail.com",
+          url:    "http://github.com/bertfrees" }],
+        additionalCopyrightHolders: "Copyright © 2014-2016 Bert Frees",
+        edDraftURI: "http://braillespecs.github.io/braille-css",
+        // testSuiteURI: "http://github.com/braillespecs/braille-css",
+        otherLinks: [{
+          key: "Feedback",
+          data: [{
+            value: "https://github.com/braillespecs/braille-css/issues",
+            href: "https://github.com/braillespecs/braille-css/issues" }]}],
+        specrefUrl: "http://specref:5000",
+        localBiblio: localBiblio
+      }
+    </script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" class="remove"/>
-    <script type="text/javascript" src="doStuff.js" class="remove"/>
+    <script type="text/javascript" src="postProcessing.js" class="remove"/>
+    <!--
+        TODO: use respec's "postProcess" hook
+     -->
     <script type="text/javascript" src="http://respec/respec-w3c-common.js"
             async="async" class="remove" id="respec"
-            onload="doStuff();"/>
+            onload="postProcessing();"/>
   </head>
   <body>
     <section id="abstract">
-      <p> TBD </p>
+      This specification presents new features to fully support the media type <a
+      href="CSS2MEDIA#media-types" class="externalDFN css-propval">embossed</a>, i.e. to print
+      braille on paper. The specification is derived from CSS2 [[CSS2]] and CSS3.
     </section>
     <section id="sotd">
       <p>
         Braille CSS was invented by the creators of <a href="http://www.daisy.org/pipeline2">DAISY
         Pipeline 2</a> as a means of configuring the braille production scripts, and as an interface
-        between interchangeable components. Although the media types <span
-        class="css-propval">braille</span> (intended for braille tactile feedback devices) and <span
-        class="css-propval">embossed</span> (intended for paged braille printers) exist, there is no
-        support in vanilla CSS for actually laying out content for braille devices or braille
-        paper. Indeed, because of its very restricted grid layout and its bulkiness, braille has
-        rather specific requirements, and the styling possibilities are limited. And thus was born
-        braille CSS. It has become a pick-and-mix of existing and new CSS features.
+        between software components.
       </p>
       <p>
-        While virtually all of the core concepts of CSS remain intact, a great deal of existing
-        features were either not incorporated, or were incorporated in a slimmed-down form. One
-        reason is that a lot of features simply don't make sense in the context of braille. Also,
-        for the sake of simplicity, the authors didn't bother to include features that are not
-        supported by implementations. Still it was chosen not to write the specification from
-        scratch but to explicitely reference existing specifications whenever possible and to
-        explain the differences.
+        Although the media types <a href="CSS2MEDIA#media-types" class="externalDFN
+        css-propval">braille</a> (intended for braille tactile feedback devices) and <a
+        href="CSS2MEDIA#media-types" class="externalDFN css-propval">embossed</a> (intended for
+        paged braille printers) exist, there is no support in CSS2 [[CSS2]] and CSS3 for actually
+        laying out content for braille devices or braille paper. Because of its very restricted grid
+        layout and its bulkiness, braille has rather specific requirements, and the styling
+        possibilities are limited. Therefore it was decided to make a custom CSS specification that
+        would support all the features specific to braille.
+      </p>
+      <p>
+        Braille CSS has become a pick-and-mix of existing CSS2 and CSS3 features and new ones. While
+        virtually all of the core concepts of CSS remain intact, a great deal of existing features
+        were either not incorporated, or were incorporated in a slimmed-down form. One reason is
+        that a lot of features simply don't make sense in the context of braille. Also, for the sake
+        of simplicity, the authors didn't bother to include features that are not supported by
+        implementations. Still it was chosen not to write the specification from scratch but to
+        explicitely reference existing specifications whenever possible and to explain the
+        differences.
       </p>
       <p>
         While the main purpose of this specification is a practical one, namely to support the use
@@ -47,7 +77,7 @@
       </p>
       <p>
         If you would like to give feedback or contribute to this specification, please file issues
-        at this <a href="https://github.com/snaekobbi/braille-css-spec/issues">project's home on
+        at this <a href="https://github.com/braillespecs/braille-css/issues">project's home on
         GitHub</a>.
       </p>
     </section>
@@ -172,8 +202,8 @@
         For all known implementations with proprietary extensions, include references to relevant
         documentation. For example, the <a href="http://code.google.com/p/dotify/">Dotify</a> based
         implementation may support <a href="obfl.html"><span class="css-propname">-obfl-</span> prefixed
-        properties</a>. See <a href="https://github.com/snaekobbi/braille-css-spec/issues/36"
-        class="ticket">braille-css-spec#36</a>.
+        properties</a>. See <a href="https://github.com/braillespecs/braille-css/issues/36"
+        class="ticket">braille-css#36</a>.
       </p>
     </section>
     <section id="values-and-units">
@@ -215,22 +245,22 @@
     <section id="selectors">
       <h2> Selectors </h2>
       <p class="issue">
-        See <a href="https://github.com/snaekobbi/braille-css-spec/issues/25"
-        class="ticket">braille-css-spec#25</a>.
+        See <a href="https://github.com/braillespecs/braille-css/issues/25"
+        class="ticket">braille-css#25</a>.
       </p>
     </section>
     <section id="cascade">
       <h2> Cascading and Inheritance </h2>
       <p class="issue">
-        See <a href="https://github.com/snaekobbi/braille-css-spec/issues/26"
-        class="ticket">braille-css-spec#26</a>.
+        See <a href="https://github.com/braillespecs/braille-css/issues/26"
+        class="ticket">braille-css#26</a>.
       </p>
     </section>
     <section id="style-attribute">
       <h2> Style Attributes </h2>
       <p class="issue">
-        See <a href="https://github.com/snaekobbi/braille-css-spec/issues/13"
-        class="ticket">braille-css-spec#13</a>.
+        See <a href="https://github.com/braillespecs/braille-css/issues/13"
+        class="ticket">braille-css#13</a>.
       </p>
     </section>
     <section id="media-types">
@@ -249,8 +279,8 @@
         italicizing which is conveyed in braille using braille indicators.
         <p class="issue">
           Add examples of other media types. See <a
-          href="https://github.com/snaekobbi/braille-css-spec/issues/27"
-          class="ticket">braille-css-spec#27</a>.
+          href="https://github.com/braillespecs/braille-css/issues/27"
+          class="ticket">braille-css#27</a>.
         </p>
       </p>
       <p class="issue">
@@ -260,22 +290,22 @@
         properties that make sense on refreshable braille displays too (examples would be <span
         class="css-propname">white-space</span>, <span class="css-propname">hyphens</span>, <span
         class="css-propname">hyphen-character</span>, <span class="css-propname">text-transform</span>,
-        etc.). See <a href="https://github.com/snaekobbi/braille-css-spec/issues/1"
-        class="ticket">braille-css-spec#1</a>.
+        etc.). See <a href="https://github.com/braillespecs/braille-css/issues/1"
+        class="ticket">braille-css#1</a>.
       </p>
     </section>
-    <xi:include href="box_model.html"/>
-    <xi:include href="text.html"/>
-    <xi:include href="generated_content.html"/>
-    <xi:include href="paged_media.html"/>
-    <xi:include href="volumes.html"/>
-    <xi:include href="flow.html"/>
-    <xi:include href="tables.html"/>
+    <xi:include href="main/box_model.html"/>
+    <xi:include href="main/text.html"/>
+    <xi:include href="main/generated_content.html"/>
+    <xi:include href="main/paged_media.html"/>
+    <xi:include href="main/volumes.html"/>
+    <xi:include href="main/flow.html"/>
+    <xi:include href="main/tables.html"/>
     <section id="original-pagination">
       <h2> Indication of Original Pagination </h2>
       <p class="issue">
-          See <a href="https://github.com/snaekobbi/braille-css-spec/issues/14"
-          class="ticket">braille-css-spec#14</a>.
+          See <a href="https://github.com/braillespecs/braille-css/issues/14"
+          class="ticket">braille-css#14</a>.
       </p>
       <div class="example">
         <div class="code code-xml">

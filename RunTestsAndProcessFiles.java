@@ -1,6 +1,8 @@
 import java.io.File;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +11,9 @@ import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import static com.google.common.collect.Iterables.size;
 
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
@@ -21,26 +25,31 @@ import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltTransformer;
 
+import org.daisy.braille.css.SimpleInlineStyle;
+
 import org.daisy.maven.xproc.api.XProcEngine;
 import org.daisy.maven.xproc.xprocspec.XProcSpecRunner;
 
-import org.daisy.pipeline.braille.common.AbstractTransform;
-import org.daisy.pipeline.braille.common.AbstractTransform.Provider.util.Iterables;
+import org.daisy.pipeline.braille.common.AbstractBrailleTranslator;
+import org.daisy.pipeline.braille.common.AbstractTransformProvider;
+import org.daisy.pipeline.braille.common.AbstractTransformProvider.util.Iterables;
 import org.daisy.pipeline.braille.common.BrailleTranslator;
-import org.daisy.pipeline.braille.common.CSSBlockTransform;
-import org.daisy.pipeline.braille.common.TextTransform;
-import org.daisy.pipeline.braille.common.Transform;
-import static org.daisy.pipeline.braille.common.util.Tuple3;
+import org.daisy.pipeline.braille.common.BrailleTranslatorProvider;
+import org.daisy.pipeline.braille.common.CSSStyledText;
+import org.daisy.pipeline.braille.common.Query;
+import org.daisy.pipeline.braille.common.Query.Feature;
+import org.daisy.pipeline.braille.common.Query.MutableQuery;
+import static org.daisy.pipeline.braille.common.Query.util.mutableQuery;
+import org.daisy.pipeline.braille.common.TransformProvider;
 import static org.daisy.pipeline.braille.common.util.URIs.asURI;
-import org.daisy.pipeline.braille.common.XProcTransform;
 
 import static org.daisy.pipeline.pax.exam.Options.brailleModule;
 import static org.daisy.pipeline.pax.exam.Options.domTraversalPackage;
 import static org.daisy.pipeline.pax.exam.Options.felixDeclarativeServices;
-import static org.daisy.pipeline.pax.exam.Options.forThisPlatform;
-import static org.daisy.pipeline.pax.exam.Options.logbackBundles;
-import static org.daisy.pipeline.pax.exam.Options.pipelineModule;
-import static org.daisy.pipeline.pax.exam.Options.xprocspecBundles;
+import static org.daisy.pipeline.pax.exam.Options.logbackClassic;
+import static org.daisy.pipeline.pax.exam.Options.mavenBundle;
+import static org.daisy.pipeline.pax.exam.Options.mavenBundlesWithDependencies;
+import static org.daisy.pipeline.pax.exam.Options.xprocspec;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,13 +64,10 @@ import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.ops4j.pax.exam.util.PathUtils;
 
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
-import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.options;
 import static org.ops4j.pax.exam.CoreOptions.systemProperty;
 
 import org.osgi.framework.BundleContext;
-
-import org.slf4j.Logger;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
@@ -74,51 +80,26 @@ public class RunTestsAndProcessFiles {
 			systemProperty("org.daisy.pipeline.xproc.configuration").value(PathUtils.getBaseDir() + "/config-calabash.xml"),
 			systemProperty("com.xmlcalabash.config.user").value(""),
 			domTraversalPackage(),
-			logbackBundles(),
 			felixDeclarativeServices(),
-			mavenBundle().groupId("net.java.dev.jna").artifactId("jna").versionAsInProject(),
-			mavenBundle().groupId("org.apache.servicemix.bundles").artifactId("org.apache.servicemix.bundles.antlr-runtime").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.libs").artifactId("jing").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.braille").artifactId("braille-utils.api").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.braille").artifactId("braille-utils.pef-tools").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.libs").artifactId("jstyleparser").versionAsInProject(),
-			mavenBundle().groupId("org.unbescape").artifactId("unbescape").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.braille").artifactId("braille-css").versionAsInProject(),
-			mavenBundle().groupId("org.liblouis").artifactId("liblouis-java").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.api").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.common").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.translator.impl").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.formatter.impl").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.task-api").versionAsInProject(),
-			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.task.impl").versionAsInProject(),
-			brailleModule("liblouis-core"),
-			brailleModule("liblouis-saxon"),
-			brailleModule("liblouis-calabash"),
-			brailleModule("liblouis-utils"),
-			brailleModule("liblouis-formatter"),
-			brailleModule("dotify-core"),
-			brailleModule("dotify-saxon"),
-			brailleModule("dotify-calabash"),
-			brailleModule("dotify-utils"),
-			brailleModule("dotify-formatter"),
-			brailleModule("css-core"),
-			brailleModule("css-calabash"),
-			brailleModule("css-utils"),
-			brailleModule("pef-core"),
-			brailleModule("pef-calabash"),
-			brailleModule("pef-saxon"),
-			brailleModule("pef-utils"),
-			brailleModule("common-utils"),
-			forThisPlatform(brailleModule("liblouis-native")),
-			pipelineModule("file-utils"),
-			pipelineModule("common-utils"),
-			pipelineModule("html-utils"),
-			pipelineModule("zip-utils"),
-			pipelineModule("mediatype-utils"),
-			pipelineModule("fileset-utils"),
-			xprocspecBundles(),
-			mavenBundle().groupId("org.daisy.pipeline").artifactId("saxon-adapter").versionAsInProject(),
-			junitBundles()
+			junitBundles(),
+			mavenBundlesWithDependencies(
+				brailleModule("css-utils"),
+				brailleModule("pef-utils"),
+				brailleModule("common-utils"),
+				brailleModule("liblouis-utils"),
+				brailleModule("liblouis-native").forThisPlatform(),
+				brailleModule("liblouis-formatter"),
+				brailleModule("dotify-utils"),
+				brailleModule("dotify-formatter"),
+				// logging
+				logbackClassic(),
+				mavenBundle("org.slf4j:jul-to-slf4j:?"),
+				mavenBundle("org.daisy.pipeline:logging-activator:?"),
+				// xprocspec
+				xprocspec(),
+				mavenBundle("org.daisy.maven:xproc-engine-daisy-pipeline:?"),
+				// xslt
+				mavenBundle("org.daisy.pipeline:saxon-adapter:?").versionAsInProject())
 		);
 	}
 	
@@ -126,33 +107,20 @@ public class RunTestsAndProcessFiles {
 	private BundleContext context;
 	
 	@Before
-	public void registerBypassBlockTransformProvider() {
-		BypassBlockTransform.Provider provider = new BypassBlockTransform.Provider();
+	public void registerBypassTranslatorProvider() {
+		BypassTranslator.Provider provider = new BypassTranslator.Provider();
 		Hashtable<String,Object> properties = new Hashtable<String,Object>();
-		context.registerService(BrailleTranslator.Provider.class.getName(), provider, properties);
-		context.registerService(TextTransform.Provider.class.getName(), provider, properties);
-		context.registerService(CSSBlockTransform.Provider.class.getName(), provider, properties);
-		context.registerService(XProcTransform.Provider.class.getName(), provider, properties);
+		context.registerService(BrailleTranslatorProvider.class.getName(), provider, properties);
+		context.registerService(TransformProvider.class.getName(), provider, properties);
 	}
 	
-	private static class BypassBlockTransform extends AbstractTransform
-	                                          implements BrailleTranslator,
-	                                                     TextTransform,
-	                                                     CSSBlockTransform,
-	                                                     XProcTransform {
+	private static class BypassTranslator extends AbstractBrailleTranslator {
+		
 		private final static Pattern NUMBER = Pattern.compile("[0-9]+");
 		private final static String NUMSIGN = "\u283c";
 		private final static String[] DIGIT_TABLE = new String[]{
 			"\u281a","\u2801","\u2803","\u2809","\u2819","\u2811","\u280b","\u281b","\u2813","\u280a"};
-		public String transform(String text) {
-			return translateNumbers(text);
-		}
-		public String[] transform(String[] text) {
-			String[] result = new String[text.length];
-			for (int i = 0; i < text.length; i++)
-				result[i] = transform(text[i]);
-			return result;
-		}
+		
 		private static String translateNumbers(String text) {
 			Matcher m = NUMBER.matcher(text);
 			int idx = 0;
@@ -165,6 +133,7 @@ public class RunTestsAndProcessFiles {
 			sb.append(text.substring(idx));
 			return sb.toString();
 		}
+		
 		private static String translateNaturalNumber(int number) {
 			StringBuilder sb = new StringBuilder();
 			sb.append(NUMSIGN);
@@ -175,22 +144,53 @@ public class RunTestsAndProcessFiles {
 				number = number / 10; }
 			return sb.toString();
 		}
-		private final URI href = asURI(new File(new File(PathUtils.getBaseDir()), "identity.xpl"));
-		public TextTransform asTextTransform() {
-			return this;
+		
+		private String transform(String text, SimpleInlineStyle style) {
+			if (style != null && !style.isEmpty())
+				throw new RuntimeException("style not supported: " + style);
+			return translateNumbers(text);
 		}
-		public Tuple3<URI,javax.xml.namespace.QName,Map<String,String>> asXProc() {
-			return new Tuple3<URI,javax.xml.namespace.QName,Map<String,String>>(href, null, null);
+		
+		@Override
+		public FromStyledTextToBraille fromStyledTextToBraille() {
+			return fromStyledTextToBraille;
 		}
-		public static class Provider extends AbstractTransform.Provider<BypassBlockTransform>
-		                             implements BrailleTranslator.Provider<BypassBlockTransform>,
-		                                        TextTransform.Provider<BypassBlockTransform>,
-		                                        CSSBlockTransform.Provider<BypassBlockTransform>,
-		                                        XProcTransform.Provider<BypassBlockTransform> {
-			private static final Iterable<BypassBlockTransform> instance = Iterables.of(new BypassBlockTransform());
-			private static final Iterable<BypassBlockTransform> empty = Iterables.<BypassBlockTransform>empty();
-			public Iterable<BypassBlockTransform> _get(String query) {
-				return query.equals("(translator:bypass)") ? instance : empty;
+		
+		private final FromStyledTextToBraille fromStyledTextToBraille = new FromStyledTextToBraille() {
+			public java.lang.Iterable<String> transform(java.lang.Iterable<CSSStyledText> styledText) {
+				int size = size(styledText);
+				String[] braille = new String[size];
+				int i = 0;
+				for (CSSStyledText t : styledText)
+					braille[i++] = BypassTranslator.this.transform(t.getText(), t.getStyle());
+				return Arrays.asList(braille);
+			}
+		};
+		
+		private final static XProc xproc = new XProc(asURI(new File(new File(PathUtils.getBaseDir()), "bypass.xpl")), null, null);
+		
+		public XProc asXProc() {
+			return xproc;
+		}
+		
+		public static class Provider extends AbstractTransformProvider<BypassTranslator> implements BrailleTranslatorProvider<BypassTranslator> {
+			private static final Iterable<BypassTranslator> instance = Iterables.of(new BypassTranslator());
+			private static final Iterable<BypassTranslator> empty = Iterables.<BypassTranslator>empty();
+			private final static List<String> supportedInput = ImmutableList.of("css","text-css");
+			private final static List<String> supportedOutput = ImmutableList.of("css","braille");
+			public Iterable<BypassTranslator> _get(Query query) {
+				final MutableQuery q = mutableQuery(query);
+				for (Feature f : q.removeAll("input"))
+					if (!supportedInput.contains(f.getValue().get()))
+						return empty;
+				for (Feature f : q.removeAll("output"))
+					if (!supportedOutput.contains(f.getValue().get()))
+						return empty;
+				if (q.containsKey("translator")) {
+					if ("bypass".equals(q.removeOnly("translator").getValue().get()))
+						if (q.isEmpty())
+							return instance; }
+				return empty;
 			}
 		}
 	}

@@ -1,7 +1,7 @@
-[braille-css-spec][]
-====================
+[braille-css][]
+===============
 
-Braille CSS specification: http://snaekobbi.github.io/braille-css-spec
+Braille CSS specification: http://braillespecs.github.io/braille-css
 
 
 Building
@@ -14,14 +14,18 @@ First start the [ReSpec][] and [Specref][] services:
     docker compose build
     docker compose up respec specref &
 
-Then build the site (target/site/index.html) with:
+Then build the site (target/site/) with:
 
     make
+
+To build the site without running the tests:
+
+    make SKIP_TESTS
 
 
 License
 -------
-Copyright 2014-2015 [Bert Frees][bert]
+Copyright 2014-2016 [Bert Frees][bert]
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the [GNU Lesser General Public License][lgpl]
@@ -34,7 +38,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU Lesser General Public License for more details.
 
 
-[braille-css-spec]: https://github.com/snaekobbi/braille-css-spec
+[braille-css]: https://github.com/braillespecs/braille-css
 [respec]: http://www.w3.org/respec
 [specref]: http://www.specref.org
 [bert]: http://github.com/bertfrees

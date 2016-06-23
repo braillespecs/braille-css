@@ -60,7 +60,7 @@ insertPEFs = function() {
 expandLinks = function() {
   respecEvents.sub("end-all", function() {
     var biblio = respecConfig.biblio;
-    var re = /^(.+)#([A-Za-z][A-Za-z0-9_:\.\-]*)$/i;
+    var re = /^(.+)#([A-Za-z][A-Za-z0-9_:\.\-]*)?$/i;
     $("a").each(function(i, a) {
       var href = a.getAttribute("href");
       var match = href.match(re);
@@ -68,8 +68,12 @@ expandLinks = function() {
         var biblioEntry = biblio[match[1]];
         while (biblioEntry && biblioEntry["aliasOf"])
           biblioEntry = biblio[biblioEntry["aliasOf"]];
-        if (biblioEntry)
-          a.setAttribute("href", biblioEntry["href"] + "#" + match[2]);
+        if (biblioEntry) {
+          href = biblioEntry["href"];
+          if (match[2])
+            href = href + "#" + match[2]
+          a.setAttribute("href", href);
+        }
       }
     });
   });
@@ -90,7 +94,7 @@ createSelfLinks = function() {
 /*
  *
  */
-doStuff = function() {
+postProcessing = function() {
   insertPEFs();
   expandLinks();
   createSelfLinks();

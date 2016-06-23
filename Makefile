@@ -1,29 +1,31 @@
 SRC_DIR              := src
 TARGET_DIR           := target/site
-SOURCES              := $(wildcard $(SRC_DIR)/*.html)
+INDEX_SOURCES        := $(SRC_DIR)/index.html $(wildcard $(SRC_DIR)/main/*.html)
 SCRIPTS              := $(wildcard $(SRC_DIR)/*.js)
-RESOURCES            := $(addprefix $(SRC_DIR)/,style.css odt2braille8.ttf text-transform.html obfl.html)
+RESOURCES            := $(addprefix $(SRC_DIR)/,style.css odt2braille8.ttf)
 DEV_DIR              := target/tmp
-DEV_INDEX            := $(DEV_DIR)/index.html
+DEV_HTML             := $(addprefix $(DEV_DIR)/,index.html obfl.html text-transform.html)
 DEV_SCRIPTS          := $(patsubst $(SRC_DIR)/%,$(DEV_DIR)/%,$(SCRIPTS))
-TARGET_INDEX         := $(TARGET_DIR)/index.html
+TARGET_HTML          := $(patsubst $(DEV_DIR)/%,$(TARGET_DIR)/%,$(DEV_HTML))
 TARGET_RESOURCES     := $(patsubst $(SRC_DIR)/%,$(TARGET_DIR)/%,$(RESOURCES))
 SKIP_TESTS           := false
 RESPEC2HTML          := docker compose run respec2html
 
-all : $(TARGET_INDEX) $(TARGET_RESOURCES)
+all : $(TARGET_HTML) $(TARGET_RESOURCES)
 
 $(TARGET_RESOURCES) : $(TARGET_DIR)/% : $(SRC_DIR)/%
 	mkdir -p $(dir $@)
 	cp $< $@
 
-$(TARGET_INDEX) : $(DEV_INDEX)
+$(TARGET_HTML) : $(TARGET_DIR)/% : $(DEV_DIR)/%
 	mkdir -p $(dir $@)
 	$(RESPEC2HTML) $< $@
 
-$(DEV_INDEX) : $(SOURCES) $(DEV_SCRIPTS)
+$(DEV_DIR)/index.xhtml : $(INDEX_SOURCES)
+
+$(DEV_HTML) : $(DEV_DIR)/% : $(SRC_DIR)/% $(DEV_SCRIPTS)
 	mkdir -p $(dir $@)
-	mvn test -Dsource=$(SRC_DIR)/index.html -Dtarget=$@ -Dmy.skipTests=${SKIP_TESTS}
+	mvn test -Dsource=$< -Dtarget=$@ -Dmy.skipTests=${SKIP_TESTS}
 
 $(DEV_SCRIPTS) : $(DEV_DIR)/% : $(SRC_DIR)/%
 	mkdir -p $(dir $@)

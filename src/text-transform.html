@@ -2,17 +2,64 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Braille CSS text-transform grammar </title>
+    <title> Braille CSS — text-transform grammar </title>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="style.css" type="text/css"></link>
+    <script type="text/javascript" src="localBiblio.js" class="remove"/>
+    <script type="text/javascript" class="remove">
+      var respecConfig = {
+        specStatus: "unofficial",
+        shortName: "braille-css-text-transform",
+        editors: [{
+          name:   "Bert Frees",
+          mailto: "bertfrees@gmail.com",
+          url:    "http://github.com/bertfrees" }],
+        additionalCopyrightHolders: "Copyright © 2014-2016 Bert Frees",
+        edDraftURI: "http://braillespecs.github.io/braille-css/text-transform",
+        otherLinks: [{
+          key: "Feedback",
+          data: [{
+            value: "https://github.com/braillespecs/braille-css/issues",
+            href: "https://github.com/braillespecs/braille-css/issues" }]}],
+        specrefUrl: "http://specref:5000",
+        noTOC: true,
+        localBiblio: localBiblio
+      }
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" class="remove"/>
+    <script type="text/javascript" src="postProcessing.js" class="remove"/>
+    <script type="text/javascript" src="http://respec/respec-w3c-common.js"
+            async="async" class="remove" id="respec"
+            onload="postProcessing();"/>
   </head>
   <body>
-	<h1> Braille CSS <a href="index.html#dfn-text-transform">text-transform</a> grammar </h1>
-    <dl>
-	  <dt>lowercase</dt>
-	  <dd>
-		Puts all letters in lowercase. (see also <a
-		href="http://www.w3.org/TR/2012/WD-css3-text-20121113/#lowercase">http://www.w3.org/TR/2012/WD-css3-text-20121113/#lowercase</a>)
-	  </dd>
-	</dl>
+    <section id="abstract">
+      This module provides a grammar for the <a
+      href="BRAILLE-CSS#dfn-text-transform">text-transform</a> property in braille CSS
+      [[BRAILLE-CSS]].
+    </section>
+    <section id="sotd">
+      <p>
+        This document attempts to establish a grammar of keywords that can be passed as context to a
+        braille translator to influence the translation in a predictable way. The idea is to be able
+        to use the grammar across several standards and tools: CSS, OBFL [[OBFL]], <a
+        href="http://www.liblouis.org/">Liblouis</a>, etc. In the case of CSS the grammar applies to
+        the <a href="BRAILLE-CSS#dfn-text-transform">text-transform</a> property.
+      </p>
+      <p>
+        The document is incomplete, but should make the intend clear.
+      </p>
+    </section>
+    <section id="grammar">
+      <h2> The grammar </h2>
+      <dl>
+        <dt>
+          <dfn><a href="CSS3TEXT#lowercase" class="externalDFN">lowercase</a></dfn>
+        </dt>
+        <dd>
+          Puts all letters in lowercase.
+        </dd>
+      </dl>
+    </section>
   </body>
 </html>

@@ -2,184 +2,612 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Braille CSS ‘-obfl-’ prefixed properties and values </title>
+    <title> Braille CSS — OBFL extensions </title>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="style.css" type="text/css"></link>
     <style type="text/css">
-      table {
-        width: 100%;
-        border: 1px solid black;
-        border-collapse: collapse;
+      .obfl-elem::before,
+      .obfl-attr::before {
+        content: '‘';
       }
-      td, th {
-        border: 1px solid black;
-        padding: 5px;
+      .obfl-elem::after,
+      .obfl-attr::after {
+        content: '’';
       }
     </style>
+    <script type="text/javascript" src="localBiblio.js" class="remove"/>
+    <script type="text/javascript" class="remove">
+      var respecConfig = {
+        specStatus: "unofficial",
+        shortName: "braille-css-obfl",
+        editors: [{
+          name:   "Bert Frees",
+          mailto: "bertfrees@gmail.com",
+          url:    "http://github.com/bertfrees" }],
+        additionalCopyrightHolders: "Copyright © 2014-2016 Bert Frees",
+        edDraftURI: "http://braillespecs.github.io/braille-css/obfl",
+        otherLinks: [{
+          key: "Feedback",
+          data: [{
+            value: "https://github.com/braillespecs/braille-css/issues",
+            href: "https://github.com/braillespecs/braille-css/issues" }]}],
+        specrefUrl: "http://specref:5000",
+        localBiblio: localBiblio
+      }
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" class="remove"/>
+    <script type="text/javascript" src="postProcessing.js" class="remove"/>
+    <script type="text/javascript" src="http://respec/respec-w3c-common.js"
+            async="async" class="remove" id="respec"
+            onload="postProcessing();"/>
   </head>
   <body>
-    <h1> Braille CSS ‘-obfl-’ prefixed properties and values </h1>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            Name
-          </th>
-          <th>
-            Value
-          </th>
-          <th>
-            <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value"
-            class="externalDFN">Initial</a>
-          </th>
-          <th>
-            Applies to
-          </th>
-          <th>
-            <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property"
-            class="externalDFN">Inherited</a>
-          </th>
-          <th>
-            Comments
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <dfn>-obfl-vertical-position</dfn>
-          </td>
-          <td>
-            <a href="index.html#dfn-length"><var>&lt;length&gt;</var></a> | auto
-          </td>
-          <td>
-            auto
-          </td>
-          <td>
-            <a href="index.html#dfn-block">block</a> | <a href="index.html#dfn-list-item">list-item</a>
-          </td>
-          <td>
-            no
-          </td>
-          <td>
-            This property corresponds with the ‘vertical-position’ attribute of the ‘<a
-            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L1023">block</a>’
-            element. <a href="index.html#dfn-length"><var>&lt;length&gt;</var></a> must be
-            non-negative.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <dfn>-obfl-vertical-align</dfn>
-          </td>
-          <td>
-            before | center | after
-          </td>
-          <td>
-            after
-          </td>
-          <td>
-            <a href="index.html#dfn-block">block</a> | <a href="index.html#dfn-list-item">list-item</a>
-          </td>
-          <td>
-            no
-          </td>
-          <td>
-            This property corresponds with the ‘vertical-align’ attribute of the ‘<a
-            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L1023">block</a>’
-            element.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href="index.html#dfn-display">display</a>
-          </td>
-          <td>
-            <dfn id="dfn-obfl-toc">-obfl-toc</dfn>
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            This value creates a ‘<a
-            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L735">table-of-contents</a>’
-            and a ‘<a
-            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L9241">toc-sequence</a>’
-            that references this ‘table-of-contents’ with the ‘toc’ attribute.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <dfn>-obfl-toc-range</dfn>
-          </td>
-          <td>
-            document | volume
-          </td>
-          <td>
-            document
-          </td>
-          <td>
-            <a href="#dfn-obfl-toc">-obfl-toc</a>
-          </td>
-          <td>
-            no
-          </td>
-          <td>
-            This property corresponds with the ‘range’ attribute of the ‘<a
-            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L9241">toc-sequence</a>’
-            element.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <dfn>::-obfl-toc-group::before</dfn>
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            <a href="#dfn-obfl-toc">-obfl-toc</a>
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            This pseudo-element corresponds with the ‘<a
-            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L969">on-volume-start</a>’
-            element.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <dfn>::-obfl-toc-group::after</dfn>
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            <a href="#dfn-obfl-toc">-obfl-toc</a>
-          </td>
-          <td>
-            N/A
-          </td>
-          <td>
-            This pseudo-element corresponds with the ‘<a
-            href="http://files.pef-format.org/drafts/obfl/obfl-specification.html#L987">on-volume-end</a>’
-            element.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <section id="abstract">
+      This module builds on braille CSS [[BRAILLE-CSS]] and defines a set of properties, values and
+      pseudo-elements specific to OBFL-based [[OBFL]] agents.
+    </section>
+    <section id="sotd">
+      The features defined in this document are intended to be temporary solutions. The goal is to
+      define official braille CSS features that can be made to work the same across all agents. In
+      order to make the distinction clear all properties, values and pseudo-elements defined here
+      have an ‘-obfl-’ prefix.
+    </section>
+    <section id="vertical-positioning">
+      <h2>
+        Vertical Positioning: the <a class="css-propname">-obfl-vertical-positioning</a> and <a
+        class="css-propname">-obfl-vertical-align</a> properties
+      </h2>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>-obfl-vertical-positioning</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-length" class="internalDFN"><var>&lt;length&gt;</var></a> |
+              auto
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>auto</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-block" class="internalDFN">block</a> | <a
+              href="BRAILLE-CSS#dfn-list-item" class="internalDFN">list-item</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              specified value
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>-obfl-vertical-align</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              before | center | after
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>after</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-block" class="internalDFN">block</a> | <a
+              href="BRAILLE-CSS#dfn-list-item" class="internalDFN">list-item</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              specified value
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        These properties map directly to the <a href="OBFL#L1023" class="obfl-elem
+        externalDFN">block</a> attributes <span class="obfl-attr">vertical-position</span> and <span
+        class="obfl-attr">vertical-align</span> in OBFL. Lengths must be non-negative.
+      </p>
+    </section>
+    <section id="underline">
+      <h2>
+        Underlining blocks of text: the <a class="css-propname">-obfl-underline property</a>
+      </h2>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>-obfl-underline</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-braille-character"
+              class="internalDFN"><var>&lt;braille-character&gt;</var></a> | none
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>none</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-block" class="internalDFN">block</a> | <a
+              href="BRAILLE-CSS#dfn-list-item" class="internalDFN">list-item</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              specified value
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        This property maps to a combination of OBFL <a href="OBFL#L1023" class="obfl-elem
+        externalDFN">block</a> attributes <span class="obfl-attr">underline-style</span>, <span
+        class="obfl-attr">underline-align</span> and <span class="obfl-attr">underline-width</span>.
+      </p>
+    </section>
+    <section id="tables-of-contents">
+      <h2> Tables of Contents </h2>
+      <section>
+        <h3>
+          Extending the <a href="BRAILLE-CSS#dfn-display" class="css-propname
+          internalDFN">display</a> property with <a class="css-propval">-obfl-toc</a>
+        </h3>
+        <p>
+          Braille CSS [[BRAILLE-CSS]] defines the <a href="BRAILLE-CSS#dfn-display"
+          class="css-propname internalDFN">display</a> property with possible values <a
+          href="BRAILLE-CSS#dfn-block" class="css-propval internalDFN">block</a>, <a
+          href="BRAILLE-CSS#dfn-inline" class="css-propval internalDFN">inline</a>, <a
+          href="BRAILLE-CSS#dfn-list-item" class="css-propval internalDFN">list-item</a>, and
+          none. This module extends the possible values with <dfn
+          class="css-propval">-obfl-toc</dfn>.
+        </p>
+        <p>
+          The <a class="css-propval">-obfl-toc</a> value corresponds in OBFL with a <a
+          href="OBFL#L9241" class="obfl-elem externalDFN">toc-sequence</a> element that is backed by
+          a <a href="OBLF#L735" class="obfl-elem externalDFN">table-of-contents</a> element. The
+          content of the <span class="obfl-elem">table-of-contents</span> element in OBFL
+          corresponds with the content of the <span class="css-propval">-obfl-toc</span> element in
+          CSS. The <span class="css-propval">-obfl-toc</span> value only applies to elements that
+          are placed into a <a href="BRAILLE-CSS#h3_the-begin-and-end-rules">volume area</a> through
+          the mechanism of <a href="BRAILLE-CSS#h3_named-flows">named flows</a>.
+        </p>
+      </section>
+      <section>
+        <h3> The <a class="css-propname">-obfl-toc-range</a> property </h3>
+        <table class="propdef">
+          <tbody>
+            <tr>
+              <th>Name:</th>
+              <td><dfn>-obfl-toc-range</dfn></td>
+            </tr>
+            <tr>
+              <th>Value:</th>
+              <td>
+                document | volume
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+              </th>
+              <td>document</td>
+            </tr>
+            <tr>
+              <th>Applies to:</th>
+              <td>
+                <a class="css-propval">-obfl-toc</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+              </th>
+              <td>no</td>
+            </tr>
+            <tr>
+              <th>Media:</th>
+              <td>
+                <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+              </th>
+              <td>
+                specified value
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          This property maps directly to the <span class="obfl-attr">range</span> attribute of the
+          <a href="OBFL#L9241" class="obfl-elem externalDFN">toc-sequence</a> element in OBFL.
+        </p>
+      </section>
+      <section>
+        <h3>
+          The <a class="css">::-obfl-on-toc-start</a>, <a class="css">::-obfl-on-volume-start</a>,
+          <a class="css">::-obfl-on-volume-end</a> and <a class="css">::-obfl-on-toc-end</a>
+          pseudo-elements
+        </h3>
+        <p>
+          The <dfn class="css">::-obfl-on-toc-start</dfn>, <dfn
+          class="css">::-obfl-on-volume-start</dfn>, <dfn class="css">::-obfl-on-volume-end</dfn>
+          and <dfn class="css">::-obfl-on-toc-end</dfn> pseudo-elements correspond directly with the
+          <a href="OBFL#L9514" class="obfl-elem externalDFN">on-toc-start</a>, <a href="OBFL#L969"
+          class="obfl-elem externalDFN">on-volume-start</a>, <a href="OBFL#L987" class="obfl-elem
+          externalDFN">on-volume-end</a> and <a href="OBFL#L1005" class="obfl-elem
+          externalDFN">on-toc-end</a> elements in OBFL. These pseudo-elements only apply to elements
+          with a <a href="BRAILLE-CSS#dfn-display" class="css-propname internalDFN">display</a>
+          value of <a class="css-propval">-obfl-toc</a>.
+        </p>
+      </section>
+    </section>
+    <section id="tables">
+      <h2>
+        Table Cell Spacing: the <a class="obfl-attr">-obfl-table-col-spacing</a>, <a
+        class="obfl-attr">-obfl-table-row-spacing</a> and <a
+        class="obfl-attr">-obfl-preferred-empty-space</a> properties
+      </h2>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>-obfl-table-col-spacing</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-length" class="internalDFN"><var>&lt;length&gt;</var></a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-table" class="internalDFN">table</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              specified value
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>-obfl-table-row-spacing</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-length" class="internalDFN"><var>&lt;length&gt;</var></a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-table" class="internalDFN">table</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              specified value
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>-obfl-preferred-empty-space</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-length" class="internalDFN"><var>&lt;length&gt;</var></a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>2</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              <a href="BRAILLE-CSS#dfn-table" class="internalDFN">table</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              specified value
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        These properties map directly to the <span class="obfl-attr">table-col-spacing</span>, <span
+        class="obfl-attr">table-row-spacing</span> and <span
+        class="obfl-attr">preferred-empty-space</span> attributes of the <a href="OBFL#L2229"
+        class="obfl-elem externalDFN">table</a> element in OBFL. Lengths must be non-negative.
+      </p>
+    </section>
+    <section id="volume-breaking">
+      <h2> Volume Breaking </h2>
+      <section>
+        <h3>
+          Extending the <a href="BRAILLE-CSS#dfn-volume-break-inside" class="css-propname
+          internalDFN">volume-break-inside</a> property with <a class="css-propval">-obfl-keep()</a>
+        </h3>
+        <p>
+          A <a href="BRAILLE-CSS#dfn-volume-break-inside" class="css-propname
+          internalDFN">volume-break-inside</a> property with a <a
+          class="css-propval">-obfl-keep()</a> value maps to the OBFL <a href="OBFL#L1023"
+          class="obfl-elem externalDFN">block</a> attribute <span
+          class="obfl-attr">volume-keep-priority</span>.
+        </p>
+        <p>
+          <code>
+            <dfn>-obfl-keep()</dfn> = -obfl-keep( <a href="CSS3VAL#integer-value"
+            class="externalDFN"><var>&lt;integer&gt;</var></a> )
+          </code>
+        </p>
+        <p>
+          The function argument defines the priority. It must be an <a href="CSS3VAL#integer-value"
+          class="externalDFN"><var>&lt;integer&gt;</var></a> between 1 and 9.
+        </p>
+      </section>
+      <section>
+        <h3>
+          The <a class="css-propname">-obfl-keep-with-previous-sheets</a> and <a
+          class="css-propname">-obfl-keep-with-next-sheets properties</a>
+        </h3>
+        <table class="propdef">
+          <tbody>
+            <tr>
+              <th>Name:</th>
+              <td><dfn>-obfl-keep-with-previous-sheets</dfn></td>
+            </tr>
+            <tr>
+              <th>Value:</th>
+              <td>
+                <a href="CSS3VAL#integer-value" class="externalDFN"><var>&lt;integer&gt;</var></a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+              </th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th>Applies to:</th>
+              <td>
+                <a href="BRAILLE-CSS#dfn-block" class="internalDFN">block</a> | <a
+                href="BRAILLE-CSS#dfn-list-item" class="internalDFN">list-item</a> | <a
+                href="BRAILLE-CSS#dfn-table" class="internalDFN">table</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+              </th>
+              <td>no</td>
+            </tr>
+            <tr>
+              <th>Media:</th>
+              <td>
+                <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+              </th>
+              <td>
+                specified value
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="propdef">
+          <tbody>
+            <tr>
+              <th>Name:</th>
+              <td><dfn>-obfl-keep-with-next-sheets</dfn></td>
+            </tr>
+            <tr>
+              <th>Value:</th>
+              <td>
+                <a href="CSS3VAL#integer-value" class="externalDFN"><var>&lt;integer&gt;</var></a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+              </th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th>Applies to:</th>
+              <td>
+                <a href="BRAILLE-CSS#dfn-block" class="internalDFN">block</a> | <a
+                href="BRAILLE-CSS#dfn-list-item" class="internalDFN">list-item</a> | <a
+                href="BRAILLE-CSS#dfn-table" class="internalDFN">table</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+              </th>
+              <td>no</td>
+            </tr>
+            <tr>
+              <th>Media:</th>
+              <td>
+                <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+              </th>
+              <td>
+                specified value
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          These properties map directly to the <a href="OBFL#L1023" class="obfl-elem
+          externalDFN">block</a> attributes <span class="obfl-attr">keep-with-previous-sheets</span>
+          and <span class="obfl-attr">keep-with-next-sheets</span> in OBFL. Values must be
+          non-negative.
+        </p>
+      </section>
+    </section>
+    <section>
+      <h2>
+        Conditional rendering based on the existence of collections: the
+        -obfl-use-when-collection-not-empty property
+      </h2>
+      <p>
+        
+      </p>
+    </section>
   </body>
 </html>

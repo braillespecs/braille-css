@@ -3,7 +3,7 @@ set -x
 set -e
 CURDIR=$(cd $(dirname "$0") && pwd)
 SITE_DIR=$1
-GH_REMOTE="git@github.com:snaekobbi/braille-css-spec.git"
+GH_REMOTE="git@github.com:braillespecs/braille-css.git"
 DEFAULT_BRANCH=$( git rev-parse --abbrev-ref HEAD )
 read -p "branch? (default: $DEFAULT_BRANCH) " BRANCH
 [ -z "$BRANCH" ] && BRANCH=$DEFAULT_BRANCH
@@ -17,7 +17,7 @@ cat <<- EOF > $TMP_DIR/index.html
 	  <head>
 	    <meta charset="UTF-8"/>
 	    <script type="text/javascript">
-	      window.location.href = "http://snaekobbi.github.io/braille-css-spec/master/index.html" + window.location.hash
+	      window.location.href = "http://braillespecs.github.io/braille-css/master/index.html" + window.location.hash
 	    </script>
 	  </head>
 	</html>

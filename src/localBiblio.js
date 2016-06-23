@@ -1,23 +1,12 @@
-var respecConfig = {
-    specStatus: "unofficial",
-    shortName: "braille-css",
-    editors: [{
-      name:   "Bert Frees",
-      mailto: "bertfrees@gmail.com",
-      url:    "http://github.com/bertfrees" }],
-    additionalCopyrightHolders: "Copyright © 2014-2015 Bert Frees",
-    edDraftURI: "http://github.com/snaekobbi/braille-css-spec",
-    testSuiteURI: "http://github.com/snaekobbi/braille-css-spec",
-    otherLinks: [{
-      key: "Feedback",
-      data: [{
-        value: "https://github.com/snaekobbi/braille-css-spec/issues",
-        href: "https://github.com/snaekobbi/braille-css-spec/issues" }]}],
-    specrefUrl: "http://specref:5000",
-    /*
-     * FIXME: remove dependency on drafts
-     */
-    localBiblio: {
+/*
+ * FIXME: remove dependency on drafts
+ */
+var localBiblio = {
+      "BRAILLE-CSS": {
+        href: "http://braillespecs.github.io/braille-css",
+        title: "Braille CSS",
+        authors: ["Bert Frees"],
+        status: "Working Draft" },
       "CSS2BOX": {
         href: "http://www.w3.org/TR/CSS21/box.html" },
       "CSS2CONFORM": {
@@ -85,6 +74,11 @@ var respecConfig = {
         status: "WD",
         publisher: "W3C" },
       "PRINCE": {
-        href: "http://www.princexml.com/doc/9.0/properties/" }
-        }
-};
+        href: "http://www.princexml.com/doc/9.0/properties/" },
+      "OBFL": {
+        href: "http://braillespecs.github.io/obfl/obfl-specification.html",
+        title: "OBFL - Open Braille Formatting Language",
+        authors: ["Joel Håkansson"],
+        status: "Working Draft",
+        publisher: "MTM" }
+}
