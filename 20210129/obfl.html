@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en" prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+      <title> Braille CSS — OBFL extensions </title>
+      
+      <meta charset="utf-8">
+      
+      <link rel="stylesheet" href="style.css" type="text/css">
+      <style type="text/css">
+      .obfl-elem::before,
+      .obfl-attr::before,
+      .obfl-attr-val::before {
+        content: '‘';
+      }
+      .obfl-elem::after,
+      .obfl-attr::after,
+      .obfl-attr-val::after {
+        content: '’';
+      }
+      .obfl-variable {
+        font-family: monospace;
+      }
+      .obfl-variable::before {
+        content: '$';
+      }
+    </style>
+      
+      
+      
+      
+      
+      
+      <style>/*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  1px solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  1px dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+cite .bibref {
+    font-style: normal;
+}
+
+code {
+    color:  #ff4500;
+}
+
+/* --- TOC --- */
+.toc a, .tof a {
+    text-decoration:    none;
+}
+
+a .secno, a .figno {
+    color:  #000;
+}
+
+ul.tof, ol.tof {
+    list-style: none outside none;
+}
+
+.caption {
+    margin-top: 0.5em;
+    font-style:   italic;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+@media print {
+    .removeOnSave {
+        display: none;
+    }
+}
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/w3c-unofficial"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
+   
+   <body style="" class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
+  <p>
+    
+  </p>
+  <h1 class="title p-name" id="title" property="dcterms:title">Braille CSS — OBFL extensions</h1>
+  
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2021-01-29T00:00:00.000Z" id="unofficial-draft-29-january-2021">Unofficial Draft <time class="dt-published" datetime="2021-01-29">29 January 2021</time></h2>
+  <dl><dt>This version</dt><dd><a href="http://braillespecs.github.io/braille-css/20210129/obfl">http://braillespecs.github.io/braille-css/20210129/obfl</a></dd><dt>Latest version</dt><dd><a href="http://braillespecs.github.io/braille-css/obfl">http://braillespecs.github.io/braille-css/obfl</a></dd><dt>Previous version</dt><dd><a href="http://braillespecs.github.io/braille-css/20181031/obfl">http://braillespecs.github.io/braille-css/20181031/obfl</a></dd>
+    
+    
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="http://braillespecs.github.io/braille-css/master/obfl">http://braillespecs.github.io/braille-css/master/obfl</a></dd>
+    
+    
+    
+    
+    
+    
+    <dt>Editor:</dt>
+    <dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Bert Frees" href="http://github.com/bertfrees">Bert Frees</a>, <span class="ed_mailto"><a class="u-email email" rel="foaf:mbox" href="mailto:bertfrees@gmail.com">bertfrees@gmail.com</a></span></span>
+</dd>
+
+    
+    
+      
+        
+          <dt>Feedback:</dt>
+          
+             
+                
+                  <dd>
+                    <a href="https://github.com/braillespecs/braille-css/issues">
+                      https://github.com/braillespecs/braille-css/issues
+                    </a>
+                  </dd>
+                
+             
+          
+        
+      
+    
+  </dl>
+  
+  
+  
+  
+    
+      <p class="copyright">Copyright © 2014-2021 Bert Frees</p>
+    
+  
+  <hr>
+</div>
+      
+      <section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_abstract">Abstract</h2><p>
+         This module builds on braille CSS [<cite><a class="bibref" href="#bib-BRAILLECSS">BRAILLECSS</a></cite>] and defines a set of properties,
+         values and
+         pseudo-elements specific to OBFL based [<cite><a class="bibref" href="#bib-OBFL">OBFL</a></cite>] agents.
+         
+      </p></section><section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_sotd">Status of This Document</h2>
+  
+    <p>
+      This document is merely a public working draft of a potential specification. It has
+      no official standing of any kind and does not represent the support or consensus of any
+      standards organisation.
+    </p>
+    
+         The features defined in this document are intended to be temporary solutions. The
+         goal is to
+         define official braille CSS features that can be made to work the same across all
+         agents. In
+         order to make the distinction clear, all properties, values and pseudo-elements defined
+         here
+         have an ‘-obfl-’ prefix.
+         
+      
+  
+</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#vertical-positioning" class="tocxref"><span class="secno">1. </span>
+            Vertical Positioning: the <span class="formerLink">-obfl-vertical-positioning</span> and <span class="formerLink">-obfl-vertical-align</span> properties
+            
+         </a></li><li class="tocline"><a href="#underline" class="tocxref"><span class="secno">2. </span>
+            Underlining blocks of text: the -obfl-underline property
+            
+         </a></li><li class="tocline"><a href="#evaluate" class="tocxref"><span class="secno">3. </span>
+            Evaluating OBFL expressions: the <span class="formerLink">-obfl-evaluate()</span> function
+            
+         </a></li><li class="tocline"><a href="#tables-of-contents" class="tocxref"><span class="secno">4. </span> Tables of Contents </a><ul class="toc"><li class="tocline"><a href="#extending-the-display-property-with--obfl-toc" class="tocxref"><span class="secno">4.1 </span>
+               Extending the <span class="formerLink">display</span> property with <span class="formerLink">-obfl-toc</span>
+               
+            </a></li><li class="tocline"><a href="#the--obfl-toc-range-property" class="tocxref"><span class="secno">4.2 </span> The <span class="formerLink">-obfl-toc-range</span> property 
+            </a></li><li class="tocline"><a href="#the--obfl-on-toc-start--obfl-on-volume-start--obfl-on-volume-end-and--obfl-on-toc-end-pseudo-elements" class="tocxref"><span class="secno">4.3 </span>
+               The <span class="formerLink">::-obfl-on-toc-start</span>, <span class="formerLink">::-obfl-on-volume-start</span>,
+               <span class="formerLink">::-obfl-on-volume-end</span> and <span class="formerLink">::-obfl-on-toc-end</span>
+               pseudo-elements
+               
+            </a></li></ul></li><li class="tocline"><a href="#lists-of-references" class="tocxref"><span class="secno">5. </span> Lists of References </a><ul class="toc"><li class="tocline"><a href="#extending-the-display-property-with--obfl-list-of-references" class="tocxref"><span class="secno">5.1 </span>
+               Extending the <span class="formerLink">display</span> property with <span class="formerLink">-obfl-list-of-references</span>
+               
+            </a></li><li class="tocline"><a href="#the--obfl-collection-function" class="tocxref"><span class="secno">5.2 </span>
+               The <span class="formerLink">-obfl-collection()</span> function
+               
+            </a></li></ul></li><li class="tocline"><a href="#tables" class="tocxref"><span class="secno">6. </span>
+            Table Cell Spacing: the <span class="formerLink">-obfl-table-col-spacing</span>, <span class="formerLink">-obfl-table-row-spacing</span> and <span class="formerLink">-obfl-preferred-empty-space</span> properties
+            
+         </a></li><li class="tocline"><a href="#volume-breaking" class="tocxref"><span class="secno">7. </span> Volume Breaking </a><ul class="toc"><li class="tocline"><a href="#extending-the-volume-break-inside-property-with--obfl-keep" class="tocxref"><span class="secno">7.1 </span>
+               Extending the <span class="formerLink">volume-break-inside</span> property with <span class="formerLink">-obfl-keep()</span>
+               
+            </a></li><li class="tocline"><a href="#the--obfl-keep-with-previous-sheets-and--obfl-keep-with-next-sheets-properties" class="tocxref"><span class="secno">7.2 </span>
+               The <span class="formerLink">-obfl-keep-with-previous-sheets</span> and -obfl-keep-with-next-sheets properties
+               
+            </a></li></ul></li><li class="tocline"><a href="#conditional-rendering" class="tocxref"><span class="secno">8. </span>
+            Conditional rendering based on the existence of collections: the <span class="formerLink">-obfl-use-when-collection-not-empty</span> property
+            
+         </a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">A. </span>References</a><ul class="toc"><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">A.1 </span>Informative references</a></li></ul></li></ul></section>
+      
+      
+      
+      <section id="vertical-positioning" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter">
+         
+         <!--OddPage--><h2 aria-level="1" role="heading" id="h2_vertical-positioning"><span class="secno"><a class="self-link" href="#h2_vertical-positioning">1. </a></span>
+            Vertical Positioning: the <span class="css-propname"><a class="internalDFN" href="#dfn-obfl-vertical-positioning">-obfl-vertical-positioning</a></span> and <span class="css-propname"><a class="internalDFN" href="#dfn-obfl-vertical-align">-obfl-vertical-align</a></span> properties
+            
+         </h2>
+         
+         <table class="propdef">
+            
+            <tbody>
+               
+               <tr>
+                  
+                  <th>Name:</th>
+                  
+                  <td><dfn id="dfn-obfl-vertical-positioning"><a class="self-link" href="#dfn-obfl-vertical-positioning">-obfl-vertical-positioning</a></dfn></td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Value:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-length" class="internalDFN"><var>&lt;length&gt;</var></a> |
+                     auto
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                     
+                  </th>
+                  
+                  <td>auto</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Applies to:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-block" class="internalDFN">block</a> | <a href="http://braillespecs.github.io/braille-css/master#dfn-list-item" class="internalDFN">list-item</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                     
+                  </th>
+                  
+                  <td>no</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Media:</th>
+                  
+                  <td>
+                     <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                     
+                  </th>
+                  
+                  <td>
+                     specified value
+                     
+                  </td>
+                  
+               </tr>
+               
+            </tbody>
+            
+         </table>
+         
+         <table class="propdef">
+            
+            <tbody>
+               
+               <tr>
+                  
+                  <th>Name:</th>
+                  
+                  <td><dfn id="dfn-obfl-vertical-align"><a class="self-link" href="#dfn-obfl-vertical-align">-obfl-vertical-align</a></dfn></td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Value:</th>
+                  
+                  <td>
+                     before | center | after
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                     
+                  </th>
+                  
+                  <td>after</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Applies to:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-block" class="internalDFN">block</a> | <a href="http://braillespecs.github.io/braille-css/master#dfn-list-item" class="internalDFN">list-item</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                     
+                  </th>
+                  
+                  <td>no</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Media:</th>
+                  
+                  <td>
+                     <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                     
+                  </th>
+                  
+                  <td>
+                     specified value
+                     
+                  </td>
+                  
+               </tr>
+               
+            </tbody>
+            
+         </table>
+         
+         <p>
+            These properties map directly to the <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L1023" class="obfl-elem         externalDFN">block</a> attributes <span class="obfl-attr">vertical-position</span> and <span class="obfl-attr">vertical-align</span> in OBFL. Lengths must be non-negative.
+            
+         </p>
+         
+      </section>
+      
+      <section id="underline" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter">
+         
+         <!--OddPage--><h2 aria-level="1" role="heading" id="h2_underline"><span class="secno"><a class="self-link" href="#h2_underline">2. </a></span>
+            Underlining blocks of text: the -obfl-underline property
+            
+         </h2>
+         
+         <table class="propdef">
+            
+            <tbody>
+               
+               <tr>
+                  
+                  <th>Name:</th>
+                  
+                  <td><dfn id="dfn-obfl-underline"><a class="self-link" href="#dfn-obfl-underline">-obfl-underline</a></dfn></td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Value:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-braille-character" class="internalDFN"><var>&lt;braille-character&gt;</var></a> | none
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                     
+                  </th>
+                  
+                  <td>none</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Applies to:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-block" class="internalDFN">block</a> | <a href="http://braillespecs.github.io/braille-css/master#dfn-list-item" class="internalDFN">list-item</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                     
+                  </th>
+                  
+                  <td>no</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Media:</th>
+                  
+                  <td>
+                     <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                     
+                  </th>
+                  
+                  <td>
+                     specified value
+                     
+                  </td>
+                  
+               </tr>
+               
+            </tbody>
+            
+         </table>
+         
+         <p>
+            This property maps to a combination of OBFL <a href="http://braillespecs.github.io/obfl/obfl-specification.html#block-atts" class="obfl-elem         externalDFN">block</a> attributes <span class="obfl-attr">underline-style</span>, <span class="obfl-attr">underline-align</span> and <span class="obfl-attr">underline-width</span>.
+            
+         </p>
+         
+      </section>
+      
+      <section id="evaluate" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter">
+         
+         <!--OddPage--><h2 aria-level="1" role="heading" id="h2_evaluate"><span class="secno"><a class="self-link" href="#h2_evaluate">3. </a></span>
+            Evaluating OBFL expressions: the <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-evaluate">-obfl-evaluate()</a></span> function
+            
+         </h2>
+         
+         <p>
+            This module extends the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-content" class="internalDFN">content</a></span> property with the <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-evaluate">-obfl-evaluate()</a></span>
+            function, which evaluates an “OBFL Evaluation Language” [<cite><a class="bibref" href="#bib-OBFLEVAL">OBFLEVAL</a></cite>] expression. <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-evaluate">-obfl-evaluate()</a></span> is added to the list of possible values in the
+            definition of <a href="http://braillespecs.github.io/braille-css/master#dfn-content-list" class="internalDFN">&lt;content-list&gt;</a>.
+            
+         </p>
+         
+         <p>
+            <code>
+               <dfn id="dfn-obfl-evaluate"><a class="self-link" href="#dfn-obfl-evaluate">-obfl-evaluate()</a></dfn> = -obfl-evaluate( <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#string-value" class="externalDFN"><var>&lt;string&gt;</var></a> )
+               </code>
+            
+         </p>
+         
+         <p>
+            The string argument must be a valid OBFL Evaluation Language expression. In addition,
+            the <a href="http://braillespecs.github.io/obfl/obfl-evaluation-language.html#L14889">variables</a> used in the expression must be available in the context
+            of the element on which the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-content" class="internalDFN">content</a></span> property with the <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-evaluate">-obfl-evaluate()</a></span> value
+            is specified. Available variables are:
+            
+         </p>
+         
+         <dl>
+            
+            <dt>
+               <dfn title="var-volume" class="obfl-variable" id="dfn-var-volume"><a class="self-link" href="#dfn-var-volume">volume</a></dfn>
+               
+            </dt>
+            
+            <dd>
+               The current volume number. Available in the context of <a href="http://braillespecs.github.io/braille-css/master#dfn-begin" class="internalDFN css">@begin</a> and <a href="http://braillespecs.github.io/braille-css/master#dfn-end" class="internalDFN           css">@end</a> areas. (That means, the element on which the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-content" class="internalDFN">content</a></span> property is
+               specified must be flowed into a <span class="css">@begin</span> or <span class="css">@end</span> area. See the chapter about <a href="http://braillespecs.github.io/braille-css/master#h3_named-flows">Named flows</a>.)
+               
+            </dd>
+            
+            <dt>
+               <dfn title="var-volumes" class="obfl-variable" id="dfn-var-volumes"><a class="self-link" href="#dfn-var-volumes">volumes</a></dfn>
+               
+            </dt>
+            
+            <dd>
+               The total number of volumes. Available in the context of <a href="http://braillespecs.github.io/braille-css/master#dfn-begin" class="internalDFN css">@begin</a> and <a href="http://braillespecs.github.io/braille-css/master#dfn-end" class="internalDFN           css">@end</a> areas.
+               
+            </dd>
+            
+            <dt>
+               <dfn title="var-sheets-in-volume" class="obfl-variable" id="dfn-var-sheets-in-volume"><a class="self-link" href="#dfn-var-sheets-in-volume">sheets-in-volume</a></dfn>
+               
+            </dt>
+            
+            <dd>
+               The number of sheets contained in the current volume. Available in the context of
+               <a href="http://braillespecs.github.io/braille-css/master#dfn-begin" class="internalDFN css">@begin</a> and <a href="http://braillespecs.github.io/braille-css/master#dfn-end" class="internalDFN css">@end</a> areas.
+               
+            </dd>
+            
+            <dt>
+               <dfn title="var-sheets-in-document" class="obfl-variable" id="dfn-var-sheets-in-document"><a class="self-link" href="#dfn-var-sheets-in-document">sheets-in-document</a></dfn>
+               
+            </dt>
+            
+            <dd>
+               The number of sheets contained in the whole document. Available in the context of
+               <a href="http://braillespecs.github.io/braille-css/master#dfn-begin" class="internalDFN css">@begin</a> and <a href="http://braillespecs.github.io/braille-css/master#dfn-end" class="internalDFN css">@end</a> areas.
+               
+            </dd>
+            
+            <dt>
+               <dfn title="var-volume-started-number" class="obfl-variable" id="dfn-var-volume-started-number"><a class="self-link" href="#dfn-var-volume-started-number">volume-started-number</a></dfn>
+               
+            </dt>
+            
+            <dd>
+               The volume number of the current volume section in a table of contents or list of
+               references. Available in the context of <a class="css internalDFN" href="#dfn-obfl-on-volume-start">::-obfl-on-volume-start</a> and <a class="css internalDFN" href="#dfn-obfl-on-volume-end">::-obfl-on-volume-end</a> pseudo-elements.
+               
+            </dd>
+            
+         </dl>
+         
+      </section>
+      
+      <section id="tables-of-contents" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter">
+         
+         <!--OddPage--><h2 aria-level="1" role="heading" id="h2_tables-of-contents"><span class="secno"><a class="self-link" href="#h2_tables-of-contents">4. </a></span> Tables of Contents </h2>
+         
+         <section id="extending-the-display-property-with--obfl-toc">
+            
+            <h3 aria-level="2" role="heading" id="h3_extending-the-display-property-with--obfl-toc"><span class="secno"><a class="self-link" href="#h3_extending-the-display-property-with--obfl-toc">4.1 </a></span>
+               Extending the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN">display</a></span> property with <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-toc">-obfl-toc</a></span>
+               
+            </h3>
+            
+            <p>
+               Braille CSS [<cite><a class="bibref" href="#bib-BRAILLECSS">BRAILLECSS</a></cite>] defines the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN">display</a></span> property with possible values <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-block" class="internalDFN" title="block">block</a></span>, <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-inline" class="internalDFN" title="inline">inline</a></span>, <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-list-item" class="internalDFN" title="list-item">list-item</a></span>, and <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-display-none" class="internalDFN" title="none">none</a></span>. This module
+               extends the possible values with <dfn class="css-propval" id="dfn-obfl-toc"><a class="self-link" href="#dfn-obfl-toc">-obfl-toc</a></dfn>.
+               
+            </p>
+            
+            <p>
+               The <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-toc">-obfl-toc</a></span> value corresponds in OBFL with a <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L9241" class="obfl-elem externalDFN">toc-sequence</a> element that is backed by
+               a <a href="OBLF#L735" class="obfl-elem externalDFN">table-of-contents</a> element. The
+               content of the <span class="obfl-elem">table-of-contents</span> element in OBFL
+               corresponds with the content of the <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-toc">-obfl-toc</a></span> element in
+               CSS. The <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-toc">-obfl-toc</a></span> value only applies to elements that are
+               placed into a <a href="http://braillespecs.github.io/braille-css/master#h3_the-begin-and-end-rules">volume area</a> through the
+               mechanism of <a href="http://braillespecs.github.io/braille-css/master#h3_named-flows">named flows</a>.
+               
+            </p>
+            
+            <p>
+               <span class="css-propval">-obfl-table-of-contents</span> may be used as an alias for <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-toc">-obfl-toc</a></span>.
+               
+            </p>
+            
+         </section>
+         
+         <section id="the--obfl-toc-range-property">
+            
+            <h3 aria-level="2" role="heading" id="h3_the--obfl-toc-range-property"><span class="secno"><a class="self-link" href="#h3_the--obfl-toc-range-property">4.2 </a></span> The <span class="css-propname"><a class="internalDFN" href="#dfn-obfl-toc-range">-obfl-toc-range</a></span> property 
+            </h3>
+            
+            <table class="propdef">
+               
+               <tbody>
+                  
+                  <tr>
+                     
+                     <th>Name:</th>
+                     
+                     <td><dfn id="dfn-obfl-toc-range"><a class="self-link" href="#dfn-obfl-toc-range">-obfl-toc-range</a></dfn></td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Value:</th>
+                     
+                     <td>
+                        document | volume
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                        
+                     </th>
+                     
+                     <td>document</td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Applies to:</th>
+                     
+                     <td>
+                        <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-toc">-obfl-toc</a></span>
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                        
+                     </th>
+                     
+                     <td>no</td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Media:</th>
+                     
+                     <td>
+                        <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                        
+                     </th>
+                     
+                     <td>
+                        specified value
+                        
+                     </td>
+                     
+                  </tr>
+                  
+               </tbody>
+               
+            </table>
+            
+            <p>
+               This property maps directly to the <span class="obfl-attr">range</span> attribute of the
+               <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L9241" class="obfl-elem externalDFN">toc-sequence</a> element in OBFL.
+               
+            </p>
+            
+         </section>
+         
+         <section id="the--obfl-on-toc-start--obfl-on-volume-start--obfl-on-volume-end-and--obfl-on-toc-end-pseudo-elements">
+            
+            <h3 aria-level="2" role="heading" id="h3_the--obfl-on-toc-start--obfl-on-volume-start--obfl-on-volume-end-and--obfl-on-toc-end-pseudo-elements"><span class="secno"><a class="self-link" href="#h3_the--obfl-on-toc-start--obfl-on-volume-start--obfl-on-volume-end-and--obfl-on-toc-end-pseudo-elements">4.3 </a></span>
+               The <a class="css internalDFN" href="#dfn-obfl-on-toc-start">::-obfl-on-toc-start</a>, <a class="css internalDFN" href="#dfn-obfl-on-volume-start">::-obfl-on-volume-start</a>,
+               <a class="css internalDFN" href="#dfn-obfl-on-volume-end">::-obfl-on-volume-end</a> and <a class="css internalDFN" href="#dfn-obfl-on-toc-end">::-obfl-on-toc-end</a>
+               pseudo-elements
+               
+            </h3>
+            
+            <p>
+               The <dfn class="css" id="dfn-obfl-on-toc-start"><a class="self-link" href="#dfn-obfl-on-toc-start">::-obfl-on-toc-start</a></dfn>, <dfn class="css" id="dfn-obfl-on-volume-start"><a class="self-link" href="#dfn-obfl-on-volume-start">::-obfl-on-volume-start</a></dfn>, <dfn class="css" id="dfn-obfl-on-volume-end"><a class="self-link" href="#dfn-obfl-on-volume-end">::-obfl-on-volume-end</a></dfn>
+               and <dfn class="css" id="dfn-obfl-on-toc-end"><a class="self-link" href="#dfn-obfl-on-toc-end">::-obfl-on-toc-end</a></dfn> pseudo-elements correspond directly with the
+               <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L9514" class="obfl-elem externalDFN">on-toc-start</a>, <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L969" class="obfl-elem externalDFN">on-volume-start</a>, <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L987" class="obfl-elem           externalDFN">on-volume-end</a> and <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L1005" class="obfl-elem           externalDFN">on-toc-end</a> elements in OBFL. These pseudo-elements apply to elements with
+               a <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN">display</a></span> value of
+               <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-toc">-obfl-toc</a></span>. They are generated if and only if the <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">computed value</a> of their <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-content" title="content" class="internalDFN">content</a></span> property
+               is not <span class="css-propval">none</span> and does not consist of <a title="collapsible" class="internalDFN" href="http://braillespecs.github.io/braille-css/master#collapsible">collapsible white space</a>
+               only. In addition, the <a class="css internalDFN" href="#dfn-obfl-on-volume-start">::-obfl-on-volume-start</a> and <a class="css internalDFN" href="#dfn-obfl-on-volume-end">::-obfl-on-volume-end</a> pseudo-elements also apply to elements with a <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN">display</a></span> value of <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-list-of-references">-obfl-list-of-references</a></span> (see below).
+               
+            </p>
+            
+         </section>
+         
+      </section>
+      
+      <section id="lists-of-references" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter">
+         
+         <!--OddPage--><h2 aria-level="1" role="heading" id="h2_lists-of-references"><span class="secno"><a class="self-link" href="#h2_lists-of-references">5. </a></span> Lists of References </h2>
+         
+         <p>
+            A list of references (typically a list of notes at the beginning or end of a chapter,
+            volume
+            or document) may be generated using the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-flow" class="internalDFN">flow</a></span> property and the <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-flow-1" class="internalDFN">flow()</a></span> function, as explained in the section <a href="http://braillespecs.github.io/braille-css/master#h3_endnotes">Endnotes</a>. This section provides an alternative way to
+            generate a list of references, only at the beginning or end of the document, but with
+            support for sorting references per volume.
+            
+         </p>
+         
+         <section id="extending-the-display-property-with--obfl-list-of-references">
+            
+            <h3 aria-level="2" role="heading" id="h3_extending-the-display-property-with--obfl-list-of-references"><span class="secno"><a class="self-link" href="#h3_extending-the-display-property-with--obfl-list-of-references">5.1 </a></span>
+               Extending the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN">display</a></span> property with <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-list-of-references">-obfl-list-of-references</a></span>
+               
+            </h3>
+            
+            <p>
+               Braille CSS [<cite><a class="bibref" href="#bib-BRAILLECSS">BRAILLECSS</a></cite>] defines the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN">display</a></span> property with possible values <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-block" class="internalDFN" title="block">block</a></span>, <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-inline" class="internalDFN" title="inline">inline</a></span>, <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-list-item" class="internalDFN" title="list-item">list-item</a></span>, and <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-display-none" class="internalDFN" title="none">none</a></span>. This module
+               extends the possible values with <dfn class="css-propval" id="dfn-obfl-list-of-references"><a class="self-link" href="#dfn-obfl-list-of-references">-obfl-list-of-references</a></dfn>.
+               
+            </p>
+            
+            <p>
+               The <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-list-of-references">-obfl-list-of-references</a></span> value corresponds with the <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L9242" class="obfl-elem externalDFN">list-of-references</a> element in
+               OBFL. The <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L1194" class="obfl-elem externalDFN">collection</a> from which the
+               items are taken is determined by the element's <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-content" title="content" class="internalDFN">content</a></span> property, which must consist of exactly one
+               <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-collection">-obfl-collection()</a></span> value. The <span class="obfl-attr">range</span> is always <span class="obfl-attr-val">document</span>.
+               
+            </p>
+            
+            <p>
+               The <span class="css-propval">-obfl-list-of-references</span> value only applies to <a href="http://braillespecs.github.io/braille-css/master#dfn-alternate" class="css internalDFN">::alternate</a> pseudo-elements
+               that are placed into a <a href="http://braillespecs.github.io/braille-css/master#h3_the-begin-and-end-rules">volume area</a>
+               through the mechanism of <a href="http://braillespecs.github.io/braille-css/master#h3_named-flows">named flows</a>.
+               
+            </p>
+            
+            <p>
+               Elements with a <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN" title="display">display</a></span>
+               value of <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-list-of-references">-obfl-list-of-references</a></span> support the <a class="css internalDFN" href="#dfn-obfl-on-volume-start">::-obfl-on-volume-start</a> and <a class="css internalDFN" href="#dfn-obfl-on-volume-end">::-obfl-on-volume-end</a>
+               pseudo-elements.
+               
+            </p>
+            
+         </section>
+         
+         <section id="the--obfl-collection-function">
+            
+            <h3 aria-level="2" role="heading" id="h3_the--obfl-collection-function"><span class="secno"><a class="self-link" href="#h3_the--obfl-collection-function">5.2 </a></span>
+               The <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-collection">-obfl-collection()</a></span> function
+               
+            </h3>
+            
+            <p>
+               The <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-collection">-obfl-collection()</a></span> function has exactly the same meaning as
+               the <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-flow-1" class="internalDFN">flow()</a></span> function,
+               except that it doesn't accept an optional second argument. The range is therefore
+               always
+               <a title="flow-range-document" href="http://braillespecs.github.io/braille-css/master#dfn-flow-range-document" class="css           internalDFN">document</a>.
+               
+            </p>
+            
+            <p>
+               <code>
+                  <dfn id="dfn-obfl-collection"><a class="self-link" href="#dfn-obfl-collection">-obfl-collection()</a></dfn> = -obfl-collection( <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value" class="externalDFN"><var>&lt;custom-ident&gt;</var></a> )
+                  </code>
+               
+            </p>
+            
+            <p>
+               Unlike the <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-flow-1" class="internalDFN">flow()</a></span>
+               function, the <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-collection">-obfl-collection()</a></span> function is allowed in an
+               element that participates in a named flow itself. On the other hand, it is also much
+               more
+               limited in use than <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-flow-1" class="internalDFN">flow()</a></span>, since it is only allowed within elements with a <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN" title="display">display</a></span> value of <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-list-of-references">-obfl-list-of-references</a></span>.
+               
+            </p>
+            
+         </section>
+         
+      </section>
+      
+      <section id="tables" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter">
+         
+         <!--OddPage--><h2 aria-level="1" role="heading" id="h2_tables"><span class="secno"><a class="self-link" href="#h2_tables">6. </a></span>
+            Table Cell Spacing: the <a class="obfl-attr internalDFN" href="#dfn-obfl-table-col-spacing">-obfl-table-col-spacing</a>, <a class="obfl-attr internalDFN" href="#dfn-obfl-table-row-spacing">-obfl-table-row-spacing</a> and <a class="obfl-attr internalDFN" href="#dfn-obfl-preferred-empty-space">-obfl-preferred-empty-space</a> properties
+            
+         </h2>
+         
+         <table class="propdef">
+            
+            <tbody>
+               
+               <tr>
+                  
+                  <th>Name:</th>
+                  
+                  <td><dfn id="dfn-obfl-table-col-spacing"><a class="self-link" href="#dfn-obfl-table-col-spacing">-obfl-table-col-spacing</a></dfn></td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Value:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-length" class="internalDFN"><var>&lt;length&gt;</var></a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                     
+                  </th>
+                  
+                  <td>0</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Applies to:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-table" class="internalDFN">table</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                     
+                  </th>
+                  
+                  <td>no</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Media:</th>
+                  
+                  <td>
+                     <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                     
+                  </th>
+                  
+                  <td>
+                     specified value
+                     
+                  </td>
+                  
+               </tr>
+               
+            </tbody>
+            
+         </table>
+         
+         <table class="propdef">
+            
+            <tbody>
+               
+               <tr>
+                  
+                  <th>Name:</th>
+                  
+                  <td><dfn id="dfn-obfl-table-row-spacing"><a class="self-link" href="#dfn-obfl-table-row-spacing">-obfl-table-row-spacing</a></dfn></td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Value:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-length" class="internalDFN"><var>&lt;length&gt;</var></a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                     
+                  </th>
+                  
+                  <td>0</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Applies to:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-table" class="internalDFN">table</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                     
+                  </th>
+                  
+                  <td>no</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Media:</th>
+                  
+                  <td>
+                     <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                     
+                  </th>
+                  
+                  <td>
+                     specified value
+                     
+                  </td>
+                  
+               </tr>
+               
+            </tbody>
+            
+         </table>
+         
+         <table class="propdef">
+            
+            <tbody>
+               
+               <tr>
+                  
+                  <th>Name:</th>
+                  
+                  <td><dfn id="dfn-obfl-preferred-empty-space"><a class="self-link" href="#dfn-obfl-preferred-empty-space">-obfl-preferred-empty-space</a></dfn></td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Value:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-length" class="internalDFN"><var>&lt;length&gt;</var></a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                     
+                  </th>
+                  
+                  <td>2</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Applies to:</th>
+                  
+                  <td>
+                     <a href="http://braillespecs.github.io/braille-css/master#dfn-table" class="internalDFN">table</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                     
+                  </th>
+                  
+                  <td>no</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Media:</th>
+                  
+                  <td>
+                     <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                     
+                  </th>
+                  
+                  <td>
+                     specified value
+                     
+                  </td>
+                  
+               </tr>
+               
+            </tbody>
+            
+         </table>
+         
+         <p>
+            These properties map directly to the <span class="obfl-attr">table-col-spacing</span>, <span class="obfl-attr">table-row-spacing</span> and <span class="obfl-attr">preferred-empty-space</span> attributes of the <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L2229" class="obfl-elem externalDFN">table</a> element in OBFL. Lengths must be non-negative.
+            
+         </p>
+         
+      </section>
+      
+      <section id="volume-breaking" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter">
+         
+         <!--OddPage--><h2 aria-level="1" role="heading" id="h2_volume-breaking"><span class="secno"><a class="self-link" href="#h2_volume-breaking">7. </a></span> Volume Breaking </h2>
+         
+         <section id="extending-the-volume-break-inside-property-with--obfl-keep">
+            
+            <h3 aria-level="2" role="heading" id="h3_extending-the-volume-break-inside-property-with--obfl-keep"><span class="secno"><a class="self-link" href="#h3_extending-the-volume-break-inside-property-with--obfl-keep">7.1 </a></span>
+               Extending the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-volume-break-inside" class="internalDFN">volume-break-inside</a></span> property with <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-keep">-obfl-keep()</a></span>
+               
+            </h3>
+            
+            <p>
+               A <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-volume-break-inside" class="internalDFN">volume-break-inside</a></span> property with a <span class="css-propval"><a class="internalDFN" href="#dfn-obfl-keep">-obfl-keep()</a></span> value maps to the OBFL <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L1023" class="obfl-elem externalDFN">block</a> attribute <span class="obfl-attr">volume-keep-priority</span>.
+               
+            </p>
+            
+            <p>
+               <code>
+                  <dfn id="dfn-obfl-keep"><a class="self-link" href="#dfn-obfl-keep">-obfl-keep()</a></dfn> = -obfl-keep( <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#integer-value" class="externalDFN"><var>&lt;integer&gt;</var></a> )
+                  </code>
+               
+            </p>
+            
+            <p>
+               The function argument defines the priority. It must be an <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#integer-value" class="externalDFN"><var>&lt;integer&gt;</var></a> between 1 and 9.
+               
+            </p>
+            
+         </section>
+         
+         <section id="the--obfl-keep-with-previous-sheets-and--obfl-keep-with-next-sheets-properties">
+            
+            <h3 aria-level="2" role="heading" id="h3_the--obfl-keep-with-previous-sheets-and--obfl-keep-with-next-sheets-properties"><span class="secno"><a class="self-link" href="#h3_the--obfl-keep-with-previous-sheets-and--obfl-keep-with-next-sheets-properties">7.2 </a></span>
+               The <span class="css-propname"><a class="internalDFN" href="#dfn-obfl-keep-with-previous-sheets">-obfl-keep-with-previous-sheets</a></span> and -obfl-keep-with-next-sheets properties
+               
+            </h3>
+            
+            <table class="propdef">
+               
+               <tbody>
+                  
+                  <tr>
+                     
+                     <th>Name:</th>
+                     
+                     <td><dfn id="dfn-obfl-keep-with-previous-sheets"><a class="self-link" href="#dfn-obfl-keep-with-previous-sheets">-obfl-keep-with-previous-sheets</a></dfn></td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Value:</th>
+                     
+                     <td>
+                        <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#integer-value" class="externalDFN"><var>&lt;integer&gt;</var></a>
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                        
+                     </th>
+                     
+                     <td>0</td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Applies to:</th>
+                     
+                     <td>
+                        <a href="http://braillespecs.github.io/braille-css/master#dfn-block" class="internalDFN">block</a> | <a href="http://braillespecs.github.io/braille-css/master#dfn-list-item" class="internalDFN">list-item</a> | <a href="http://braillespecs.github.io/braille-css/master#dfn-table" class="internalDFN">table</a>
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                        
+                     </th>
+                     
+                     <td>no</td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Media:</th>
+                     
+                     <td>
+                        <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                        
+                     </th>
+                     
+                     <td>
+                        specified value
+                        
+                     </td>
+                     
+                  </tr>
+                  
+               </tbody>
+               
+            </table>
+            
+            <table class="propdef">
+               
+               <tbody>
+                  
+                  <tr>
+                     
+                     <th>Name:</th>
+                     
+                     <td><dfn id="dfn-obfl-keep-with-next-sheets"><a class="self-link" href="#dfn-obfl-keep-with-next-sheets">-obfl-keep-with-next-sheets</a></dfn></td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Value:</th>
+                     
+                     <td>
+                        <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#integer-value" class="externalDFN"><var>&lt;integer&gt;</var></a>
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                        
+                     </th>
+                     
+                     <td>0</td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Applies to:</th>
+                     
+                     <td>
+                        <a href="http://braillespecs.github.io/braille-css/master#dfn-block" class="internalDFN">block</a> | <a href="http://braillespecs.github.io/braille-css/master#dfn-list-item" class="internalDFN">list-item</a> | <a href="http://braillespecs.github.io/braille-css/master#dfn-table" class="internalDFN">table</a>
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                        
+                     </th>
+                     
+                     <td>no</td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>Media:</th>
+                     
+                     <td>
+                        <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                        
+                     </td>
+                     
+                  </tr>
+                  
+                  <tr>
+                     
+                     <th>
+                        <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                        
+                     </th>
+                     
+                     <td>
+                        specified value
+                        
+                     </td>
+                     
+                  </tr>
+                  
+               </tbody>
+               
+            </table>
+            
+            <p>
+               These properties map directly to the <a href="http://braillespecs.github.io/obfl/obfl-specification.html#L1023" class="obfl-elem           externalDFN">block</a> attributes <span class="obfl-attr">keep-with-previous-sheets</span>
+               and <span class="obfl-attr">keep-with-next-sheets</span> in OBFL. Values must be
+               non-negative.
+               
+            </p>
+            
+         </section>
+         
+      </section>
+      
+      <section id="conditional-rendering" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter">
+         
+         <!--OddPage--><h2 aria-level="1" role="heading" id="h2_conditional-rendering"><span class="secno"><a class="self-link" href="#h2_conditional-rendering">8. </a></span>
+            Conditional rendering based on the existence of collections: the <span class="css-propname"><a class="internalDFN" href="#dfn-obfl-use-when-collection-not-empty">-obfl-use-when-collection-not-empty</a></span> property
+            
+         </h2>
+         
+         <table class="propdef">
+            
+            <tbody>
+               
+               <tr>
+                  
+                  <th>Name:</th>
+                  
+                  <td><dfn id="dfn-obfl-use-when-collection-not-empty"><a class="self-link" href="#dfn-obfl-use-when-collection-not-empty">-obfl-use-when-collection-not-empty</a></dfn></td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Value:</th>
+                  
+                  <td>
+                     <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value" class="externalDFN">&lt;custom-ident&gt;</a> | normal
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#initial-value" class="externalDFN">Initial</a>:
+                     
+                  </th>
+                  
+                  <td>normal</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Applies to:</th>
+                  
+                  <td>
+                     all elements
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#inherited-property" class="externalDFN">Inherited</a>:
+                     
+                  </th>
+                  
+                  <td>no</td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>Media:</th>
+                  
+                  <td>
+                     <a href="http://www.w3.org/TR/CSS21/media.html#media-types" class="externalDFN">embossed</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+               <tr>
+                  
+                  <th>
+                     <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#computed" class="externalDFN">Computed value</a>:
+                     
+                  </th>
+                  
+                  <td>
+                     the <a href="http://www.w3.org/TR/2013/CR-css-cascade-3-20131003/#specified" class="externalDFN">specified value</a>
+                     
+                  </td>
+                  
+               </tr>
+               
+            </tbody>
+            
+         </table>
+         
+         <p>
+            If the value identifies a <a href="http://braillespecs.github.io/braille-css/master#dfn-named-flow" class="internalDFN">named
+               flow</a> through which content has passed, the element behaves normally, otherwise it
+            generates no boxes (as if the <span class="css-propname"><a href="http://braillespecs.github.io/braille-css/master#dfn-display" class="internalDFN">display</a></span> property were set to <span class="css-propval"><a href="http://braillespecs.github.io/braille-css/master#dfn-display-none" class="internalDFN">none</a></span>).
+            
+         </p>
+         
+      </section>
+      
+   
+   
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno"><a class="self-link" href="#h2_references">A. </a></span>References</h2><section id="informative-references" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_informative-references"><span class="secno"><a class="self-link" href="#h3_informative-references">A.1 </a></span>Informative references</h3><dl class="bibliography" about=""><dt id="bib-BRAILLECSS">[BRAILLECSS]</dt><dd rel="dcterms:references">Bert Frees. <a href="http://braillespecs.github.io/braille-css/master"><cite>Braille CSS</cite></a>. Unofficial Draft. URL: <a href="http://braillespecs.github.io/braille-css/master">http://braillespecs.github.io/braille-css/master</a>
+</dd><dt id="bib-OBFL">[OBFL]</dt><dd rel="dcterms:references">Joel Håkansson. <a href="http://braillespecs.github.io/obfl/obfl-specification.html"><cite>OBFL - Open Braille Formatting Language</cite></a>. Unofficial Draft. URL: <a href="http://braillespecs.github.io/obfl/obfl-specification.html">http://braillespecs.github.io/obfl/obfl-specification.html</a>
+</dd><dt id="bib-OBFLEVAL">[OBFLEVAL]</dt><dd rel="dcterms:references">Joel Håkansson. <a href="http://braillespecs.github.io/obfl/obfl-evaluation-language.html"><cite>OBFL Evaluation Language</cite></a>. Unofficial Draft. URL: <a href="http://braillespecs.github.io/obfl/obfl-evaluation-language.html">http://braillespecs.github.io/obfl/obfl-evaluation-language.html</a>
+</dd></dl></section></section></body></html>
