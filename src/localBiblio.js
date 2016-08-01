@@ -2,11 +2,13 @@
  * FIXME: remove dependency on drafts
  */
 var localBiblio = {
-      "BRAILLE-CSS": {
-        href: "http://braillespecs.github.io/braille-css",
+      "braille-css-20160801": {
+        href: "http://braillespecs.github.io/braille-css/20160801",
         title: "Braille CSS",
         authors: ["Bert Frees"],
         status: "Working Draft" },
+      "BRAILLECSS": {
+        aliasOf: "braille-css-20160801" },
       "CSS2BOX": {
         href: "http://www.w3.org/TR/CSS21/box.html" },
       "CSS2CONFORM": {
