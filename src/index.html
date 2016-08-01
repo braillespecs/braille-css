@@ -6,25 +6,14 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="style.css" type="text/css"></link>
     <script type="text/javascript" src="localBiblio.js" class="remove"/>
+    <script type="text/javascript" src="config.js" class="remove"/>
     <script type="text/javascript" class="remove">
-      var respecConfig = {
-        specStatus: "unofficial",
+      respecConfig({
         shortName: "braille-css",
-        editors: [{
-          name:   "Bert Frees",
-          mailto: "bertfrees@gmail.com",
-          url:    "http://github.com/bertfrees" }],
-        additionalCopyrightHolders: "Copyright © 2014-2016 Bert Frees",
-        edDraftURI: "http://braillespecs.github.io/braille-css",
-        // testSuiteURI: "http://github.com/braillespecs/braille-css",
-        otherLinks: [{
-          key: "Feedback",
-          data: [{
-            value: "https://github.com/braillespecs/braille-css/issues",
-            href: "https://github.com/braillespecs/braille-css/issues" }]}],
-        specrefUrl: "http://specref:5000",
-        localBiblio: localBiblio
-      }
+        baseURI: "http://braillespecs.github.io/braille-css/",
+        latestURI: "http://braillespecs.github.io/braille-css",
+        edDraftURI: "http://braillespecs.github.io/braille-css/master",
+      });
     </script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" class="remove"/>
     <script type="text/javascript" src="postProcessing.js" class="remove"/>

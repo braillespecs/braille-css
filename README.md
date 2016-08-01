@@ -20,7 +20,7 @@ Then build the site (target/site/) with:
 
 To build the site without running the tests:
 
-    make SKIP_TESTS
+    make SKIP_TESTS=true
 
 
 License
