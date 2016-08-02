@@ -14,6 +14,12 @@
       .obfl-attr::after {
         content: '’';
       }
+      .obfl-variable {
+        font-family: monospace;
+      }
+      .obfl-variable::before {
+        content: '$';
+      }
     </style>
     <script type="text/javascript" src="localBiblio.js" class="remove"/>
     <script type="text/javascript" src="config.js" class="remove"/>
@@ -201,10 +207,82 @@
         </tbody>
       </table>
       <p>
-        This property maps to a combination of OBFL <a href="OBFL#L1023" class="obfl-elem
+        This property maps to a combination of OBFL <a href="OBFL#block-atts" class="obfl-elem
         externalDFN">block</a> attributes <span class="obfl-attr">underline-style</span>, <span
         class="obfl-attr">underline-align</span> and <span class="obfl-attr">underline-width</span>.
       </p>
+    </section>
+    <section id="evaluate">
+      <h2>
+        Evaluating OBFL expressions: the <a class="css-propname">-obfl-evaluate()</a> function
+      </h2>
+      <p>
+        This module extends the <a href="BRAILLECSS#dfn-content" class="css-propname
+        internalDFN">content</a> property with the <a class="css-propval">-obfl-evaluate()</a>
+        function, which evaluates an “OBFL Evaluation Language” [[OBFLEVAL]] expression. <a
+        class="css-propval">-obfl-evaluate()</a> is added to the list of possible values in the
+        definition of <a href="BRAILLECSS#dfn-content-list"
+        class="internalDFN">&lt;content-list&gt;</a>.
+      </p>
+      <p>
+        <code>
+          <dfn>-obfl-evaluate()</dfn> = -obfl-evaluate( <a href="CSS3VAL#string-value"
+          class="externalDFN"><var>&lt;string&gt;</var></a> )
+        </code>
+      </p>
+      <p>
+        The string argument must be a valid OBFL Evaluation Language expression. In addition, the <a
+        href="OBFLEVAL#L14889">variables</a> used in the expression must be available in the context
+        of the element on which the <a href="BRAILLECSS#dfn-content" class="css-propname
+        internalDFN">content</a> property with the <a class="css-propval">-obfl-evaluate()</a> value
+        is specified. Available variables are:
+      </p>
+      <dl>
+        <dt>
+          <dfn title="var-volume" class="obfl-variable">volume</dfn>
+        </dt>
+        <dd>
+          The current volume number. Available in the context of <a href="BRAILLECSS#dfn-begin"
+          class="internalDFN css">@begin</a> and <a href="BRAILLECSS#dfn-end" class="internalDFN
+          css">@end</a> areas. (That means, the element on which the <a
+          href="BRAILLECSS#dfn-content" class="css-propname internalDFN">content</a> property is
+          specified must be flowed into a <span class="css">@begin</span> or <span
+          class="css">@end</span> area. See the chapter about <a
+          href="BRAILLECSS#h3_named-flows">Named flows</a>.)
+        </dd>
+        <dt>
+          <dfn title="var-volumes" class="obfl-variable">volumes</dfn>
+        </dt>
+        <dd>
+          The total number of volumes. Available in the context of <a href="BRAILLECSS#dfn-begin"
+          class="internalDFN css">@begin</a> and <a href="BRAILLECSS#dfn-end" class="internalDFN
+          css">@end</a> areas.
+        </dd>
+        <dt>
+          <dfn title="var-sheets-in-volume" class="obfl-variable">sheets-in-volume</dfn>
+        </dt>
+        <dd>
+          The number of sheets contained in the current volume. Available in the context of <a
+          href="BRAILLECSS#dfn-begin" class="internalDFN css">@begin</a> and <a
+          href="BRAILLECSS#dfn-end" class="internalDFN css">@end</a> areas.
+        </dd>
+        <dt>
+          <dfn title="var-sheets-in-document" class="obfl-variable">sheets-in-document</dfn>
+        </dt>
+        <dd>
+          The number of sheets contained in the whole document. Available in the context of <a
+          href="BRAILLECSS#dfn-begin" class="internalDFN css">@begin</a> and <a
+          href="BRAILLECSS#dfn-end" class="internalDFN css">@end</a> areas.
+        </dd>
+        <dt>
+          <dfn title="var-volume-started-number" class="obfl-variable">volume-started-number</dfn>
+        </dt>
+        <dd>
+          The volume number of the current volume section in a table of contents. Available in the
+          context of <a class="css">::-obfl-on-volume-start</a> and <a
+          class="css">::-obfl-on-volume-end</a> pseudo-elements.
+        </dd>
+      </dl>
     </section>
     <section id="tables-of-contents">
       <h2> Tables of Contents </h2>
@@ -590,13 +668,64 @@
         </p>
       </section>
     </section>
-    <section>
+    <section id="conditional-rendering">
       <h2>
-        Conditional rendering based on the existence of collections: the
-        -obfl-use-when-collection-not-empty property
+        Conditional rendering based on the existence of collections: the <a
+        class="css-propname">-obfl-use-when-collection-not-empty</a> property
       </h2>
+      <table class="propdef">
+        <tbody>
+          <tr>
+            <th>Name:</th>
+            <td><dfn>-obfl-use-when-collection-not-empty</dfn></td>
+          </tr>
+          <tr>
+            <th>Value:</th>
+            <td>
+              <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/#identifier-value"
+              class="externalDFN">&lt;custom-ident&gt;</a> | normal
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#initial-value" class="externalDFN">Initial</a>:
+            </th>
+            <td>normal</td>
+          </tr>
+          <tr>
+            <th>Applies to:</th>
+            <td>
+              all elements
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#inherited-property" class="externalDFN">Inherited</a>:
+            </th>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Media:</th>
+            <td>
+              <a href="CSS2MEDIA#media-types" class="externalDFN">embossed</a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="CSS3CASCADE#computed" class="externalDFN">Computed value</a>:
+            </th>
+            <td>
+              the <a href="CSS3CASCADE#specified" class="externalDFN">specified value</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <p>
-        
+        If the value identifies a <a href="BRAILLECSS#dfn-named-flow" class="internalDFN">named
+        flow</a> through which content has passed, the element behaves normally, otherwise it
+        generates no boxes (as if the <a href="BRAILLECSS#dfn-display" class="css-propname
+        internalDFN">display</a> property were set to <a href="BRAILLECSS#dfn-display-none"
+        class="css-propval internalDFN">none</a>).
       </p>
     </section>
   </body>

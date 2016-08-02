@@ -950,9 +950,9 @@ p {
         <tr>
           <th>Applies to:</th>
           <td>
-            <a class="css">::before</a>, <a class="css">::after</a>, <a class="css">::marker</a>
-            and <a class="css">::alternate</a> pseudo-elements
-            and <a href="CSS3PAGE#margin-context">margin contexts</a>
+            <a class="css">::before</a>, <a class="css">::after</a>, <a class="css">::marker</a> and
+            <a class="css">::alternate</a> pseudo-elements, <a href="CSS3PAGE#margin-context">margin
+            contexts</a> and <a class="css">@begin</a> and <a class="css">@end</a> rules.
           </td>
         </tr>
         <tr>
@@ -996,11 +996,17 @@ p {
         order. The generated content is the concatenation of all values in the list.
         <p>
           <code>
-            <dfn>&lt;content-list&gt;</dfn> = [ <a href="CSS3VAL#string-value"
-            class="externalDFN"><var>&lt;string&gt;</var></a> | <var>&lt;attr()&gt;</var> |
-            <var>&lt;string()&gt;</var> | <var>&lt;counter()&gt;</var> |
-            <var>&lt;target-text()&gt;</var> | <var>&lt;target-string()&gt;</var> |
-            <var>&lt;target-counter()&gt;</var> | <var>&lt;leader()&gt;</var> ]+
+            <dfn>&lt;content-list&gt;</dfn> = [
+            <a href="CSS3VAL#string-value" class="externalDFN"><var>&lt;string&gt;</var></a> |
+            <a href="CSS3VAL#attr-notation" class="externalDFN"><var>&lt;attr()&gt;</var></a> |
+            <a title="string()"><var>&lt;string()&gt;</var></a> |
+            <a title="counter()"><var>&lt;counter()&gt;</var></a> |
+            <a title="target-text()"><var>&lt;target-text()&gt;</var></a> |
+            <a title="target-string()"><var>&lt;target-string()&gt;</var></a> |
+            <a title="target-counter()"><var>&lt;target-counter()&gt;</var></a> |
+            <a title="leader()"><var>&lt;leader()&gt;</var></a> |
+            <a title="flow()"><var>&lt;flow()&gt;</var></a>
+            ]+
           </code>
         </p>
         <dl>
@@ -1011,47 +1017,54 @@ p {
             A <a href="CSS3VAL#string-value" class="externalDFN">string</a>.
           </dd>
           <dt>
-            &lt;attr()&gt;
+            <a href="CSS3VAL#attr-notation" class="externalDFN">&lt;attr()&gt;</a>
           </dt>
           <dd>
             An <a href="CSS3VAL#attr-notation" class="externalDFN css-propval">attr()</a> function, as
             defined in [[CSS3VAL]].
           </dd>
           <dt>
-            &lt;string()&gt;
+            <a title="string()">&lt;string()&gt;</a>
           </dt>
           <dd>
             A <a class="css-propval">string()</a> function.
           </dd>
           <dt>
-            &lt;counter()&gt;
+            <a title="counter()">&lt;counter()&gt;</a>
           </dt>
           <dd>
             A <a class="css-propval">counter()</a> function.
           </dd>
           <dt>
-            &lt;target-text()&gt;
+            <a title="target-text()">&lt;target-text()&gt;</a>
           </dt>
           <dd>
             A <a class="css-propval">target-text()</a> function.
           </dd>
           <dt>
-            &lt;target-string()&gt;
+            <a title="target-string()">&lt;target-string()&gt;</a>
           </dt>
           <dd>
             A <a class="css-propval">target-string()</a> function.
           </dd>
           <dt>
-            &lt;target-counter()&gt;
+            <a title="target-counter()">&lt;target-counter()&gt;</a>
           </dt>
           <dd>
             A <a class="css-propval">target-counter()</a> function.
           </dd>
           <dt>
-            &lt;leader()&gt;
+            <a title="leader()">&lt;leader()&gt;</a>
           </dt>
           <dd>
             A <a class="css-propval">leader()</a> function.
+          </dd>
+          <dt>
+            <a title="flow()">&lt;flow()&gt;</a>
+          </dt>
+          <dd>
+            A <a class="css-propval">flow()</a> function. See the chapter about <a
+            href="#h3_named-flows">Named Flows</a>.
           </dd>
         </dl>
       </dd>

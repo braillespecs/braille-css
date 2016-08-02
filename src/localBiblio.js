@@ -6,9 +6,15 @@ var localBiblio = {
         href: "http://braillespecs.github.io/braille-css/20160801",
         title: "Braille CSS",
         authors: ["Bert Frees"],
-        status: "Working Draft" },
+        status: "Unofficial Draft",
+        rawDate: "2016-08-01" },
+      "braille-css-master": {
+        href: "http://braillespecs.github.io/braille-css/master",
+        title: "Braille CSS",
+        authors: ["Bert Frees"],
+        status: "Unofficial Draft" },
       "BRAILLECSS": {
-        aliasOf: "braille-css-20160801" },
+        aliasOf: "braille-css-master" },
       "CSS2BOX": {
         href: "http://www.w3.org/TR/CSS21/box.html" },
       "CSS2CONFORM": {
@@ -81,6 +87,12 @@ var localBiblio = {
         href: "http://braillespecs.github.io/obfl/obfl-specification.html",
         title: "OBFL - Open Braille Formatting Language",
         authors: ["Joel Håkansson"],
-        status: "Working Draft",
+        status: "Unofficial Draft",
+        publisher: "MTM" },
+      "OBFLEVAL": {
+        href: "http://braillespecs.github.io/obfl/obfl-evaluation-language.html",
+        title: "OBFL Evaluation Language",
+        authors: ["Joel Håkansson"],
+        status: "Unofficial Draft",
         publisher: "MTM" }
 }
