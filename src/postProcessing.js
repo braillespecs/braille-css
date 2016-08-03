@@ -54,22 +54,49 @@ insertPEFs = function() {
 }
 
 /*
- * expand shortened links
+ * expand shortened links and add title attributes
  */
 expandLinks = function() {
     var biblio = respecConfig.biblio;
-    var re = /^(.+)#([A-Za-z][A-Za-z0-9_:\.\-]*)?$/i;
+    var re = /^(.+)#(([A-Za-z]|\{\})([A-Za-z0-9_:\.\-]|\{\})*)?$/i;
     $("a").each(function(i, a) {
+      var title; {
+        if (a.hasAttribute("title")) {
+          title = a.getAttribute("title");
+          if (title == "{}") {
+            title = $(a).text().replace(/\s+/g, " ");
+            a.setAttribute("title", title);
+          }
+        }
+      }
       var href = a.getAttribute("href");
       var match = href.match(re);
       if (match) {
+        if (a.classList.contains("dfn")) {
+          a.classList.remove("dfn");
+          if (match[1] == "BRAILLECSS")
+            a.classList.add("internalDFN");
+          else
+            a.classList.add("externalDFN");
+        }
         var biblioEntry = biblio[match[1]];
         while (biblioEntry && biblioEntry["aliasOf"])
           biblioEntry = biblio[biblioEntry["aliasOf"]];
         if (biblioEntry) {
           href = biblioEntry["href"];
-          if (match[2])
-            href = href + "#" + match[2]
+          if (match[2]) {
+            var fragment = match[2]; {
+              if (match[2].indexOf("{}") != -1) {
+                if (!title) {
+                  title = $(a).text().replace(/\s+/g, " ");
+                  a.setAttribute("title", title);
+                }
+                fragment = match[2].replace("{}", title.replace(/\s+/g, "-"));
+              } else
+                fragment = match[2];
+            }
+            href = href + "#" + fragment;
+          }
           a.setAttribute("href", href);
         }
       }
