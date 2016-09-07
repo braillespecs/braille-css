@@ -666,8 +666,9 @@
         <code>
           <dfn>string()</dfn> = string( <a href="CSS3VAL#identifier-value"
           class="externalDFN"><var>&lt;custom-ident&gt;</var></a> [ , [ first | start | last |
-          last-except-start | page-first | page-start | page-last | page-last-except-start |
-          spread-first | spread-start | spread-last | spread-last-except-start | ] ]? )
+          start-except-last | last-except-start | page-first | page-start | page-last |
+          page-start-except-last | page-last-except-start | spread-first | spread-start |
+          spread-last | spread-start-except-last | spread-last-except-start | ] ]? )
         </code>
       </p>
       <p>
@@ -697,6 +698,13 @@
           The assignment in effect at the end of the current page (<a href="CSS3GCPM#exit-value"
           class="externalDFN">exit value</a>) is used.
         </dd>
+        <dt><dfn title="string-start-except-last">start-except-last</dfn></dt>
+        <dt><dfn title="string-page-start-except-last">page-start-except-last</dfn></dt>
+        <dd>
+          The assignment that would be used by <a title="string-start" class="css-propval">start</a>
+          is used if it precedes another assignment on the current page. Otherwise the empty string
+          is used.
+        </dd>
         <dt><dfn title="string-last-except-start">last-except-start</dfn></dt>
         <dt><dfn title="string-page-last-except-start">page-last-except-start</dfn></dt>
         <dd>
@@ -720,6 +728,11 @@
         <dd>
           Analogous to <a title="string-last" class="css-propval">last</a> with ‘page’ replaced by
           ‘page spread’.
+        </dd>
+        <dt><dfn title="string-spread-start-except-last">spread-start-except-last</dfn></dt>
+        <dd>
+          Analogous to <a title="string-start-except-last" class="css-propval">start-except-last</a>
+          with ‘page’ replaced by ‘page spread’.
         </dd>
         <dt><dfn title="string-spread-last-except-start">spread-last-except-start</dfn></dt>
         <dd>
