@@ -1,8 +1,8 @@
 function respecConfig(config) {
 	respecConfig = {
 		specStatus: "unofficial",
-		publishDate: "2016-09-07",
-		previousPublishDate: "2016-08-01",
+		publishDate: "2016-12-01",
+		previousPublishDate: "2016-09-07",
 		editors: [{
 			name:   "Bert Frees",
 			mailto: "bertfrees@gmail.com",

@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="style.css" type="text/css"></link>
     <style type="text/css">
       .obfl-elem::before,
-      .obfl-attr::before {
+      .obfl-attr::before,
+      .obfl-attr-val::before {
         content: '‘';
       }
       .obfl-elem::after,
-      .obfl-attr::after {
+      .obfl-attr::after,
+      .obfl-attr-val::after {
         content: '’';
       }
       .obfl-variable {
@@ -40,12 +42,12 @@
   <body>
     <section id="abstract">
       This module builds on braille CSS [[BRAILLECSS]] and defines a set of properties, values and
-      pseudo-elements specific to OBFL-based [[OBFL]] agents.
+      pseudo-elements specific to OBFL based [[OBFL]] agents.
     </section>
     <section id="sotd">
       The features defined in this document are intended to be temporary solutions. The goal is to
       define official braille CSS features that can be made to work the same across all agents. In
-      order to make the distinction clear all properties, values and pseudo-elements defined here
+      order to make the distinction clear, all properties, values and pseudo-elements defined here
       have an ‘-obfl-’ prefix.
     </section>
     <section id="vertical-positioning">
@@ -214,7 +216,7 @@
     </section>
     <section id="evaluate">
       <h2>
-        Evaluating OBFL expressions: the <a class="css-propname">-obfl-evaluate()</a> function
+        Evaluating OBFL expressions: the <a class="css-propval">-obfl-evaluate()</a> function
       </h2>
       <p>
         This module extends the <a href="BRAILLECSS#dfn-content" class="css-propname
@@ -278,8 +280,8 @@
           <dfn title="var-volume-started-number" class="obfl-variable">volume-started-number</dfn>
         </dt>
         <dd>
-          The volume number of the current volume section in a table of contents. Available in the
-          context of <a class="css">::-obfl-on-volume-start</a> and <a
+          The volume number of the current volume section in a table of contents or list of
+          references. Available in the context of <a class="css">::-obfl-on-volume-start</a> and <a
           class="css">::-obfl-on-volume-end</a> pseudo-elements.
         </dd>
       </dl>
@@ -294,21 +296,25 @@
         <p>
           Braille CSS [[BRAILLECSS]] defines the <a href="BRAILLECSS#dfn-display"
           class="css-propname internalDFN">display</a> property with possible values <a
-          href="BRAILLECSS#dfn-block" class="css-propval internalDFN">block</a>, <a
-          href="BRAILLECSS#dfn-inline" class="css-propval internalDFN">inline</a>, <a
-          href="BRAILLECSS#dfn-list-item" class="css-propval internalDFN">list-item</a>, and
-          none. This module extends the possible values with <dfn
-          class="css-propval">-obfl-toc</dfn>.
+          href="BRAILLECSS#dfn-{}" class="css-propval internalDFN">block</a>, <a
+          href="BRAILLECSS#dfn-{}" class="css-propval internalDFN">inline</a>, <a
+          href="BRAILLECSS#dfn-{}" class="css-propval internalDFN">list-item</a>, and <a
+          href="BRAILLECSS#dfn-display-{}" class="css-propval internalDFN">none</a>. This module
+          extends the possible values with <dfn class="css-propval">-obfl-toc</dfn>.
         </p>
         <p>
           The <a class="css-propval">-obfl-toc</a> value corresponds in OBFL with a <a
           href="OBFL#L9241" class="obfl-elem externalDFN">toc-sequence</a> element that is backed by
           a <a href="OBLF#L735" class="obfl-elem externalDFN">table-of-contents</a> element. The
           content of the <span class="obfl-elem">table-of-contents</span> element in OBFL
-          corresponds with the content of the <span class="css-propval">-obfl-toc</span> element in
-          CSS. The <span class="css-propval">-obfl-toc</span> value only applies to elements that
-          are placed into a <a href="BRAILLECSS#h3_the-begin-and-end-rules">volume area</a> through
-          the mechanism of <a href="BRAILLECSS#h3_named-flows">named flows</a>.
+          corresponds with the content of the <a class="css-propval">-obfl-toc</a> element in
+          CSS. The <a class="css-propval">-obfl-toc</a> value only applies to elements that are
+          placed into a <a href="BRAILLECSS#h3_the-begin-and-end-rules">volume area</a> through the
+          mechanism of <a href="BRAILLECSS#h3_named-flows">named flows</a>.
+        </p>
+        <p>
+          <span class="css-propval">-obfl-table-of-contents</span> may be used as an alias for <a
+          class="css-propval">-obfl-toc</a>.
         </p>
       </section>
       <section>
@@ -377,9 +383,92 @@
           <a href="OBFL#L9514" class="obfl-elem externalDFN">on-toc-start</a>, <a href="OBFL#L969"
           class="obfl-elem externalDFN">on-volume-start</a>, <a href="OBFL#L987" class="obfl-elem
           externalDFN">on-volume-end</a> and <a href="OBFL#L1005" class="obfl-elem
-          externalDFN">on-toc-end</a> elements in OBFL. These pseudo-elements only apply to elements
-          with a <a href="BRAILLECSS#dfn-display" class="css-propname internalDFN">display</a>
-          value of <a class="css-propval">-obfl-toc</a>.
+          externalDFN">on-toc-end</a> elements in OBFL. These pseudo-elements apply to elements with
+          a <a href="BRAILLECSS#dfn-display" class="css-propname internalDFN">display</a> value of
+          <a class="css-propval">-obfl-toc</a>. They are generated if and only if the <a
+          href="CSS3CASCADE#computed" class="externalDFN">computed value</a> of their <a
+          href="BRAILLECSS#dfn-{}" title="{}" class="css-propname internalDFN">content</a> property
+          is not <span class="css-propval">none</span> and does not consist of <a
+          title="collapsible" class="internalDFN" href="BRAILLECSS#{}">collapsible white space</a>
+          only. In addition, the <a class="css">::-obfl-on-volume-start</a> and <a
+          class="css">::-obfl-on-volume-end</a> pseudo-elements also apply to elements with a <a
+          href="BRAILLECSS#dfn-display" class="css-propname internalDFN">display</a> value of <a
+          class="css-propval">-obfl-list-of-references</a> (see below).
+        </p>
+      </section>
+    </section>
+    <section id="lists-of-references">
+      <h2> Lists of References </h2>
+      <p>
+        A list of references (typically a list of notes at the beginning or end of a chapter, volume
+        or document) may be generated using the <a href="BRAILLECSS#dfn-flow" class="css-propname
+        internalDFN">flow</a> property and the <a href="BRAILLECSS#dfn-flow-1" class="css-propval
+        internalDFN">flow()</a> function, as explained in the section <a
+        href="BRAILLECSS#h3_endnotes">Endnotes</a>. This section provides an alternative way to
+        generate a list of references, only at the beginning or end of the document, but with
+        support for sorting references per volume.
+      </p>
+      <section>
+        <h3>
+          Extending the <a href="BRAILLECSS#dfn-display" class="css-propname
+          internalDFN">display</a> property with <a class="css-propval">-obfl-list-of-references</a>
+        </h3>
+        <p>
+          Braille CSS [[BRAILLECSS]] defines the <a href="BRAILLECSS#dfn-display"
+          class="css-propname internalDFN">display</a> property with possible values <a
+          href="BRAILLECSS#dfn-{}" class="css-propval internalDFN">block</a>, <a
+          href="BRAILLECSS#dfn-{}" class="css-propval internalDFN">inline</a>, <a
+          href="BRAILLECSS#dfn-{}" class="css-propval internalDFN">list-item</a>, and <a
+          href="BRAILLECSS#dfn-display-{}" class="css-propval internalDFN">none</a>. This module
+          extends the possible values with <dfn class="css-propval">-obfl-list-of-references</dfn>.
+        </p>
+        <p>
+          The <a class="css-propval">-obfl-list-of-references</a> value corresponds with the <a
+          href="OBFL#L9242" class="obfl-elem externalDFN">list-of-references</a> element in
+          OBFL. The <a href="OBFL#L1194" class="obfl-elem externalDFN">collection</a> from which the
+          items are taken is determined by the element's <a href="BRAILLECSS#dfn-{}" title="{}"
+          class="css-propname internalDFN">content</a> property, which must consist of exactly one
+          <a class="css-propval">-obfl-collection()</a> value. The <span
+          class="obfl-attr">range</span> is always <span class="obfl-attr-val">document</span>.
+        </p>
+        <p>
+          The <span class="css-propval">-obfl-list-of-references</span> value only applies to <a
+          href="BRAILLECSS#dfn-alternate" class="css internalDFN">::alternate</a> pseudo-elements
+          that are placed into a <a href="BRAILLECSS#h3_the-begin-and-end-rules">volume area</a>
+          through the mechanism of <a href="BRAILLECSS#h3_named-flows">named flows</a>.
+        </p>
+        <p>
+          Elements with a <a href="BRAILLECSS#dfn-{}" class="css-propname internalDFN">display</a>
+          value of <a class="css-propval">-obfl-list-of-references</a> support the <a
+          class="css">::-obfl-on-volume-start</a> and <a class="css">::-obfl-on-volume-end</a>
+          pseudo-elements.
+        </p>
+      </section>
+      <section>
+        <h3>
+          The <a class="css-propval">-obfl-collection()</a> function
+        </h3>
+        <p>
+          The <a class="css-propval">-obfl-collection()</a> function has exactly the same meaning as
+          the <a href="BRAILLECSS#dfn-flow-1" class="css-propval internalDFN">flow()</a> function,
+          except that it doesn't accept an optional second argument. The range is therefore always
+          <a title="flow-range-document" href="BRAILLECSS#dfn-{}" class="css
+          internalDFN">document</a>.
+        </p>
+        <p>
+          <code>
+            <dfn>-obfl-collection()</dfn> = -obfl-collection( <a href="CSS3VAL#identifier-value"
+            class="externalDFN"><var>&lt;custom-ident&gt;</var></a> )
+          </code>
+        </p>
+        <p>
+          Unlike the <a href="BRAILLECSS#dfn-flow-1" class="css-propval internalDFN">flow()</a>
+          function, the <a class="css-propval">-obfl-collection()</a> function is allowed in an
+          element that participates in a named flow itself. On the other hand, it is also much more
+          limited in use than <a href="BRAILLECSS#dfn-flow-1" class="css-propval
+          internalDFN">flow()</a>, since it is only allowed within elements with a <a
+          href="BRAILLECSS#dfn-{}" class="css-propname internalDFN">display</a> value of <a
+          class="css-propval">-obfl-list-of-references</a>.
         </p>
       </section>
     </section>
