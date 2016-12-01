@@ -31,6 +31,10 @@ em.rfc2119 {
 .css-propval::after {
   content: '’';
 }
+a.internalDFN,
+a.externalDFN {
+  border-bottom:  1px dotted #ccc !important;
+}
 a.self-link {
   position: relative;
   text-decoration: none;
