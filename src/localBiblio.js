@@ -76,11 +76,13 @@ var localBiblio = {
       "CSS3WRITINGMODES": {
         aliasOf: "css-writing-modes-3-20140320" },
       "CSSSTYLEATTR": {
-        href: "http://www.w3.org/TR/2002/WD-css-style-attr-20020515",
-        title: "Syntax of CSS rules in HTML's \"style\" attribute",
-        authors: ["Tantek Çelik", "Bert Bos", "Marc Attinasi"],
-        status: "WD",
-        publisher: "W3C" },
+        aliasOf: "css-style-attr" },
+      // older version: {
+      //   href: "http://www.w3.org/TR/2002/WD-css-style-attr-20020515",
+      //   title: "Syntax of CSS rules in HTML's \"style\" attribute",
+      //   authors: ["Tantek Çelik", "Bert Bos", "Marc Attinasi"],
+      //   status: "WD",
+      //   publisher: "W3C" },
       "PRINCE": {
         href: "http://www.princexml.com/doc/9.0/properties/" },
       "OBFL": {
@@ -94,5 +96,8 @@ var localBiblio = {
         title: "OBFL Evaluation Language",
         authors: ["Joel Håkansson"],
         status: "Unofficial Draft",
-        publisher: "MTM" }
+        publisher: "MTM" },
+      "SASS": {
+        href: "http://sass-lang.com/documentation/file.SASS_REFERENCE.html",
+        title: "Sass (Syntactically Awesome StyleSheets)" }
 }

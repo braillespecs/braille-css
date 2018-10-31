@@ -247,9 +247,48 @@
     </section>
     <section id="style-attribute">
       <h2> Style Attributes </h2>
-      <p class="issue">
-        See <a href="https://github.com/braillespecs/braille-css/issues/13"
-        class="ticket">braille-css#13</a>.
+      <p>Some document formats, such as HTML, have a <a href="CSSSTYLEATTR#style-attribute"
+      class="externalDFN">style attribute</a> to permit the author to directly apply style
+      information to specific elements. The style attribute's syntax and interpretation in defined
+      in [[CSSSTYLEATTR]]:</p>
+      <p>
+        <code><pre>inline-stylesheet
+  : S* <a href="CSS3SYNTAX#declaration-diagram" class="externalDFN">declaration</a>? [ ';' S* <a href="CSS3SYNTAX#declaration-diagram" class="externalDFN">declaration</a>? ]*
+  ;
+</pre></code>
+      </p>
+      <p>Interpreters may optionally support an extension of this syntax:</p>
+      <p>
+        <!--
+            TODO: add support for @text-transform:
+            text-transform-rule
+              : '@text-transform' S+ IDENT S* '{' declaration-list '}'
+              ;
+        -->
+        <code><pre><dfn>inline-stylesheet</dfn>
+  : <a>declaration-list</a> [ S+ <a>inline-ruleset</a> ]*
+  ;
+
+<dfn>declaration-list</dfn>
+  : S* <a href="CSS3SYNTAX#declaration-diagram" class="externalDFN">declaration</a>? [ ';' S* <a href="CSS3SYNTAX#declaration-diagram" class="externalDFN">declaration</a>? ]*
+  ;
+
+<dfn>inline-ruleset</dfn>
+  : '&amp;'? S* [ [ '>' | '+' | '~' ]? S* <a href="CSS3SELECT#w3cselgrammar" class="externalDFN">selector</a> ]+ S* '{' <a>declaration-list</a> '}' S*
+  ;
+</pre></code>
+      </p>
+      <p>This syntax is inspired by Sass [[SASS]]. The inline rulesets apply to elements relative to
+      the element to which the style attribute belongs. A ‘<var>&amp;</var>’ (ampersand) indicates
+      the position of the base element within the combined selector expression. Without a
+      ‘<var>&amp;</var>’, a space between the base element and the relative selector is assumed. If
+      a ‘<var>&amp;</var>’ is present and is no space of other <a
+      href="CSS3SELECT#combinators">combinator</a> separates it from the relative selector, it means
+      the relative selector is effectively “chained” onto the base element as if it where a single
+      <a href="CSS3SELECT#sequence" class="externalDFN">sequence of simple selectors</a>.
+      <!--
+          TODO: add an example
+      -->
       </p>
     </section>
     <section id="media-types">
