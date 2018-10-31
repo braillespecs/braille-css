@@ -1,5 +1,13 @@
 #!/bin/bash
-INPUT=$(readlink -f $1)
-OUTPUT=$(readlink -f $2)
+INPUT=$(pwd)/$1
+OUTPUT=$(pwd)/$2
+if ! [ -e $INPUT ]; then
+    echo "File $INPUT does not exist" >&2
+    exit 1
+fi
+if ! [ -d $(dirname $OUTPUT) ]; then
+    echo "Directory $(dirname $OUTPUT) does not exist" >&2
+    exit 1
+fi
 cd /root/respec
 phantomjs --ssl-protocol=any tools/respec2html.js $INPUT >$OUTPUT || true

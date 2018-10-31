@@ -14,6 +14,6 @@ respec2html:
     - respec
     - specref
   volumes:
-    - target:/host/target
+    - ./target:/host/target
   working_dir: /host
   entrypoint: ["respec2html"]
