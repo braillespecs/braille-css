@@ -30,10 +30,11 @@
     <section id="sotd">
       <p>
         This document attempts to establish a grammar of keywords that can be passed as context to a
-        braille translator to influence the translation in a predictable way. The idea is to be able
-        to use the grammar across several standards and tools: CSS, OBFL [[OBFL]], <a
-        href="http://www.liblouis.org/">Liblouis</a>, etc. In the case of CSS the grammar applies to
-        the <a href="BRAILLECSS#dfn-text-transform">text-transform</a> property.
+        braille <a title="BRAILLECSS#dfn-translator">translator</a> to influence the translation in
+        a predictable way. The idea is to be able to use the grammar across several standards and
+        tools: CSS, OBFL [[OBFL]], <a href="http://www.liblouis.org/">Liblouis</a>, etc. In the case
+        of CSS the grammar applies to the <a href="BRAILLECSS#dfn-text-transform">text-transform</a>
+        property.
       </p>
       <p>
         The document is incomplete, but should make the intend clear.
@@ -47,6 +48,12 @@
         </dt>
         <dd>
           Puts all letters in lowercase.
+        </dd>
+        <dt>
+          <dfn>uncontracted</dfn>
+        </dt>
+        <dd>
+          Sets the contraction level for this text to 0.
         </dd>
       </dl>
     </section>
