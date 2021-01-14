@@ -3,6 +3,7 @@ function respecConfig(config) {
 		specStatus: "unofficial",
 		publishDate: "2020-01-03",
 		previousPublishDate: "2018-10-31",
+		previousMaturity: "unofficial",
 		editors: [{
 			name:   "Bert Frees",
 			mailto: "bertfrees@gmail.com",

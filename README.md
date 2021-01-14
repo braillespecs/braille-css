@@ -7,25 +7,24 @@ Braille CSS specification: http://braillespecs.github.io/braille-css
 Building
 --------
 
-First start the [ReSpec][] and [Specref][] services:
+First build the [ReSpec][] and [Specref][] services:
 
     make respec/src
     make specref/src
-    docker compose build
-    docker compose up respec specref &
+    docker-compose build
 
 Then build the site (target/site/) with:
 
     make
 
-To build the site without running the tests:
+To build the site without running the examples as tests:
 
     make SKIP_TESTS=true
 
 
 License
 -------
-Copyright 2014-2016 [Bert Frees][bert]
+Copyright 2014-2021 [Bert Frees][bert]
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the [GNU Lesser General Public License][lgpl]

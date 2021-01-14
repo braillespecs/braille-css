@@ -9,7 +9,7 @@ DEV_SCRIPTS          := $(patsubst $(SRC_DIR)/%,$(DEV_DIR)/%,$(SCRIPTS))
 TARGET_HTML          := $(patsubst $(DEV_DIR)/%,$(TARGET_DIR)/%,$(DEV_HTML))
 TARGET_RESOURCES     := $(patsubst $(SRC_DIR)/%,$(TARGET_DIR)/%,$(RESOURCES))
 SKIP_TESTS           := false
-RESPEC2HTML          := docker compose run respec2html
+RESPEC2HTML          := docker-compose run respec2html
 
 all : $(TARGET_HTML) $(TARGET_RESOURCES)
 
@@ -21,7 +21,7 @@ $(TARGET_HTML) : $(TARGET_DIR)/% : $(DEV_DIR)/%
 	mkdir -p $(dir $@)
 	$(RESPEC2HTML) $< $@
 
-$(DEV_DIR)/index.xhtml : $(INDEX_SOURCES)
+$(DEV_DIR)/index.html : $(INDEX_SOURCES)
 
 $(DEV_HTML) : $(DEV_DIR)/% : $(SRC_DIR)/% $(DEV_SCRIPTS)
 	mkdir -p $(dir $@)

@@ -4,7 +4,7 @@
 insertPEFs = function() {
     var parser = new DOMParser();
     $(".code-pef").each(function(i, block) {
-      var pef = parser.parseFromString(block.textContent, "application/x-pef+xml").documentElement;
+      var pef = parser.parseFromString(block.textContent, "application/xml").documentElement;
       /* remove head and body because they are causing trouble */
       $(pef).children("head").remove();
       $(pef).children("body").children("volume").each(function(i, volume) {
