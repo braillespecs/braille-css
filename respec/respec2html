@@ -13,4 +13,15 @@ cd /root/respec
 mkdir -p $(dirname $OUTPUT)
 
 # PhantomJS will crash (segmentation fault) but the output will be created.
+#
+# If no output is created, first try opening target/tmp/index.html in
+# a browser (as described in README.md) and check for issues.
+#
+# You can also try remote debugging the script. See
+# https://phantomjs.org/troubleshooting.html#remote-debugging. If you
+# add the "--remote-debugger-port=9000" argument to the phantomjs
+# command, the Docker command to run respec2html becomes:
+#
+#   docker-compose run respec2html -p "9000:9000" target/tmp/index.html target/site/index.html
+#
 phantomjs --ssl-protocol=any tools/respec2html.js $INPUT >$OUTPUT || true

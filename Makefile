@@ -6,14 +6,17 @@ RESOURCES            := $(addprefix $(SRC_DIR)/,style.css odt2braille8.ttf)
 DEV_DIR              := target/tmp
 DEV_HTML             := $(addprefix $(DEV_DIR)/,index.html obfl.html text-transform.html)
 DEV_SCRIPTS          := $(patsubst $(SRC_DIR)/%,$(DEV_DIR)/%,$(SCRIPTS))
+DEV_RESOURCES        := $(patsubst $(SRC_DIR)/%,$(DEV_DIR)/%,$(RESOURCES))
 TARGET_HTML          := $(patsubst $(DEV_DIR)/%,$(TARGET_DIR)/%,$(DEV_HTML))
 TARGET_RESOURCES     := $(patsubst $(SRC_DIR)/%,$(TARGET_DIR)/%,$(RESOURCES))
 SKIP_TESTS           := false
 RESPEC2HTML          := docker-compose run respec2html
+SPECREF_URL          ?= http://specref:5000
+RESPEC_URL           ?= http://respec
 
 all : $(TARGET_HTML) $(TARGET_RESOURCES)
 
-$(TARGET_RESOURCES) : $(TARGET_DIR)/% : $(SRC_DIR)/%
+$(TARGET_RESOURCES) : $(TARGET_DIR)/% : $(DEV_DIR)/%
 	mkdir -p $(dir $@)
 	cp $< $@
 
@@ -23,13 +26,15 @@ $(TARGET_HTML) : $(TARGET_DIR)/% : $(DEV_DIR)/%
 
 $(DEV_DIR)/index.html : $(INDEX_SOURCES)
 
-$(DEV_HTML) : $(DEV_DIR)/% : $(SRC_DIR)/% $(DEV_SCRIPTS)
-	mkdir -p $(dir $@)
-	mvn test -Dsource=$< -Dtarget=$@ -Dmy.skipTests=${SKIP_TESTS}
+$(DEV_HTML) : $(DEV_DIR)/% : $(SRC_DIR)/% $(DEV_SCRIPTS) $(DEV_RESOURCES)
+	trap "rm -f $<.tmp" EXIT; \
+	cat $< | SPECREF_URL="$(SPECREF_URL)" RESPEC_URL="$(RESPEC_URL)" envsubst '$${SPECREF_URL} $${RESPEC_URL}' >$<.tmp && \
+	mkdir -p $(dir $@) && \
+	mvn test -Dsource=$<.tmp -Dtarget=$@ -Dmy.skipTests=${SKIP_TESTS}
 
-$(DEV_SCRIPTS) : $(DEV_DIR)/% : $(SRC_DIR)/%
+$(DEV_SCRIPTS) $(DEV_RESOURCES) : $(DEV_DIR)/% : $(SRC_DIR)/%
 	mkdir -p $(dir $@)
-	cp $< $@
+	cat $< | SPECREF_URL="$(SPECREF_URL)" RESPEC_URL="$(RESPEC_URL)" envsubst '$${SPECREF_URL} $${RESPEC_URL}' >$@
 
 publish : all
 	bash publish-on-gh-pages.sh $(TARGET_DIR)

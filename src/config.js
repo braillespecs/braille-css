@@ -14,7 +14,7 @@ function respecConfig(config) {
 			data: [{
 				value: "https://github.com/braillespecs/braille-css/issues",
 				href: "https://github.com/braillespecs/braille-css/issues" }]}],
-		specrefUrl: "http://specref:5000",
+		specrefUrl: "${SPECREF_URL}",
 		localBiblio: localBiblio
 	}
 	for (var attr in config)

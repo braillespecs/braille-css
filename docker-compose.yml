@@ -2,11 +2,15 @@ respec:
   build: respec
   expose:
     - 80
+  ports:
+    - "80:80"
 
 specref:
   build: specref
   expose:
     - 5000
+  ports:
+    - "5000:5000"
 
 respec2html:
   build: respec

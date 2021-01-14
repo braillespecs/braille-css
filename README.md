@@ -21,6 +21,18 @@ To build the site without running the examples as tests:
 
     make SKIP_TESTS=true
 
+The above gives you a static web site. All JavaScript has been
+pre-applied. To get a version of the site without the JavaScript
+applied, do the following:
+
+    make SPECREF_URL=http://localhost:5000 \
+         RESPEC_URL=http://localhost \
+         target/tmp/{index.html,obfl.html,text-transform.html} \
+         target/tmp/{style.css,odt2braille8.ttf} \
+         target/tmp/{config.js,localBiblio.js,postProcessing.js}
+    docker-compose up specref respec
+    open target/tmp/index.html
+
 
 License
 -------
