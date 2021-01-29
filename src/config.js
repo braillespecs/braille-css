@@ -1,14 +1,14 @@
 function respecConfig(config) {
 	respecConfig = {
 		specStatus: "unofficial",
-		publishDate: "2020-01-03",
+		publishDate: "2021-01-29",
 		previousPublishDate: "2018-10-31",
 		previousMaturity: "unofficial",
 		editors: [{
 			name:   "Bert Frees",
 			mailto: "bertfrees@gmail.com",
 			url:    "http://github.com/bertfrees" }],
-		additionalCopyrightHolders: "Copyright © 2014-2020 Bert Frees",
+		additionalCopyrightHolders: "Copyright © 2014-2021 Bert Frees",
 		otherLinks: [{
 			key: "Feedback",
 			data: [{

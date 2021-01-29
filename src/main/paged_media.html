@@ -1144,4 +1144,104 @@ p#4 { orphans: 2; }
       </ul>
     </section>
   </section>
+  <section id="the-top-of-page-pseudo-class">
+    <h3> Conditional Rendering based on Position on Page : the <span class="css">:top-of-page</span> pseudo-class </h3>
+    <p>
+      Sometimes it is desirable to not generate a box for an element when it would occur at the top
+      of a page. An example is when the element's content was used to generate a <a
+      href="#page-margin-boxes">page header</a>, so that it would cause repetition when rendered at
+      the top of the page, right beneath the header. The <span class="css">:top-of-page</span>
+      pseudo-class can be used to achieve this, like is shown in the example below.
+    </p>
+    <div class="example">
+      <div class="code code-xml">
+        <pre class="highlight"><![CDATA[<body>
+  <span class="pagenum">⠼⠁</span>
+  <p>
+    ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+    ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+  </p>
+  <span class="pagenum">⠼⠃</span>
+  <p>
+    ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭
+    <span class="pagenum">⠼⠉</span>
+    ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭ ⠭⠭⠭
+  </p>
+  <p>
+    ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+    ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿ ⠿⠿⠿
+  </p>
+</body>]]></pre>
+      </div>
+      <p>
+        Using the <a class="css-propname">string-set</a> property and the <a
+        class="css-propval">string()</a> function, print page numbers are rendered in the page
+        header. In addition, the numbers are rendered where they occur within the braille page. The
+        <span class="css">:top-of-page</span> pseudo-class and <a class="css-propname">display</a>
+        property are used to skip them at the top of pages.
+      </p>
+      <div class="code code-css">
+        <pre class="highlight">@page {
+  size: 12 6;
+  margin-top: 1;
+  @top-right {
+    content: string(print-page);
+  }
+}
+p {
+  display: block;
+  text-indent: 2;
+}
+.pagenum {
+  string-set: print-page content();
+  display: block;
+  text-indent: 0;
+}
+.pagenum::before {
+  content: leader('⠒') '⠀';
+}
+.pagenum:top-of-page {
+  display: none;
+}
+</pre>
+      </div>
+      <div class="code code-pef">
+        <pre class="highlight"><![CDATA[<pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+  <head xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <meta>
+      <dc:format>application/x-pef+xml</dc:format>
+    </meta>
+  </head>
+  <body>
+    <volume rows="6" cols="12" rowgap="0" duplex="true">
+      <section>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁</row>
+          <row>⠀⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃</row>
+          <row>⠀⠀⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠒⠒⠒⠒⠒⠒⠒⠒⠒⠀⠼⠉</row>
+          <row>⠭⠭⠭⠀⠭⠭⠭⠀⠭⠭⠭</row>
+        </page>
+        <page>
+          <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉</row>
+          <row>⠭⠭⠭⠀⠭⠭⠭</row>
+          <row>⠀⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿⠀⠿⠿⠿</row>
+          <row>⠿⠿⠿⠀⠿⠿⠿</row>
+        </page>
+      </section>
+    </volume>
+  </body>
+</pef>]]></pre>
+      </div>
+    </div>
+  </section>
 </section>
