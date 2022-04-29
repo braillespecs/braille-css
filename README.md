@@ -17,10 +17,6 @@ Then build the site (target/site/) with:
 
     make
 
-To build the site without running the examples as tests:
-
-    make SKIP_TESTS=true
-
 The above gives you a static web site. All JavaScript has been
 pre-applied. To get a version of the site without the JavaScript
 applied, do the following:

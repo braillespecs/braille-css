@@ -142,40 +142,6 @@ table.propdef dfn a.self-link::before {
 .code-pef pre {
   display: none;
 }
-.code-pef .test {
-  position: absolute;
-  top: 5px;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
-  padding: 7px;
-  color: white;
-  font-family: "Arial";
-  font-size: 160%;
-  font-weight: bold;
-  text-align: center;
-  border: 1px solid rgba(0,0,0,.15);
-  border-radius: 8px;
-  box-shadow: 0 1px rgba(255,255,255,.2) inset;
-}
-.code-pef .test-liblouis {
-  right: 48px;
-}
-.code-pef .test-dotify {
-  right: 5px;
-}
-.code-pef .test-liblouis::before {
-  content: "L";
-}
-.code-pef .test-dotify::before {
-  content: "D";
-}
-.code-pef .test-passed {
-  background-color: #449900;
-}
-.code-pef .test-failed {
-  background-color: #ee2200;
-}
 pef {
   display: block;
   margin: 0;
