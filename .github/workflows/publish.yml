@@ -1,0 +1,44 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Java and Maven
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+      - name: Cache local Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Cache respec source
+        uses: actions/cache@v3
+        with:
+          path: respec/src
+          key: ${{ runner.os }}-respec-${{ hashFiles('Makefile') }} # revision defined in Makefile
+      - name: Cache specref source
+        uses: actions/cache@v3
+        with:
+          path: specref/src
+          key: ${{ runner.os }}-specref-${{ hashFiles('Makefile') }} # revision defined in Makefile
+      - name: Build respec and specref images
+        run: |
+          make respec/src
+          make specref/src
+          docker-compose build
+      - name: Build and publish website
+        env:
+          GITHUB_TOKEN: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
+        run: |
+          make publish
