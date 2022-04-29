@@ -9,7 +9,6 @@ DEV_SCRIPTS          := $(patsubst $(SRC_DIR)/%,$(DEV_DIR)/%,$(SCRIPTS))
 DEV_RESOURCES        := $(patsubst $(SRC_DIR)/%,$(DEV_DIR)/%,$(RESOURCES))
 TARGET_HTML          := $(patsubst $(DEV_DIR)/%,$(TARGET_DIR)/%,$(DEV_HTML))
 TARGET_RESOURCES     := $(patsubst $(SRC_DIR)/%,$(TARGET_DIR)/%,$(RESOURCES))
-SKIP_TESTS           := false
 RESPEC2HTML          := docker-compose run respec2html
 SPECREF_URL          ?= http://specref:5000
 RESPEC_URL           ?= http://respec
@@ -30,7 +29,7 @@ $(DEV_HTML) : $(DEV_DIR)/% : $(SRC_DIR)/% $(DEV_SCRIPTS) $(DEV_RESOURCES)
 	trap "rm -f $<.tmp" EXIT; \
 	cat $< | SPECREF_URL="$(SPECREF_URL)" RESPEC_URL="$(RESPEC_URL)" envsubst '$${SPECREF_URL} $${RESPEC_URL}' >$<.tmp && \
 	mkdir -p $(dir $@) && \
-	mvn test -Dsource=$<.tmp -Dtarget=$@ -Dmy.skipTests=${SKIP_TESTS}
+	mvn test -Dsource=$<.tmp -Dtarget=$@
 
 $(DEV_SCRIPTS) $(DEV_RESOURCES) : $(DEV_DIR)/% : $(SRC_DIR)/%
 	mkdir -p $(dir $@)
